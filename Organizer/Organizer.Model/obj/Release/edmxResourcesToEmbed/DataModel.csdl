@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="DataContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="DataModel.Category" />
+    <EntitySet Name="Activities" EntityType="DataModel.Activity" />
+    <AssociationSet Name="CategoryActivity" Association="DataModel.CategoryActivity">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Activity" EntitySet="Activities" />
+    </AssociationSet>
+    <EntitySet Name="TodoItems" EntityType="DataModel.TodoItem" />
+    <AssociationSet Name="ActivityTodoItem" Association="DataModel.ActivityTodoItem">
+      <End Role="Activity" EntitySet="Activities" />
+      <End Role="TodoItem" EntitySet="TodoItems" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Notes" Type="String" Nullable="true" />
+    <NavigationProperty Name="Activities" Relationship="DataModel.CategoryActivity" FromRole="Category" ToRole="Activity" />
+  </EntityType>
+  <EntityType Name="Activity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Priority" Type="Int16" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="true" />
+    <NavigationProperty Name="Category" Relationship="DataModel.CategoryActivity" FromRole="Activity" ToRole="Category" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="Completed" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="TodoItems" Relationship="DataModel.ActivityTodoItem" FromRole="Activity" ToRole="TodoItem" />
+  </EntityType>
+  <Association Name="CategoryActivity">
+    <End Type="DataModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="DataModel.Activity" Role="Activity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activity">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TodoItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <Property Name="AddedOn" Type="DateTime" Nullable="false" />
+    <Property Name="Deadline" Type="DateTime" Nullable="false" />
+    <Property Name="ResolvesActivity" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Activity" Relationship="DataModel.ActivityTodoItem" FromRole="TodoItem" ToRole="Activity" />
+    <Property Name="ActivityId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="ActivityTodoItem">
+    <End Type="DataModel.Activity" Role="Activity" Multiplicity="1" />
+    <End Type="DataModel.TodoItem" Role="TodoItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TodoItem">
+        <PropertyRef Name="ActivityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
