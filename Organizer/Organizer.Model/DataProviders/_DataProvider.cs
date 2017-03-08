@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Organizer.Model;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace Model.DataProviders {
 	public class DataProvider<T> where T : class {
 		private DataContext _dbContext;
-		private DbSet<T> _dbSet;
+		protected DbSet<T> _dbSet;
 
 		public DataProvider() {
 			_dbContext = new DataContext();

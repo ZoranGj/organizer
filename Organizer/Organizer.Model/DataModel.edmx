@@ -25,6 +25,7 @@
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Notes" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Priority" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Activities">
     <Key>
@@ -97,6 +98,7 @@
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="Notes" Type="String" Nullable="true" />
           <NavigationProperty Name="Activities" Relationship="DataModel.CategoryActivity" FromRole="Category" ToRole="Activity" />
+          <Property Name="Priority" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Activity">
           <Key>
@@ -159,6 +161,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

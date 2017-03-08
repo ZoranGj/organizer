@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Model
+namespace Organizer.Model
 {
     using System;
     using System.Collections.Generic;

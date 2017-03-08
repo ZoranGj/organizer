@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/01/2017 22:42:06
--- Generated from EDMX file: D:\Projects\Prototypes\organizer\organizer\Organizer\Model\DataModel.edmx
+-- Date Created: 03/08/2017 20:18:35
+-- Generated from EDMX file: D:\Projects\Prototypes\organizer\organizer\Organizer\Organizer.Model\DataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -46,7 +46,8 @@ GO
 CREATE TABLE [dbo].[Categories] (
     [Id] int  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [Notes] nvarchar(max)  NULL
+    [Notes] nvarchar(max)  NULL,
+    [Priority] int  NOT NULL
 );
 GO
 

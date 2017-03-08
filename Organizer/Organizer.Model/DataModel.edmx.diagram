@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="DataModel.Category" Width="1.5" PointX="2.25" PointY="1.25" />
         <EntityTypeShape EntityType="DataModel.Activity" Width="1.5" PointX="5.625" PointY="1.25" />
         <AssociationConnector Association="DataModel.CategoryActivity" />
-        <EntityTypeShape EntityType="DataModel.TodoItem" Width="1.5" PointX="9.125" PointY="3.25" />
+        <EntityTypeShape EntityType="DataModel.TodoItem" Width="1.5" PointX="8.75" PointY="2.375" />
         <AssociationConnector Association="DataModel.ActivityTodoItem" />
       </Diagram>
     </edmx:Diagrams>
