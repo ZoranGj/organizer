@@ -3,3 +3,9 @@
 ################################################################################
 
 /Organizer/packages
+/Organizer/Organizer.Client/bin/Debug
+/Organizer/Organizer.Client/obj/Debug
+/Organizer/Organizer.Model/bin/Debug
+/Organizer/Organizer.Model/obj/Debug
+/Organizer/Organizer.Client/bin/x64/Debug
+/Organizer/Organizer.Client/obj/x64/Debug
