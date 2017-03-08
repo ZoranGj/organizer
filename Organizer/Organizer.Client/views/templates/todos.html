@@ -1,0 +1,42 @@
+﻿<div id="toDoList" ng-init="initializeTodoItems()">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Task description</th>
+                <th>Added on</th>
+                <th>DEADLINE</th>
+                <th>Activity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="test-row">
+                <td class="cell-input">
+                    <input type="text" class="table-input form-control" placeholder="Description.." ng-model="todoItem.Description"/>
+                </td>
+                <td class="cell-input"><input type="date" class="table-input form-control" placeholder="AddedOn.." ng-model="todoItem.AddedOn" /></td>
+                <td class="cell-input"><input type="date" class="table-input form-control" placeholder="Deadline.." ng-model="todoItem.Deadline" /></td>
+                <td class="cell-input">
+                    <select ng-model="todoItem.ActivityId" class="form-control table-input"
+                            ng-options="activityItem.Id as activityItem.Name for activityItem in activityItems">
+                        <option value="">Activity..</option>
+                    </select>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-info pull-left" ng-click="addTodoItem(1727)"> <span class="fa fa-plus"></span> Todo Item</button>
+                </td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="item in todoItems" class="test-row">
+                <td><input type="checkbox">  {{item.Description}}</td>
+                <td>{{item.AddedOn}}</td>
+                <td>{{item.Deadline}}</td>
+                <td>{{item.Activity}}</td>
+                <td>
+                    <button type="button" class="btn btn-warning btn-sm">Edit</button>
+                    <button type="button" class="btn btn-danger btn-sm" ng-click="deleteTodoItem(item.Id)"> <span class="fa fa-times"></span></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
