@@ -1,4 +1,9 @@
 ﻿<div id="toDoList" ng-init="initializeTodoItems()">
+    <div>
+        <select ng-model="selectedCategoryId" class="form-control table-input" ng-change="categoryChanged()"
+                ng-options="item.Id as item.Name for item in categories">
+        </select>
+    </div>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -14,8 +19,19 @@
                 <td class="cell-input">
                     <input type="text" class="table-input form-control" placeholder="Description.." ng-model="todoItem.Description"/>
                 </td>
-                <td class="cell-input"><input type="date" class="table-input form-control" placeholder="AddedOn.." ng-model="todoItem.AddedOn" /></td>
-                <td class="cell-input"><input type="date" class="table-input form-control" placeholder="Deadline.." ng-model="todoItem.Deadline" /></td>
+                <td class="cell-input" colspan="2">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                            <div class="input-group">
+                                <input type="text" class="table-input form-control" data-ng-model="todoItem.Deadline">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="todoItem.Deadline" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }" data-on-set-time="onTimeSet(newDate, oldDate)"/>
+                        </ul>
+                    </div>
+                </td>
                 <td class="cell-input">
                     <select ng-model="todoItem.ActivityId" class="form-control table-input"
                             ng-options="activityItem.Id as activityItem.Name for activityItem in activityItems">

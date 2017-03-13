@@ -1,4 +1,4 @@
-﻿var app = angular.module('ngApp', []);
+﻿var app = angular.module('ngApp', ['ui.bootstrap.datetimepicker']);
 appController.showDevTools();
 
 app.config(['$routeProvider',
@@ -110,20 +110,32 @@ app.controller('CategoriesController', function ($scope) {
 
 app.controller('TodoItemsController', function($scope) {
     $scope.todoItem = {
-        ActivityId: 0
+        ActivityId: 0,
+        Deadline: new Date()
     }
 
     $scope.initializeTodoItems = function () {
-        var todoItems = appController.getTodoItems();
+        var categories = appController.getCategories();
+        $scope.categories = JSON.parse(categories);
+
+        $scope.initializeTodoItemsByCategory($scope.categories[0].categoryId);
+    }
+
+    $scope.categoryChanged = function () {
+        $scope.initializeTodoItemsByCategory($scope.selectedCategoryId);
+    }
+
+    $scope.initializeTodoItemsByCategory = function(categoryId){
+        var todoItems = appController.getTodoItems(categoryId);
         $scope.todoItems = JSON.parse(todoItems);
 
-        var activityItems = appController.getActivityItems();
+        var activityItems = appController.getActivityItems(categoryId);
         $scope.activityItems = JSON.parse(activityItems);
     }
 
     $scope.addTodoItem = function () {
         if ($scope.todoItem.ActivityId) {
-            appController.addTodoItem($scope.todoItem.ActivityId);
+            appController.addTodoItem($scope.todoItem.Description, new Date($scope.todoItem.Deadline), $scope.todoItem.ActivityId);
             $scope.initializeTodoItems();
         }
     }
@@ -131,5 +143,10 @@ app.controller('TodoItemsController', function($scope) {
     $scope.deleteTodoItem = function (todoItemId) {
         appController.deleteTodoItem(todoItemId);
         $scope.initializeTodoItems();
+    }
+
+    $scope.onTimeSet = function (newDate, oldDate) {
+        alert(newDate);
+        $scope.todoItem.Deadline = newDate;
     }
 });

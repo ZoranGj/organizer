@@ -107,11 +107,11 @@ namespace Organizer.Client
             activityProvider.Save();
         }
 
-        public string GetActivityItems()
+        public string GetActivityItems(int categoryId)
         {
             var activityProvider = new ActivitiesProvider();
             var dictionary = new Dictionary<int, string>();
-            return SerializeObject(activityProvider.GetAll().Select(x => new ActivityDto()
+            return SerializeObject(activityProvider.GetAll(categoryId).Select(x => new ActivityDto()
             {
                 Name = x.Name,
                 Id = x.Id
@@ -120,7 +120,7 @@ namespace Organizer.Client
 
         #endregion
 
-        public void AddTodoItem(int activityId)
+        public void AddTodoItem(string description, DateTime deadline, int activityId)
         {
             var id = new Random().Next(100000);
             var todoItemProvider = new TodoItemsProvider();
@@ -128,17 +128,17 @@ namespace Organizer.Client
             {
                 Id = id,
                 ActivityId = activityId,
-                Deadline = new DateTime(2017, 04, 04).AddMinutes(id + new Random().Next(30)),
-                AddedOn = DateTime.Now.AddMinutes(id),
-                Description = "Simple todo item for activity " + id
+                Deadline = deadline,
+                AddedOn = DateTime.Now,
+                Description = description
             });
             todoItemProvider.Save();
         }
 
-        public string GetTodoItems()
+        public string GetTodoItems(int categoryId)
         {
             var todoItemProvider = new TodoItemsProvider();
-            var data = todoItemProvider.GetAll();
+            var data = todoItemProvider.GetAll(categoryId);
             return SerializeObject(data.Select(x => new ToDoItemDto
             {
                 Id = x.Id,
