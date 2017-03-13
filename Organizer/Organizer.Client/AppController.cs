@@ -76,18 +76,27 @@ namespace Organizer.Client
 
         #region Activities
 
-        public void SaveActivity(int categoryId, string name, string description)
+        public void SaveActivity(int categoryId, string name, int activityId)
         {
-            var id = new Random().Next(100000);
             var activityProvider = new ActivitiesProvider();
-            activityProvider.Insert(new Activity
+            if(activityId == 0)
             {
-                Id = id,
-                Name = name,
-                Description = description,
-                CategoryId = categoryId,
-                Priority = 2
-            });
+                var id = new Random().Next(100000);
+                activityProvider.Insert(new Activity
+                {
+                    Id = id,
+                    Name = name,
+                    Description = null,
+                    CategoryId = categoryId,
+                    Priority = 2
+                });
+            }
+            else
+            {
+                var activity = activityProvider.GetById(activityId);
+                activity.Name = name;
+                activityProvider.Update(activity);
+            }
             activityProvider.Save();
         }
 

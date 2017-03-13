@@ -49,13 +49,6 @@ app.controller('CategoriesController', function ($scope) {
         });
         $('#newCategory').hide();
         $scope.category.name = null;
-
-        $scope.activity = {
-            categoryId: null,
-            categoryName: null,
-            name: null,
-            description: null,
-        }
     }
 
     $scope.addCategory = function () {
@@ -89,15 +82,17 @@ app.controller('CategoriesController', function ($scope) {
 
     $scope.showicons = false;
 
-    $scope.saveActivity = function() {
-        appController.saveActivity($scope.activity.categoryId, $scope.activity.name, $scope.activity.description);
-        $scope.initializeCategories();
+    $scope.saveActivity = function () {
+        appController.saveActivity(this.activity.CategoryId, this.activity.Name, this.activity.Id  || 0);
     }
 
-    $scope.addActivity = function (categoryId, categoryName) {
-        $scope.activity.categoryId = categoryId;
-        $scope.activity.categoryName = categoryName;
-        $('#activityModal').modal();
+    $scope.addActivity = function (category) {
+        category.Activities.push({
+            CategoryId: category.Id,
+            Name: 'Activity name..',
+            Id: 0,
+        });
+        $(".activity[data-id=0]").focus();
     }
 
     $scope.deleteActivity = function(id) {

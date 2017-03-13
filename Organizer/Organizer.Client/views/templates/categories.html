@@ -1,4 +1,4 @@
-﻿<div ng-init="initializeCategories()">
+﻿<div ng-init="initializeCategories()" class="col-md-12">
     <!--<div class="search-bar">
         <input type="text" class="form-control" placeholder="Search categories.."/>
     </div>-->
@@ -10,14 +10,14 @@
                 <span class="fa fa-cog text-warning pull-right" style="font-size: 16px; margin-right: 6px;"></span>
             </li>
             <ul class="list-group">
-                <li class="list-group-item" ng-repeat="activity in category.Activities" ng-mouseenter="showicons=true" ng-mouseleave="showicons=false">
-                    {{activity.Name}} <span class="text-muted">({{activity.Description}})</span>
-                    <a ng-show="showicons" class="text-danger pull-right" ng-click="deleteActivity(activity.Id)" style="font-size: 14px;"><span class="fa fa-times"></span></a>
-                    <a ng-show="showicons" class="text-primary pull-right" ng-click="createTodoItem(activity.Id)" style="margin-right: 5px; font-size: 14px;"><span class="fa fa-pencil"></span></a>
+                <li ng-repeat="activity in category.Activities" ng-mouseenter="showicons=true" ng-mouseleave="showicons=false">
+                    <input data-id="{{activity.Id}}" type="text" class="form-control list-group-item activity" style="border-radius: 0;" value="{{activity.Name}}" ng-model="activity.Name" />
+                    <button type="button" ng-show="showicons" style="cursor:pointer; position:absolute; right: 5px; margin-top: -28px; padding: 1px 6px;" class="text-danger btn btn-default pull-right" ng-click="deleteActivity(activity.Id)" style="font-size: 14px;"><span class="fa fa-times"></span></button>
+                        <button type="button" ng-show="showicons" style="cursor:pointer; position:absolute; right: 35px; margin-top: -28px; padding: 1px 6px;" class="text-primary btn btn-default pull-right" ng-click="createTodoItem(activity.Id)" style="margin-right: 5px; font-size: 14px;"><span class="fa fa-pencil"></span></button>
+                    <button type="button" ng-show="showicons" style="cursor:pointer; position:absolute;right: 65px; margin-top: -28px; padding: 1px 6px;" class="text-primary btn btn-default pull-right" ng-click="saveActivity()" style="margin-right: 5px; font-size: 14px;"><span class="fa fa-floppy-o"></span></button>
                 </li>
-                <!-- todo: fix: -->
             </ul>
-            <button type="button" class="list-group-item btn-default text-muted" ng-click="addActivity(category.Id, category.Name)"><span class="fa fa-plus text-info"></span> <span class="text-muted">Add new activity to category</span></button>
+            <button type="button" class="list-group-item btn-default text-muted" ng-click="addActivity(category)"><span class="fa fa-plus text-info"></span> <span class="text-muted">Add new activity to category</span></button>
         </div>
         <div class="col-md-4 card category" id="newCategory">
             <li class="list-group-item list-group-item-primary" style="border-bottom: 1px solid #e1e1e1;">
