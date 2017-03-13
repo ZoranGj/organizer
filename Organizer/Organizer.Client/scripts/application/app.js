@@ -16,10 +16,17 @@ app.config(['$routeProvider',
             templateUrl: 'templates/todos.html',
             controller: 'TodoItemsController'
         }).
+        when('/settings', {
+            templateUrl: 'templates/settings.html',
+            controller: 'SettingsController'
+        }).
         otherwise({
             redirectTo: '/home'
         });
   }]);
+
+app.controller('SettingsController', function ($scope) {
+});
 
 app.controller('HomeController', function ($scope) {
     $scope.message = 'message from home controller';
