@@ -7,17 +7,13 @@
 .card {
     width: 30%;
     margin-bottom: 60px;
-}
-
-    .card:not(:nth-of-type(3n)) {
-        margin-right: 60px !important;
-    }
-
-.card {
     background: #fff;
     padding: 0;
     box-shadow: 2px 4px 7px rgba(0,0,0,.1);
 }
+    .card:not(:nth-of-type(3n)) {
+        margin-right: 60px !important;
+    }
 
 .list-group {
     margin-bottom: 0;
@@ -28,17 +24,14 @@
     background: #fff;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
-
     #menu * {
         background: #fff;
     }
-
     #menu li a, .navbar-brand {
         padding-top: 20px;
         padding-bottom: 20px;
         color: #333;
     }
-
     #menu li a {
         font-size: 15px;
     }
