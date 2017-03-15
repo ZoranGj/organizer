@@ -72,6 +72,12 @@ namespace Organizer.Client
             categoryProvider.UpdatePriority(id, newPriority);
         }
 
+        public void UpdateCategoryData(int id, int hoursPerWeek)
+        {
+            var categoryProvider = new CategoriesProvider();
+            categoryProvider.UpdateCategoryData(id, (short)hoursPerWeek);
+        }
+
         #endregion
 
         #region Activities

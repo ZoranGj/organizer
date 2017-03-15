@@ -25,5 +25,12 @@ namespace Model.DataProviders {
             Update(GetById(swappedCategory.Id));
             Save();
         }
+
+        public void UpdateCategoryData(int id, short hoursPerWeek)
+        {
+            var category = GetById(id);
+            category.HoursPerWeek = hoursPerWeek;
+            Save();
+        }
     }
 }

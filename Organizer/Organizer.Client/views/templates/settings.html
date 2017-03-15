@@ -1,1 +1,21 @@
-﻿<h2>Settings</h2>
+﻿<div id="settings" ng-init="init()">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="col-md-8">Category</th>
+                <th>Planned hours per week</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="test-row" ng-repeat="category in categories" ng-mouseenter="showicons=true" ng-mouseleave="showicons=false">
+                <td class="cell-input">
+                    <button type="button" class="pull-left btn btn-primary" ng-show="showicons" ng-click="updateCategory(category)">Save</button>
+                    {{category.Name}}
+                </td>
+                <td >
+                    <input type="text" class="table-input form-control" ng-model="category.HoursPerWeek" value="category.HoursPerWeek">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
