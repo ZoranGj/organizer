@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../content/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link href="../content/css/datetimepicker.css" rel="stylesheet" />
     <link href="../content/css/site.css" rel="stylesheet" />
@@ -17,23 +17,27 @@
     <script type="text/javascript" src="../scripts/libraries/datetimepicker.templates.js"></script>
 </head>
 <body ng-app="ngApp">
-<div>
-    <div id="menu" class="navbar navbar-default navbar-fixed-top">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#home">Organizer</a>
+    <div>
+        <div id="menu" class="navbar navbar-default navbar-fixed-top">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#home">Organizer</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#categories">My activities</a></li>
+                    <li><a href="#todos">Todo items</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#settings">Settings</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="#categories">My activities</a></li>
-                <li><a href="#todos">Todo items</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="#settings">Settings</a></li>
-            </ul>
+        <div id="viewContainer" class="container-fluid">
+            <div class="col-sm-12" ng-view>
+
+            </div>
         </div>
     </div>
-    <div id="viewContainer" ng-view class="container-fluid"></div>
-</div>
     
     <script>
         $(document).ready(function () {

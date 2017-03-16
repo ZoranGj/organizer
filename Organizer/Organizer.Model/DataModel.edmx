@@ -49,6 +49,7 @@
     <Property Name="Deadline" Type="datetime" Nullable="false" />
     <Property Name="ResolvesActivity" Type="bit" Nullable="false" />
     <Property Name="ActivityId" Type="int" Nullable="false" />
+    <Property Name="Resolved" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="CategoryActivity">
     <End Role="Category" Type="DataModel.Store.Categories" Multiplicity="1" />
@@ -138,6 +139,7 @@
           <Property Name="ResolvesActivity" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Activity" Relationship="DataModel.ActivityTodoItem" FromRole="TodoItem" ToRole="Activity" />
           <Property Name="ActivityId" Type="Int32" Nullable="false" />
+          <Property Name="Resolved" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="ActivityTodoItem">
           <End Type="DataModel.Activity" Role="Activity" Multiplicity="1" />
@@ -189,6 +191,7 @@
           <ScalarProperty Name="Deadline" ColumnName="Deadline" />
           <ScalarProperty Name="ResolvesActivity" ColumnName="ResolvesActivity" />
           <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+          <ScalarProperty Name="Resolved" ColumnName="Resolved" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -94,3 +94,22 @@ body, html {
     width: 100%;
     height: 100%;
 }
+
+.panel-bg {
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 2px 4px 7px rgba(0,0,0,.1);
+    padding-bottom: 15px;
+}
+
+.float-action {
+    float: right;
+    position: absolute;
+    right: 22px;
+    margin-top: -38px;
+    border-radius: 0;
+}
+
+.resolved {
+    background: #5cb85c !important;
+    color: #fff;
+}

@@ -11,5 +11,12 @@ namespace Model.DataProviders {
         {
             return _dbSet.Include("Activity").Where(x => x.Activity.CategoryId == categoryId);
         }
+
+        public void Resolve(int id, bool resolved)
+        {
+            var item = GetById(id);
+            item.Resolved = resolved;
+            Save();
+        }
     }
 }

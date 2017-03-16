@@ -20,6 +20,7 @@ namespace Organizer.Model
         public System.DateTime Deadline { get; set; }
         public bool ResolvesActivity { get; set; }
         public int ActivityId { get; set; }
+        public bool Resolved { get; set; }
     
         public virtual Activity Activity { get; set; }
     }

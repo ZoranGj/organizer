@@ -1,21 +1,39 @@
-﻿<div id="settings" ng-init="init()">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th class="col-md-8">Category</th>
-                <th>Planned hours per week</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="test-row" ng-repeat="category in categories" ng-mouseenter="showicons=true" ng-mouseleave="showicons=false">
-                <td class="cell-input">
-                    <button type="button" class="pull-left btn btn-primary" ng-show="showicons" ng-click="updateCategory(category)">Save</button>
-                    {{category.Name}}
-                </td>
-                <td >
-                    <input type="text" class="table-input form-control" ng-model="category.HoursPerWeek" value="category.HoursPerWeek">
-                </td>
-            </tr>
-        </tbody>
-    </table>
+﻿<div id="settings" ng-init="init()" class="panel-bg row">
+    <div class="col-md-12">
+        <h4>Settings</h4>
+        <!-- tabs left -->
+        <div class="tabbable">
+            <ul class="nav nav-pills nav-stacked col-md-3">
+                <li class="active"><a href="#a" data-toggle="tab">Activities</a></li>
+                <li><a href="#b" data-toggle="tab">UI</a></li>
+            </ul>
+            <div class="tab-content col-md-9">
+                <div class="tab-pane active" id="a">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="col-md-8">Category</th>
+                                <th>Planned hours per week</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="test-row" ng-repeat="category in categories" ng-mouseenter="showicons=true" ng-mouseleave="showicons=false">
+                                <td>
+                                    {{category.Name}}
+                                </td>
+                                <td>
+                                    <input type="text" class="table-input form-control" ng-model="category.HoursPerWeek" value="category.HoursPerWeek">
+                                    <button type="button" class="btn btn-info float-action" ng-show="showicons" ng-click="updateCategory(category)">
+                                        <span class="fa fa-floppy-o"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane" id="b">Secondo sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
+            </div>
+        </div>
+        <!-- /tabs -->
+    </div>
 </div>

@@ -151,7 +151,8 @@ namespace Organizer.Client
                 Activity = x.Activity.Name,
                 Description = x.Description,
                 AddedOn = x.AddedOn,
-                Deadline = x.Deadline
+                Deadline = x.Deadline,
+                Resolved = x.Resolved,
             }));
         }
 
@@ -160,6 +161,12 @@ namespace Organizer.Client
             var todoItemProvider = new TodoItemsProvider();
             todoItemProvider.Delete(todoItemId);
             todoItemProvider.Save();
+        }
+
+        public void ResolveTodoItem(int id, bool resolved)
+        {
+            var todoItemProvider = new TodoItemsProvider();
+            todoItemProvider.Resolve(id, resolved);
         }
 
         private string SerializeObject(object data)
@@ -185,6 +192,7 @@ namespace Organizer.Client
         public DateTime AddedOn { get; set; }
         public DateTime Deadline { get; set; }
         public string Activity { get; set; }
+        public bool Resolved { get; set; }
     }
 
     public class ActivityDto

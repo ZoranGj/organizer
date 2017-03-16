@@ -122,20 +122,31 @@ app.controller('TodoItemsController', function($scope) {
         Deadline: new Date()
     }
 
+    $scope.filter = {
+        category: 0,
+        status: 0
+    };
+
     $scope.initializeTodoItems = function () {
         var categories = appController.getCategories();
         $scope.categories = JSON.parse(categories);
 
-        $scope.initializeTodoItemsByCategory($scope.categories[0].categoryId);
+        $scope.initializeTodoItemsByCategory($scope.filter.category);
     }
 
     $scope.categoryChanged = function () {
-        $scope.initializeTodoItemsByCategory($scope.selectedCategoryId);
+        $scope.initializeTodoItemsByCategory($scope.filter.category);
+    }
+
+    $scope.statusChanged = function () {
+
     }
 
     $scope.initializeTodoItemsByCategory = function(categoryId){
         var todoItems = appController.getTodoItems(categoryId);
         $scope.todoItems = JSON.parse(todoItems);
+
+        console.log($scope.todoItems);
 
         var activityItems = appController.getActivityItems(categoryId);
         $scope.activityItems = JSON.parse(activityItems);
@@ -154,7 +165,15 @@ app.controller('TodoItemsController', function($scope) {
     }
 
     $scope.onTimeSet = function (newDate, oldDate) {
-        alert(newDate);
         $scope.todoItem.Deadline = newDate;
+    }
+
+    $scope.resolveItem = function (id) {
+        appController.resolveTodoItem(id, this.item.Resolved);
+        //this.item.Resolved = true;
+    }
+
+    $scope.todoItemClass = function (item) {
+        return item.Resolved ? 'resolved' : '';
     }
 });
