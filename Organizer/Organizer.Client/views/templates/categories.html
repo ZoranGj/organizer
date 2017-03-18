@@ -11,13 +11,13 @@
             </li>
             <ul class="list-group">
                 <li ng-repeat="activity in category.Activities" ng-mouseenter="showicons=true" ng-mouseleave="showicons=false">
-                    <input data-id="{{activity.Id}}" type="text" class="form-control list-group-item activity" style="border-radius: 0;" value="{{activity.Name}}" ng-model="activity.Name" />
+                    <input data-id="{{activity.Id}}" type="text" class="form-control list-group-item activity" style="border-radius: 0;" value="{{activity.Focus}}" ng-model="activity.Name"  ng-focus="activity.Focus"/>
                     <button type="button" ng-show="showicons" style="cursor:pointer; position:absolute; right: 5px; margin-top: -28px; padding: 1px 6px;" class="text-danger btn btn-default pull-right" ng-click="deleteActivity(activity.Id)" style="font-size: 14px;"><span class="fa fa-times"></span></button>
                         <button type="button" ng-show="showicons" style="cursor:pointer; position:absolute; right: 35px; margin-top: -28px; padding: 1px 6px;" class="text-primary btn btn-default pull-right" ng-click="createTodoItem(activity.Id)" style="margin-right: 5px; font-size: 14px;"><span class="fa fa-pencil"></span></button>
                     <button type="button" ng-show="showicons" style="cursor:pointer; position:absolute;right: 65px; margin-top: -28px; padding: 1px 6px;" class="text-primary btn btn-default pull-right" ng-click="saveActivity()" style="margin-right: 5px; font-size: 14px;"><span class="fa fa-floppy-o"></span></button>
                 </li>
             </ul>
-            <button type="button" class="list-group-item btn-default text-muted" ng-click="addActivity(category)"><span class="fa fa-plus text-info"></span> <span class="text-muted">Add new activity to category</span></button>
+            <button type="button" class="list-group-item btn-default text-muted" ng-click="addActivity(category)"><span class="fa fa-plus text-info"></span> <span class="text-muted">Add new activity</span></button>
         </div>
         <div class="col-md-4 card category" id="newCategory">
             <li class="list-group-item list-group-item-primary" style="border-bottom: 1px solid #e1e1e1;">

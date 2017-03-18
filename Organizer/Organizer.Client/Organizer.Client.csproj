@@ -155,6 +155,15 @@
     <Content Include="scripts\application\app.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="scripts\application\controllers\settingsController.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\controllers\categoriesController.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\controllers\todoItemsController.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="scripts\libraries\angular.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -176,14 +185,10 @@
     <Content Include="scripts\libraries\jquery-ui.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="views\activities.html" />
     <Content Include="views\index.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="views\templates\categories.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="views\templates\index.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="views\templates\settings.html">
@@ -194,7 +199,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="scripts\application\controllers\" />
     <Folder Include="scripts\application\directives\" />
     <Folder Include="scripts\application\services\" />
   </ItemGroup>

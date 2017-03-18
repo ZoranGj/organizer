@@ -7,7 +7,7 @@
 .card {
     width: 30%;
     margin-bottom: 60px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.8);
     padding: 0;
     box-shadow: 2px 4px 7px rgba(0,0,0,.1);
 }
@@ -113,3 +113,19 @@ body, html {
     background: #5cb85c !important;
     color: #fff;
 }
+
+.btn {
+    border-radius: 0 !important;
+}
+
+.filter {
+    padding: 10px 9px;
+    height: auto;
+    overflow: auto;
+}
+    .filter > div {
+        padding: 0;
+    }
+        .filter > div:not(:last-child) {
+            margin-right: 8px;
+        }

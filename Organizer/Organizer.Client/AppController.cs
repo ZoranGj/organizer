@@ -144,7 +144,7 @@ namespace Organizer.Client
         public string GetTodoItems(int categoryId)
         {
             var todoItemProvider = new TodoItemsProvider();
-            var data = todoItemProvider.GetAll(categoryId);
+            var data = categoryId == 0 ? todoItemProvider.GetAll() : todoItemProvider.GetAll(categoryId);
             return SerializeObject(data.Select(x => new ToDoItemDto
             {
                 Id = x.Id,
