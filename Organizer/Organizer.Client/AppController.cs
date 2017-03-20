@@ -3,9 +3,11 @@ using CefSharp.WinForms;
 using Model.DataProviders;
 using Newtonsoft.Json;
 using Organizer.Model;
+using Organizer.Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +46,12 @@ namespace Organizer.Client
             var categoryProvider = new CategoriesProvider();
             var data = categoryProvider.GetAll();
             return SerializeObject(data);
+        }
+
+        public Category GetCategory(int id)
+        {
+            var categoryProvider = new CategoriesProvider();
+            return categoryProvider.GetById(id);
         }
 
         public void AddCategory(string name, int priority)
@@ -182,6 +190,35 @@ namespace Organizer.Client
         {
             var list = new List<int> { 4464, 4907, 3709 };
             return list.ElementAt(new Random().Next(list.Count));
+        }
+
+        public string LoadProductivityReports(int id)
+        {
+            var todoItemProvider = new TodoItemsProvider();
+            var productivityList = new List<ActivityProductivity>();
+            var category = GetCategory(id);
+
+            var todoItems = todoItemProvider.GetAll(id).Where(x => x.Resolved);
+            var groupedByWeek = todoItems.GroupBy(item => GetStartOfWeek(item.Deadline));
+            productivityList = groupedByWeek.Select(x =>
+            {
+                return x.FirstOrDefault() == null ? new ActivityProductivity() : new ActivityProductivity
+                {
+                    ActualTime = x.Sum(y => 1),
+                    From = x.Key,
+                    NumberOfTodos = x.Count(),
+                    PlannedTime = category.HoursPerWeek
+                };
+            }).ToList();
+            return SerializeObject(productivityList);
+        }
+
+        public static DateTime GetStartOfWeek(DateTime value)
+        {
+            // Get rid of the time part first...
+            value = value.Date;
+            int daysIntoWeek = (int)value.DayOfWeek;
+            return value.AddDays(-daysIntoWeek);
         }
     }
 

@@ -1,0 +1,15 @@
+﻿<div class="container" ng-init="initReports()">
+    <div class="filter">
+        <div class="col-md-3">
+            <label>Choose activity group:</label>
+            <div>
+                <select ng-model="category" class="form-control table-input" ng-change="categoryChanged()"
+                        ng-options="item.Id as item.Name for item in categories"></select>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+</div>

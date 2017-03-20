@@ -1,4 +1,5 @@
 ﻿using Organizer.Model;
+using Organizer.Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -96,6 +96,7 @@
     <Compile Include="DataProviders\CategoriesProvider.cs" />
     <Compile Include="DataProviders\TodoItemsProvider.cs" />
     <Compile Include="DataProviders\_DataProvider.cs" />
+    <Compile Include="DTO\ActivityProductivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup\DbInitializer.cs" />
     <Compile Include="TodoItem.cs">

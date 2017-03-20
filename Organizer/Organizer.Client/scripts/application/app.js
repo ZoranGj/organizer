@@ -17,6 +17,10 @@ app.config(['$routeProvider',
             templateUrl: 'templates/settings.html',
             controller: 'SettingsController'
         }).
+        when('/reports', {
+            templateUrl: 'templates/reports.html',
+            controller: 'ReportsController'
+        }).
         otherwise({
             redirectTo: '/categories'
         });
