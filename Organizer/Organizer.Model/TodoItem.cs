@@ -21,6 +21,7 @@ namespace Organizer.Model
         public bool ResolvesActivity { get; set; }
         public int ActivityId { get; set; }
         public bool Resolved { get; set; }
+        public int Duration { get; set; }
     
         public virtual Activity Activity { get; set; }
     }

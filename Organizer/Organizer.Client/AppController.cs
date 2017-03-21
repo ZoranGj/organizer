@@ -161,6 +161,7 @@ namespace Organizer.Client
                 AddedOn = x.AddedOn,
                 Deadline = x.Deadline,
                 Resolved = x.Resolved,
+                Duration = x.Duration
             }));
         }
 
@@ -229,6 +230,7 @@ namespace Organizer.Client
         public DateTime Deadline { get; set; }
         public string Activity { get; set; }
         public bool Resolved { get; set; }
+        public int Duration { get; set; }
     }
 
     public class ActivityDto

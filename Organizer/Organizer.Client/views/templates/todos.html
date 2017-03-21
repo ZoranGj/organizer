@@ -19,6 +19,7 @@
             <tr>
                 <th>Task description</th>
                 <th>DEADLINE</th>
+                <th>Duration</th>
                 <th>Activity</th>
                 <th></th>
             </tr>
@@ -42,9 +43,11 @@
                     </div>
                 </td>
                 <td class="cell-input">
+                    <input type="text" class="table-input form-control" placeholder="Duration (hours).." ng-model="todoItem.Duration" />
+                </td>
+                <td class="cell-input">
                     <select ng-model="todoItem.ActivityId" class="form-control table-input"
-                            ng-options="activityItem.Id as activityItem.Name for activityItem in activityItems">
-                    </select>
+                            ng-options="activityItem.Id as activityItem.Name for activityItem in activityItems"></select>
                 </td>
                 <td>
                     <button type="button" class="btn btn-default pull-left" ng-click="addTodoItem(1727)"> <span class="fa fa-plus"></span> Todo Item</button>
@@ -57,9 +60,9 @@
                     <span ng-bind="item.Deadline |  date:'MM/dd/yyyy hh:mm'"></span> 
                     (<small ng-bind="item.AddedOn |  date:'MM/dd/yyyy'"></small>)
                 </td>
+                <td>{{item.Duration}}</td>
                 <td>{{item.Activity}}</td>
                 <td>
-                    <!--<button type="button" class="btn btn-warning btn-sm">Edit</button>-->
                     <button type="button" class="btn btn-danger btn-sm" ng-click="deleteTodoItem(item.Id)"> <span class="fa fa-times"></span></button>
                 </td>
             </tr>

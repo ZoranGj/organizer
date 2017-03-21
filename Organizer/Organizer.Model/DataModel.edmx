@@ -50,6 +50,7 @@
     <Property Name="ResolvesActivity" Type="bit" Nullable="false" />
     <Property Name="ActivityId" Type="int" Nullable="false" />
     <Property Name="Resolved" Type="bit" Nullable="false" />
+    <Property Name="Duration" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="CategoryActivity">
     <End Role="Category" Type="DataModel.Store.Categories" Multiplicity="1" />
@@ -140,6 +141,7 @@
           <NavigationProperty Name="Activity" Relationship="DataModel.ActivityTodoItem" FromRole="TodoItem" ToRole="Activity" />
           <Property Name="ActivityId" Type="Int32" Nullable="false" />
           <Property Name="Resolved" Type="Boolean" Nullable="false" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="ActivityTodoItem">
           <End Type="DataModel.Activity" Role="Activity" Multiplicity="1" />
@@ -192,6 +194,7 @@
           <ScalarProperty Name="ResolvesActivity" ColumnName="ResolvesActivity" />
           <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
           <ScalarProperty Name="Resolved" ColumnName="Resolved" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
