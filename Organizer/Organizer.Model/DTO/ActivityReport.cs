@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Organizer.Model.DTO
 {
-    public class ActivityProductivity
+    public class ActivityReport : Report
     {
         public int CategoryId { get; set; }
         public DateTime From { get; set; }
@@ -16,5 +16,14 @@ namespace Organizer.Model.DTO
         public string Name { get; set; }
         public int NumberOfTodos { get; set; }
         public int NumberOfActivities { get; set; }
+
+
+        public override string DisplayLabel
+        {
+            get
+            {
+                return string.Format("{0} - {1}", From.ToShortDateString(), From.AddDays(7).ToShortDateString());
+            }
+        }
     }
 }

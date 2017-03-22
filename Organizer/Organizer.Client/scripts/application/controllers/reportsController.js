@@ -14,7 +14,7 @@
         }
 
         if ($scope.category != 0) {
-            var productivityItems = appController.loadProductivityReports($scope.category);
+            var productivityItems = appController.loadProductivityReports(parseInt($scope.category));
             var itemList = JSON.parse(productivityItems);
 
             var labels = [];
@@ -22,7 +22,7 @@
             var plannedTime = 0;
 
             for (var i in itemList) {
-                labels.push('Week ' + i + ' - ' + itemList[i].From);
+                labels.push(itemList[i].DisplayLabel);
                 items.push(itemList[i].ActualTime);
             }
 

@@ -17,10 +17,10 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Task description</th>
-                <th>DEADLINE</th>
-                <th>Duration</th>
-                <th>Activity</th>
+                <th class="col-md-5">Task description</th>
+                <th class="col-md-2">DEADLINE</th>
+                <th class="col-md-1">Duration</th>
+                <th class="col-md-2">Activity</th>
                 <th></th>
             </tr>
         </thead>
@@ -41,6 +41,12 @@
                             <datetimepicker data-ng-model="todoItem.Deadline" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }" data-on-set-time="onTimeSet(newDate, oldDate)"/>
                         </ul>
                     </div>
+                    <select ng-model="todoItem.Recurring" class="form-control table-input">
+                        <option value="0">Standard</option>
+                        <option value="1">Daily</option>
+                        <option value="2">Weekly</option>
+                        <option value="3">Weekends</option>
+                    </select>
                 </td>
                 <td class="cell-input">
                     <input type="text" class="table-input form-control" placeholder="Duration (hours).." ng-model="todoItem.Duration" />
@@ -52,10 +58,9 @@
                 <td>
                     <button type="button" class="btn btn-default pull-left" ng-click="addTodoItem(1727)"> <span class="fa fa-plus"></span> Todo Item</button>
                 </td>
-                <td></td>
             </tr>
             <tr ng-repeat="item in todoItems" class="test-row" ng-class="todoItemClass(item)">
-                <td><input type="checkbox" ng-model="item.Resolved" ng-change="resolveItem(item.Id)">  {{item.Description}}</td>
+                <td><input type="checkbox" ng-model="item.Resolved" ng-change="resolveItem(item.Id)">  {{item.Description}} (<i class="text-muted">{{item.RecurringMode}}</i>)</td>
                 <td>
                     <span ng-bind="item.Deadline |  date:'MM/dd/yyyy hh:mm'"></span> 
                     (<small ng-bind="item.AddedOn |  date:'MM/dd/yyyy'"></small>)

@@ -12,6 +12,11 @@ namespace Model.DataProviders {
             return _dbSet.Include("Activity").Where(x => x.Activity.CategoryId == categoryId);
         }
 
+        public void InitRecurringTodos()
+        {
+
+        }
+
         public void Resolve(int id, bool resolved)
         {
             var item = GetById(id);

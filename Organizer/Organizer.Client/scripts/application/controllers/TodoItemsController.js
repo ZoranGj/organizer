@@ -34,7 +34,7 @@
 
     $scope.addTodoItem = function () {
         if ($scope.todoItem.ActivityId) {
-            appController.addTodoItem($scope.todoItem.Description, new Date($scope.todoItem.Deadline), $scope.todoItem.ActivityId);
+            appController.addTodoItem($scope.todoItem.Description, new Date($scope.todoItem.Deadline), $scope.todoItem.ActivityId, parseInt($scope.todoItem.Duration));
             $scope.initializeTodoItems();
         }
     }

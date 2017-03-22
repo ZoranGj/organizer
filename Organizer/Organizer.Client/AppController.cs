@@ -4,6 +4,7 @@ using Model.DataProviders;
 using Newtonsoft.Json;
 using Organizer.Model;
 using Organizer.Model.DTO;
+using Organizer.Model.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -134,7 +135,7 @@ namespace Organizer.Client
 
         #endregion
 
-        public void AddTodoItem(string description, DateTime deadline, int activityId)
+        public void AddTodoItem(string description, DateTime deadline, int activityId, int duration)
         {
             var id = new Random().Next(100000);
             var todoItemProvider = new TodoItemsProvider();
@@ -144,7 +145,9 @@ namespace Organizer.Client
                 ActivityId = activityId,
                 Deadline = deadline,
                 AddedOn = DateTime.Now,
-                Description = description
+                Description = description,
+                Duration = duration,
+                //Recurring = (short)recurring
             });
             todoItemProvider.Save();
         }
@@ -152,6 +155,7 @@ namespace Organizer.Client
         public string GetTodoItems(int categoryId)
         {
             var todoItemProvider = new TodoItemsProvider();
+            todoItemProvider.InitRecurringTodos();
             var data = categoryId == 0 ? todoItemProvider.GetAll() : todoItemProvider.GetAll(categoryId);
             return SerializeObject(data.Select(x => new ToDoItemDto
             {
@@ -161,7 +165,8 @@ namespace Organizer.Client
                 AddedOn = x.AddedOn,
                 Deadline = x.Deadline,
                 Resolved = x.Resolved,
-                Duration = x.Duration
+                Duration = x.Duration,
+                //RecurringTypeId = x.Recurring
             }));
         }
 
@@ -195,31 +200,85 @@ namespace Organizer.Client
 
         public string LoadProductivityReports(int id)
         {
-            var todoItemProvider = new TodoItemsProvider();
-            var productivityList = new List<ActivityProductivity>();
-            var category = GetCategory(id);
-
-            var todoItems = todoItemProvider.GetAll(id).Where(x => x.Resolved);
-            var groupedByWeek = todoItems.GroupBy(item => GetStartOfWeek(item.Deadline));
-            productivityList = groupedByWeek.Select(x =>
+            if (id != 0)
             {
-                return x.FirstOrDefault() == null ? new ActivityProductivity() : new ActivityProductivity
+            //    var categoryProvider = new CategoriesProvider();
+            //    var categories = categoryProvider.GetAll();
+            //    var productivityList = categories.Select(x =>
+            //    new
+            //    {
+            //        Label = x.Name,
+            //        Items = ActivityReports(x)
+            //    });
+            //    return SerializeObject(productivityList);
+            //}
+            //else
+            //{
+                var category = GetCategory(id);
+                var productivityList = ActivityReports(category);
+                return SerializeObject(productivityList);
+            }
+
+            return null;
+        }
+
+        public List<ActivityReport> ActivityReports(Category category)
+        {
+            var todoItemProvider = new TodoItemsProvider();
+            var todoItems = todoItemProvider.GetAll(category.Id).Where(x => x.Resolved).OrderBy(x => x.Deadline).ToList();
+            var todoItemsCopy = new List<TodoItem>();
+            if (!todoItems.Any())
+            {
+                return null;
+            }
+
+            for (var i = 0; i < todoItems.Count(); i++)
+            {
+                var item = todoItems.ElementAt(i);
+                todoItemsCopy.Add(item);
+                if (todoItems.Count() > i + 1)
                 {
-                    ActualTime = x.Sum(y => 1),
-                    From = x.Key,
-                    NumberOfTodos = x.Count(),
-                    PlannedTime = category.HoursPerWeek
-                };
+
+                    var nextItem = todoItems.ElementAt(i + 1);
+                    int dateDiff = ((int)(nextItem.Deadline - item.Deadline).TotalDays / 7);
+                    todoItemsCopy = todoItemsCopy.Concat(Enumerable.Range(1, dateDiff - 1).Select(x => new TodoItem
+                    {
+                        Deadline = item.Deadline.AddDays(7 * x),
+                        ActivityId = item.ActivityId,
+                        AddedOn = item.AddedOn.AddDays(7 * x),
+                        Resolved = true,
+                        Duration = 0
+                    })).ToList();
+                    todoItemsCopy.Add(nextItem);
+                    i++;
+                }
+            }
+
+            var groupedByWeek = todoItemsCopy.OrderBy(x => x.Deadline).GroupBy(item => GetStartOfWeek(item.Deadline));
+            return groupedByWeek.Select(x => new ActivityReport
+            {
+                ActualTime = x.Sum(y => y.Duration),
+                From = x.Key,
+                NumberOfTodos = x.Count(),
+                PlannedTime = category.HoursPerWeek
             }).ToList();
-            return SerializeObject(productivityList);
         }
 
         public static DateTime GetStartOfWeek(DateTime value)
         {
             value = value.Date;
-            int daysIntoWeek = (int)value.DayOfWeek;
+            int daysIntoWeek = (int)value.DayOfWeek - 1;
             return value.AddDays(-daysIntoWeek);
         }
+    }
+
+
+    public enum RecurringType
+    {
+        Standard = 0,
+        Dayly = 1,
+        Weekly = 2,
+        Weekend = 3
     }
 
     public class ToDoItemDto
@@ -231,6 +290,24 @@ namespace Organizer.Client
         public string Activity { get; set; }
         public bool Resolved { get; set; }
         public int Duration { get; set; }
+        public int RecurringTypeId { get; set; }
+        public string RecurringMode
+        {
+            get
+            {
+                switch ((RecurringType)RecurringTypeId)
+                {
+                    case RecurringType.Dayly:
+                        return "Repeat daily";
+                    case RecurringType.Weekend:
+                        return "Repeat on weekends";
+                    case RecurringType.Weekly:
+                        return "Repeat weekly";
+                    default:
+                        return "One time";
+                }
+            }
+        }
     }
 
     public class ActivityDto
