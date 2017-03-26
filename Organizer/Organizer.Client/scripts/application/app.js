@@ -1,4 +1,4 @@
-﻿var app = angular.module('ngApp', ['ui.bootstrap.datetimepicker']);
+﻿var app = angular.module('ngApp', ['ui.bootstrap.datetimepicker', 'ui.calendar', 'ui-notification']);
 
 appController.showDevTools();
 
@@ -13,6 +13,10 @@ app.config(['$routeProvider',
             templateUrl: 'templates/todos.html',
             controller: 'TodoItemsController'
         }).
+        when('/calendar', {
+            templateUrl: 'templates/calendar.html',
+            controller: 'TodoItemsController'
+        }).
         when('/settings', {
             templateUrl: 'templates/settings.html',
             controller: 'SettingsController'
@@ -25,3 +29,15 @@ app.config(['$routeProvider',
             redirectTo: '/categories'
         });
   }]);
+
+//app.config(function(NotificationProvider) {
+//    NotificationProvider.setOptions({
+//        delay: 10000,
+//        startTop: 20,
+//        startRight: 10,
+//        verticalSpacing: 20,
+//        horizontalSpacing: 20,
+//        positionX: 'left',
+//        positionY: 'bottom'
+//    });
+//});

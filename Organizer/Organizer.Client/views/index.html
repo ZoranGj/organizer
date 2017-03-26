@@ -8,6 +8,10 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link href="../content/css/datetimepicker.css" rel="stylesheet" />
     <link href="../content/css/site.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.css" rel="stylesheet" />
+    <link href="../content/css/angular-ui-notification.min.css" rel="stylesheet" />
+    
+    
     <script type="text/javascript" src="../scripts/libraries/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="https://momentjs.com/downloads/moment.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
@@ -16,6 +20,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
     <script type="text/javascript" src="../scripts/libraries/datetimepicker.js"></script>
     <script type="text/javascript" src="../scripts/libraries/datetimepicker.templates.js"></script>
+
+    <script type="text/javascript" src="../scripts/libraries/calendar.js"></script>
+    <!--<script type="text/javascript" src="http://arshaw.com/js/fullcalendar-1.5.3/fullcalendar/gcal.js"></script>-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="../scripts/libraries/angular-ui-notification.js"></script>
 </head>
 <body ng-app="ngApp">
     <div>
@@ -26,7 +35,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="#categories">My activities</a></li>
-                    <li><a href="#todos">Todo items</a></li>
+                    <li><a href="#todos">Work</a></li>
                     <li><a href="#reports">Productivity</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -41,27 +50,9 @@
         </div>
     </div>
     
-    <script>
-        $(document).ready(function () {
-            appController.showDevTools();
-        });
-
-        function addCategory() {
-            appController.addDummyCategory();
-            loadCategories();
-        }
-
-        function loadCategories() {
-            $("#categories tbody").html('');
-            var categories = appController.getCategories();
-            var categoriesJson = JSON.parse(categories);
-            for (var i in categoriesJson) {
-                var trHTML = "<tr><td>" + categoriesJson[i].Id + "</td><td>" + categoriesJson[i].Name + "</td><td>" + categoriesJson[i].Activities.length + "</td>";
-                $("#categories tbody").append(trHTML);
-            }
-        }
-    </script>
     <script src="../scripts/application/app.js"></script>
+    <script src="../scripts/application/constants.js"></script>
+    <script src="../scripts/application/services/reportsService.js"></script>
     <script src="../scripts/application/controllers/categoriesController.js"></script>
     <script src="../scripts/application/controllers/todoItemsController.js"></script>
     <script src="../scripts/application/controllers/settingsController.js"></script>

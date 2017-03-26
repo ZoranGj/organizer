@@ -13,6 +13,9 @@
                 <option value="2">Resolved</option>
             </select>
         </div>
+        <div class="col-md-3">
+            <a href="#calendar" class="navigate-action">View calendar</a>
+        </div>
     </div>
     <table class="table table-bordered">
         <thead>
@@ -41,12 +44,12 @@
                             <datetimepicker data-ng-model="todoItem.Deadline" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }" data-on-set-time="onTimeSet(newDate, oldDate)"/>
                         </ul>
                     </div>
-                    <select ng-model="todoItem.Recurring" class="form-control table-input">
+                    <!--<select ng-model="todoItem.Recurring" class="form-control table-input">
                         <option value="0">Standard</option>
                         <option value="1">Daily</option>
                         <option value="2">Weekly</option>
                         <option value="3">Weekends</option>
-                    </select>
+                    </select>-->
                 </td>
                 <td class="cell-input">
                     <input type="text" class="table-input form-control" placeholder="Duration (hours).." ng-model="todoItem.Duration" />
@@ -68,7 +71,8 @@
                 <td>{{item.Duration}}</td>
                 <td>{{item.Activity}}</td>
                 <td>
-                    <button type="button" class="btn btn-danger btn-sm" ng-click="deleteTodoItem(item.Id)"> <span class="fa fa-times"></span></button>
+                    <button type="button" class="btn btn-danger btn-sm pull-left" ng-click="deleteTodoItem(item.Id)"> <span class="fa fa-times"></span></button>
+                    <span ng-show="item.Resolved" class="item-label pull-left"><span class="label label-success">Resolved</span></span>
                 </td>
             </tr>
         </tbody>

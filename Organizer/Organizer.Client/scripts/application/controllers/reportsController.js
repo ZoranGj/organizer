@@ -1,4 +1,4 @@
-﻿app.controller('ReportsController', function ($scope) {
+﻿app.controller('ReportsController', function ($scope, reports, REPORT_TYPE) {
     $scope.categoryChanged = function () {
         $scope.initReports($scope.category);
     }
@@ -14,28 +14,19 @@
         }
 
         if ($scope.category != 0) {
-            var productivityItems = appController.loadProductivityReports(parseInt($scope.category));
-            var itemList = JSON.parse(productivityItems);
+            reports.init($scope.category);
 
-            var labels = [];
-            var items = [];
-            var plannedTime = 0;
+            //plannedTime = itemList[0].PlannedTime;
 
-            for (var i in itemList) {
-                labels.push(itemList[i].DisplayLabel);
-                items.push(itemList[i].ActualTime);
-            }
-
-            plannedTime = itemList[0].PlannedTime;
-
+            //todo: create directive for report
             var ctx = document.getElementById("myChart").getContext('2d');
             var myChart = new Chart(ctx, {
-                type: 'bar',
+                type: REPORT_TYPE.bar,
                 data: {
-                    labels: labels,
+                    labels: reports.labels(),
                     datasets: [{
                         label: 'Productivity',
-                        data: items,
+                        data: reports.items(),
                         backgroundColor: "rgba(153,255,51,1)"
                     }
                     //, {

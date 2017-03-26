@@ -110,8 +110,7 @@ body, html {
 }
 
 .resolved {
-    background: #5cb85c !important;
-    color: #fff;
+    background: rgba(255, 255, 255, 0.3) !important;
 }
 
 .btn {
@@ -129,3 +128,14 @@ body, html {
         .filter > div:not(:last-child) {
             margin-right: 8px;
         }
+
+.item-label {
+    margin: 0 4px;
+    font-size: 16px;
+    margin-top: 4px;
+}
+.item-label > .label{
+    font-size: 14px;
+    padding: 7px 5px;
+    border-radius: 0;
+}
