@@ -166,6 +166,7 @@ namespace Organizer.Client
                 Deadline = x.Deadline,
                 Resolved = x.Resolved,
                 Duration = x.Duration,
+                Notes = x.Notes
                 //RecurringTypeId = x.Recurring
             }));
         }
@@ -181,6 +182,15 @@ namespace Organizer.Client
         {
             var todoItemProvider = new TodoItemsProvider();
             todoItemProvider.Resolve(id, resolved);
+        }
+
+        public void UpdateTodoItem(int id, string notes)
+        {
+            var todoItemProvider = new TodoItemsProvider();
+            var item = todoItemProvider.GetById(id);
+            item.Notes = notes;
+            todoItemProvider.Update(item);
+            todoItemProvider.Save();
         }
 
         private string SerializeObject(object data)
@@ -270,49 +280,5 @@ namespace Organizer.Client
             int daysIntoWeek = (int)value.DayOfWeek - 1;
             return value.AddDays(-daysIntoWeek);
         }
-    }
-
-
-    public enum RecurringType
-    {
-        Standard = 0,
-        Dayly = 1,
-        Weekly = 2,
-        Weekend = 3
-    }
-
-    public class ToDoItemDto
-    {
-        public int Id { get; set; }
-        public string Description { get; set; }
-        public DateTime AddedOn { get; set; }
-        public DateTime Deadline { get; set; }
-        public string Activity { get; set; }
-        public bool Resolved { get; set; }
-        public int Duration { get; set; }
-        public int RecurringTypeId { get; set; }
-        public string RecurringMode
-        {
-            get
-            {
-                switch ((RecurringType)RecurringTypeId)
-                {
-                    case RecurringType.Dayly:
-                        return "Repeat daily";
-                    case RecurringType.Weekend:
-                        return "Repeat on weekends";
-                    case RecurringType.Weekly:
-                        return "Repeat weekly";
-                    default:
-                        return "One time";
-                }
-            }
-        }
-    }
-
-    public class ActivityDto
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿var app = angular.module('ngApp', ['ui.bootstrap.datetimepicker', 'ui.calendar', 'ui-notification']);
 
-appController.showDevTools();
+//appController.showDevTools();
 
 app.config(['$routeProvider',
   function ($routeProvider) {

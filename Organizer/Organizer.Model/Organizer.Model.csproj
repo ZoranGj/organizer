@@ -96,7 +96,9 @@
     <Compile Include="DataProviders\CategoriesProvider.cs" />
     <Compile Include="DataProviders\TodoItemsProvider.cs" />
     <Compile Include="DataProviders\_DataProvider.cs" />
+    <Compile Include="DTO\ActivityDto.cs" />
     <Compile Include="DTO\ActivityReport.cs" />
+    <Compile Include="DTO\ToDoItemDto.cs" />
     <Compile Include="DTO\_Report.cs" />
     <Compile Include="Extensions\CollectionsExtensions.cs" />
     <Compile Include="Extensions\ReportsExtensions.cs" />

@@ -7,10 +7,10 @@
             </select>
         </div>
         <div class="col-md-3">
-            <select class="form-control table-input" ng-model="filter.status" ng-change="statusChanged()">
-                <option value="0">All</option>
-                <option value="1">Active</option>
-                <option value="2">Resolved</option>
+            <select class="form-control table-input" ng-model="filter.resolved" ng-change="statusChanged()">
+                <option value="">All</option>
+                <option value="false">Active</option>
+                <option value="true">Resolved</option>
             </select>
         </div>
         <div class="col-md-3">
@@ -71,7 +71,26 @@
                 <td>{{item.Duration}}</td>
                 <td>{{item.Activity}}</td>
                 <td>
-                    <button type="button" class="btn btn-danger btn-sm pull-left" ng-click="deleteTodoItem(item.Id)"> <span class="fa fa-times"></span></button>
+                    <div class="modal fade" id="dialogTestDialog{{$index}}" tabindex="-1" role="dialog" aria-labelledby="executionOptionLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog" style="width: 500px;">
+                            <div class="modal-content" style="margin:0;">
+                                <div class="well modal-body">
+                                    <textarea ng-model="item.Notes" class="form-control" style="height:200px;"></textarea>
+                                </div>
+                                <div class="modal-footer" style="border-top: 0;">
+                                    <button type="button" class="btn btn-info" data-toggle="dismiss" ng-click="updateTodoItem(item)">
+                                        Update Info
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" style="margin-right: 5px;" class="btn btn-default btn-sm pull-left" data-toggle="modal" data-target="#dialogTestDialog{{$index}}">
+                        <span class="fa fa-ellipsis-h"></span>
+                    </button>
+                    <button type="button"  class="btn btn-danger btn-sm pull-left" ng-click="deleteTodoItem(item.Id)"> <span class="fa fa-times"></span></button>
                     <span ng-show="item.Resolved" class="item-label pull-left"><span class="label label-success">Resolved</span></span>
                 </td>
             </tr>

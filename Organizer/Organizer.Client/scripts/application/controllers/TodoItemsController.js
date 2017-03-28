@@ -56,6 +56,10 @@
         return item.Resolved ? 'resolved' : '';
     }
 
+    $scope.updateTodoItem = function (item) {
+        appController.updateTodoItem(item.Id, item.Notes);
+    }
+
     $scope.init = function () {
         var todoItems = appController.getTodoItems(0);
         var t = JSON.parse(todoItems);

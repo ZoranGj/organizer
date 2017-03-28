@@ -65,7 +65,9 @@
             Name: 'Activity name..',
             Id: 0,
         });
-        $("[data-id=" + category.Id + "] .activity:last-of-type").focus();
+        console.log($("[data-id=" + category.Id + "]"));
+        console.log($("[data-id=" + category.Id + "] .activity:last-of-type"));
+        $("[data-id=" + category.Id + "] .activity:last-of-type").next().focus();
     }
 
     $scope.deleteActivity = function (id) {
