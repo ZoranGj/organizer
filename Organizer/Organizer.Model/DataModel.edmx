@@ -26,7 +26,8 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Notes" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Priority" Type="int" Nullable="false" />
-    <Property Name="HoursPerWeek" Type="smallint" Nullable="false" />
+    <Property Name="MinHoursPerWeek" Type="smallint" Nullable="false" />
+    <Property Name="MaxHoursPerWeek" Type="smallint" Nullable="false" />
   </EntityType>
   <EntityType Name="Activities">
     <Key>
@@ -103,7 +104,8 @@
           <Property Name="Notes" Type="String" Nullable="true" />
           <NavigationProperty Name="Activities" Relationship="DataModel.CategoryActivity" FromRole="Category" ToRole="Activity" />
           <Property Name="Priority" Type="Int32" Nullable="false" />
-          <Property Name="HoursPerWeek" Type="Int16" Nullable="false" />
+          <Property Name="MinHoursPerWeek" Type="Int16" Nullable="false" />
+          <Property Name="MaxHoursPerWeek" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="Activity">
           <Key>
@@ -170,7 +172,8 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="Priority" ColumnName="Priority" />
-          <ScalarProperty Name="HoursPerWeek" ColumnName="HoursPerWeek" />
+          <ScalarProperty Name="MinHoursPerWeek" ColumnName="MinHoursPerWeek" />
+          <ScalarProperty Name="MaxHoursPerWeek" ColumnName="MaxHoursPerWeek" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

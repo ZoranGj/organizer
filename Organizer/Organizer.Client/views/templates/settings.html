@@ -12,8 +12,9 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="col-md-8">Category</th>
-                                <th>Planned hours per week</th>
+                                <th class="col-md-6">Category</th>
+                                <th>Min Hours Per Week</th>
+                                <th>Max Hours Per Week</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -22,7 +23,10 @@
                                     {{category.Name}}
                                 </td>
                                 <td>
-                                    <input type="text" class="table-input form-control" ng-model="category.HoursPerWeek" value="category.HoursPerWeek">
+                                    <input type="text" class="table-input form-control" ng-model="category.MinHoursPerWeek" value="category.MinHoursPerWeek">
+                                </td>
+                                <td>
+                                    <input type="text" class="table-input form-control" ng-model="category.MaxHoursPerWeek" value="category.MaxHoursPerWeek">
                                     <button type="button" class="btn btn-info float-action" ng-show="showicons" ng-click="updateCategory(category)">
                                         <span class="fa fa-floppy-o"></span>
                                     </button>

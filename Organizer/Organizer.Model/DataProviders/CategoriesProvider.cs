@@ -27,10 +27,11 @@ namespace Model.DataProviders {
             Save();
         }
 
-        public void UpdateCategoryData(int id, short hoursPerWeek)
+        public void UpdateCategoryData(int id, short minHoursPerWeek, short maxHoursPerWeek)
         {
             var category = GetById(id);
-            category.HoursPerWeek = hoursPerWeek;
+            category.MinHoursPerWeek = minHoursPerWeek;
+            category.MaxHoursPerWeek = maxHoursPerWeek;
             Save();
         }
     }

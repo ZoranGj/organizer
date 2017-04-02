@@ -81,10 +81,10 @@ namespace Organizer.Client
             categoryProvider.UpdatePriority(id, newPriority);
         }
 
-        public void UpdateCategoryData(int id, int hoursPerWeek)
+        public void UpdateCategoryData(int id, int minHoursPerWeek, int maxHoursPerWeek)
         {
             var categoryProvider = new CategoriesProvider();
-            categoryProvider.UpdateCategoryData(id, (short)hoursPerWeek);
+            categoryProvider.UpdateCategoryData(id, (short)minHoursPerWeek, (short)maxHoursPerWeek);
         }
 
         #endregion
@@ -251,14 +251,17 @@ namespace Organizer.Client
 
                     var nextItem = todoItems.ElementAt(i + 1);
                     int dateDiff = ((int)(nextItem.Deadline - item.Deadline).TotalDays / 7);
-                    todoItemsCopy = todoItemsCopy.Concat(Enumerable.Range(1, dateDiff - 1).Select(x => new TodoItem
+                    if(dateDiff > 0)
                     {
-                        Deadline = item.Deadline.AddDays(7 * x),
-                        ActivityId = item.ActivityId,
-                        AddedOn = item.AddedOn.AddDays(7 * x),
-                        Resolved = true,
-                        Duration = 0
-                    })).ToList();
+                        todoItemsCopy = todoItemsCopy.Concat(Enumerable.Range(1, dateDiff - 1).Select(x => new TodoItem
+                        {
+                            Deadline = item.Deadline.AddDays(7 * x),
+                            ActivityId = item.ActivityId,
+                            AddedOn = item.AddedOn.AddDays(7 * x),
+                            Resolved = true,
+                            Duration = 0
+                        })).ToList();
+                    }
                     todoItemsCopy.Add(nextItem);
                     i++;
                 }
@@ -270,7 +273,8 @@ namespace Organizer.Client
                 ActualTime = x.Sum(y => y.Duration),
                 From = x.Key,
                 NumberOfTodos = x.Count(),
-                PlannedTime = category.HoursPerWeek
+                MaxHoursPerWeek = category.MaxHoursPerWeek,
+                MinHoursPerWeek = category.MinHoursPerWeek
             }).ToList();
         }
 

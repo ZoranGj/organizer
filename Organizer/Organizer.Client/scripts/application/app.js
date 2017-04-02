@@ -1,6 +1,6 @@
 ﻿var app = angular.module('ngApp', ['ui.bootstrap.datetimepicker', 'ui.calendar', 'ui-notification']);
 
-//appController.showDevTools();
+appController.showDevTools();
 
 app.config(['$routeProvider',
   function ($routeProvider) {
@@ -30,6 +30,24 @@ app.config(['$routeProvider',
         });
   }]);
 
+app.directive('customAutofocus', function() {
+    return{
+        restrict: 'A',
+
+        link: function (scope, element, attrs) {
+            scope.$watch(function () {
+                return scope.$eval(attrs.customAutofocus);
+            }, function (newValue) {
+                if (newValue === true) {
+                    element[0].focus();
+                    element[0].select();
+
+                    scope.showicons = true;
+                }
+            });
+        }
+    };
+})
 //app.config(function(NotificationProvider) {
 //    NotificationProvider.setOptions({
 //        delay: 10000,

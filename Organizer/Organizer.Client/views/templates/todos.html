@@ -6,15 +6,18 @@
                 <option value="">All activities</option>
             </select>
         </div>
-        <div class="col-md-3">
+        <!--<div class="col-md-3">
             <select class="form-control table-input" ng-model="filter.resolved" ng-change="statusChanged()">
                 <option value="">All</option>
                 <option value="false">Active</option>
                 <option value="true">Resolved</option>
             </select>
-        </div>
+        </div>-->
         <div class="col-md-3">
-            <a href="#calendar" class="navigate-action">View calendar</a>
+            <a href="#calendar" class="btn btn-default" style="height: 41px; padding: 10px;">
+                <span class="fa fa-calendar"></span>
+                View Calendar
+            </a>
         </div>
     </div>
     <table class="table table-bordered">
@@ -76,10 +79,11 @@
                         <div class="modal-dialog" style="width: 500px;">
                             <div class="modal-content" style="margin:0;">
                                 <div class="well modal-body">
+                                    <span>Task Notes/</span>
                                     <textarea ng-model="item.Notes" class="form-control" style="height:200px;"></textarea>
                                 </div>
                                 <div class="modal-footer" style="border-top: 0;">
-                                    <button type="button" class="btn btn-info" data-toggle="dismiss" ng-click="updateTodoItem(item)">
+                                    <button type="button" class="btn btn-info" data-dismiss="modal" ng-click="updateTodoItem(item)">
                                         Update Info
                                     </button>
                                 </div>

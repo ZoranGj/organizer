@@ -1,9 +1,12 @@
 ﻿app.factory('reports', [function () {
-    var labels = [];
-    var items = [];
+    var labels;
+    var items;
 
     return {
         init: function (categoryId) {
+            labels = [];
+            items = [];
+
             var productivityItems = appController.loadProductivityReports(categoryId);
             var itemList = JSON.parse(productivityItems);
             var plannedTime = 0;
