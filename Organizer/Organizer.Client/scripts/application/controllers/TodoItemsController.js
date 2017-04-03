@@ -1,7 +1,8 @@
 ﻿app.controller('TodoItemsController', function ($scope, $compile, uiCalendarConfig) {
     $scope.todoItem = {
         ActivityId: 0,
-        Deadline: new Date()
+        Deadline: new Date(),
+        Tags: []
     }
 
     $scope.filter = {
@@ -10,6 +11,8 @@
     };
 
     $scope.initializeTodoItems = function () {
+        $scope.allTags = ['coursera', 'pluralsight', 'web-development', 'software-architecture', 'machine learning' ];
+
         var categories = appController.getCategories();
         $scope.categories = JSON.parse(categories);
 
@@ -34,7 +37,7 @@
 
     $scope.addTodoItem = function () {
         if ($scope.todoItem.ActivityId) {
-            appController.addTodoItem($scope.todoItem.Description, new Date($scope.todoItem.Deadline), $scope.todoItem.ActivityId, parseInt($scope.todoItem.Duration));
+            appController.addTodoItem($scope.todoItem.Description, new Date($scope.todoItem.Deadline), $scope.todoItem.ActivityId, parseInt($scope.todoItem.Duration), $scope.todoItem.Tags);
             $scope.initializeTodoItems();
         }
     }
@@ -57,7 +60,7 @@
     }
 
     $scope.updateTodoItem = function (item) {
-        appController.updateTodoItem(item.Id, item.Notes);
+        appController.updateTodoItem(item.Id, item.Notes, item.Tags.join(','));
     }
 
     $scope.init = function () {

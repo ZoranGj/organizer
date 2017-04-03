@@ -166,7 +166,8 @@ namespace Organizer.Client
                 Deadline = x.Deadline,
                 Resolved = x.Resolved,
                 Duration = x.Duration,
-                Notes = x.Notes
+                Notes = x.Notes,
+                Tags = x.Tags.Split(',').ToList()
                 //RecurringTypeId = x.Recurring
             }));
         }
@@ -184,11 +185,12 @@ namespace Organizer.Client
             todoItemProvider.Resolve(id, resolved);
         }
 
-        public void UpdateTodoItem(int id, string notes)
+        public void UpdateTodoItem(int id, string notes, string tags)
         {
             var todoItemProvider = new TodoItemsProvider();
             var item = todoItemProvider.GetById(id);
             item.Notes = notes;
+            item.Tags = tags;
             todoItemProvider.Update(item);
             todoItemProvider.Save();
         }

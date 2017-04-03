@@ -23,6 +23,7 @@ namespace Organizer.Model
         public bool Resolved { get; set; }
         public int Duration { get; set; }
         public string Notes { get; set; }
+        public string Tags { get; set; }
     
         public virtual Activity Activity { get; set; }
     }

@@ -81,6 +81,31 @@
                                 <div class="well modal-body">
                                     <span>Task Notes/</span>
                                     <textarea ng-model="item.Notes" class="form-control" style="height:200px;"></textarea>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><h4><i class="fa fa-tag fa-lg"></i> Tags</h4></div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <tag-manager tags="item.Tags" autocomplete="allTags"></tag-manager>
+                                                    <hr>
+                                                    <h3>Current Tags</h3>
+                                                    <ul class="list-unstyled">
+                                                        <li ng-repeat="tag in tags">{{tag}}</li>
+                                                    </ul>
+
+                                                </div>
+
+                                            </div>
+                                        </div><!--/panel-body-->
+                                    </div>
+                                    <div>
+                                        <!--<tag-manager tags="item.Tags" autocomplete="allTags"></tag-manager>-->
+                                        <!--<hr>
+                                        <h3>Current Tags</h3>
+                                        <ul class="list-unstyled">
+                                            <li ng-repeat="tag in item.Tags">{{tag}}</li>
+                                        </ul>-->
+                                    </div>
                                 </div>
                                 <div class="modal-footer" style="border-top: 0;">
                                     <button type="button" class="btn btn-info" data-dismiss="modal" ng-click="updateTodoItem(item)">

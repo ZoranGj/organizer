@@ -53,6 +53,7 @@
     <Property Name="Resolved" Type="bit" Nullable="false" />
     <Property Name="Duration" Type="int" Nullable="false" />
     <Property Name="Notes" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Tags" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="CategoryActivity">
     <End Role="Category" Type="DataModel.Store.Categories" Multiplicity="1" />
@@ -146,6 +147,7 @@
           <Property Name="Resolved" Type="Boolean" Nullable="false" />
           <Property Name="Duration" Type="Int32" Nullable="false" />
           <Property Name="Notes" Type="String" Nullable="true" />
+          <Property Name="Tags" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="ActivityTodoItem">
           <End Type="DataModel.Activity" Role="Activity" Multiplicity="1" />
@@ -201,6 +203,7 @@
           <ScalarProperty Name="Resolved" ColumnName="Resolved" />
           <ScalarProperty Name="Duration" ColumnName="Duration" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Tags" ColumnName="Tags" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

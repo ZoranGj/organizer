@@ -139,3 +139,23 @@ body, html {
     padding: 7px 5px;
     border-radius: 0;
 }
+
+.tags {
+   margin-bottom: 5px;
+} 
+
+.tags .tag {
+   display: inline-block;
+   margin-right: 5px;
+   font-size: 13px;
+}
+  
+.tag .close {
+   font-size: 14px;
+   margin-left: 5px;
+}
+
+
+.ui-autocomplete{
+    z-index: 1101 !important;
+}

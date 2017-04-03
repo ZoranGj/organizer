@@ -16,6 +16,7 @@ namespace Organizer.Model.DTO
         public bool Resolved { get; set; }
         public int Duration { get; set; }
         public string Notes { get; set; }
+        public List<string> Tags { get; set; }
         public int RecurringTypeId { get; set; }
         public string RecurringMode
         {

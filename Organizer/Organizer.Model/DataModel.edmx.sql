@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/01/2017 19:53:55
+-- Date Created: 04/03/2017 22:26:30
 -- Generated from EDMX file: D:\Projects\Prototypes\organizer\organizer\Organizer\Organizer.Model\DataModel.edmx
 -- --------------------------------------------------
 
@@ -74,7 +74,8 @@ CREATE TABLE [dbo].[TodoItems] (
     [ActivityId] int  NOT NULL,
     [Resolved] bit  NOT NULL,
     [Duration] int  NOT NULL,
-    [Notes] nvarchar(max)  NULL
+    [Notes] nvarchar(max)  NULL,
+    [Tags] nvarchar(max)  NOT NULL
 );
 GO
 

@@ -194,6 +194,9 @@
     <Content Include="scripts\application\controllers\todoItemsController.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="scripts\application\directives\tags.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="scripts\application\services\reportsService.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -250,9 +253,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="scripts\application\directives\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Organizer.Model\Organizer.Model.csproj">
       <Project>{e006a4da-dd9c-49d2-bcb5-bff9e8260e2d}</Project>
