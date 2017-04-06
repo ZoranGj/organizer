@@ -55,9 +55,24 @@ namespace Organizer.Client.API
 
         public void Update(int id, string notes, string tags)
         {
+            var tagList = new List<Tag>();
             var item = _todoItemsProvider.GetById(id);
             item.Notes = notes;
-            item.Tags = string.IsNullOrEmpty(tags) ? null : tags.Split(',').Select(t => new Tag { Name = t }).ToList();
+
+            if (string.IsNullOrEmpty(tags) || tags == " ")
+            {
+                item.Tags = new List<Tag>();
+            }
+            else
+            {
+                item.Tags = tags.Split(',')
+                                .Select(tag => {
+                                    var dbTag = _tagsProvider.Get(tag);
+                                    return dbTag ?? new Tag { Name = tag };
+                                })
+                                .ToList();
+            }
+
             _todoItemsProvider.Update(item);
             _todoItemsProvider.Save();
         }

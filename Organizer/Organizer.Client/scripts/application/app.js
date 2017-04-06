@@ -1,6 +1,6 @@
 ﻿var app = angular.module('ngApp', ['ui.bootstrap.datetimepicker', 'ui.calendar', 'ui-notification']);
 
-appController.showDevTools();
+appCtrl.showDevTools();
 
 app.config(['$routeProvider',
   function ($routeProvider) {
@@ -33,34 +33,3 @@ app.config(['$routeProvider',
             redirectTo: '/categories'
         });
   }]);
-
-app.directive('autoFocus', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
-            //var model = attrs.changeModel;
-            //scope.$watch(model, function () {
-            //    alert();
-            //    return scope.$eval(attrs.autoFocus);
-            //}, function (newValue) {
-            //    if (newValue === true) {
-            //        element[0].focus();
-            //        element[0].select();
-            //        //scope.showicons = true;
-            //    }
-            //});
-        }
-    };
-});
-
-//app.config(function(NotificationProvider) {
-//    NotificationProvider.setOptions({
-//        delay: 10000,
-//        startTop: 20,
-//        startRight: 10,
-//        verticalSpacing: 20,
-//        horizontalSpacing: 20,
-//        positionX: 'left',
-//        positionY: 'bottom'
-//    });
-//});

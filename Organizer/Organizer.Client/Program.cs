@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Setup;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,6 +17,10 @@ namespace Organizer.Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            //seed database with initial data.
+            DbInitializer.Seed();
+
             Application.Run(new MainWindow());
         }
     }

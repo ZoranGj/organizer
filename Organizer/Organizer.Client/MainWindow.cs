@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Organizer.Client.API;
+using Model.Setup;
 
 namespace Organizer.Client
 {
@@ -22,7 +23,7 @@ namespace Organizer.Client
         {
             InitializeComponent();
             InitializeChromium();
-            chromeBrowser.RegisterJsObject("appController", new AppController(chromeBrowser, this));
+            chromeBrowser.RegisterJsObject("appCtrl", new AppController(chromeBrowser, this));
             chromeBrowser.RegisterJsObject("categoriesCtrl", new CategoriesController(chromeBrowser, this));
             chromeBrowser.RegisterJsObject("todosCtrl", new TodosController(chromeBrowser, this));
             chromeBrowser.RegisterJsObject("reportsCtrl", new ReportsController(chromeBrowser, this));
