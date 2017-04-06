@@ -1,67 +1,44 @@
 ﻿<div ng-init="initializeCategories()" class="col-md-12">
-    <!--<div class="search-bar">
-        <input type="text" class="form-control" placeholder="Search categories.."/>
-    </div>-->
     <div id="categories">
         <div data-id="{{category.Id}}" ng-repeat="category in categories" class="col-md-4 card category">
-            <li class="list-group-item list-group-item-primary" style="border-bottom: 1px solid #e1e1e1;">
+            <div class="list-group-item list-group-item-primary bordered">
                 <strong style="font-size: 14px;">{{category.Name}}</strong>
-                <span class="fa fa-times text-danger pull-right" style="font-size: 16px; " ng-click="deleteCategory(category.Id)"></span>
-                <span class="fa fa-cog text-warning pull-right" style="font-size: 16px; margin-right: 6px;"></span>
-            </li>
+                <span class="fa fa-times text-danger pull-right lead" ng-click="deleteCategory(category, $index)"></span>
+            </div>
             <ul class="list-group">
                 <li ng-repeat="activity in category.Activities" ng-mouseenter="showicons=true" ng-focus="showicons=true" ng-mouseleave="showicons=false">
-                    <input data-id="{{activity.Id}}" type="text" class="form-control list-group-item activity" custom-autofocus="$index == focusIndex" style="border-radius: 0;" value="{{activity.Focus}}" ng-model="activity.Name"  ng-focus="activity.Focus"/>
-                    <button type="button" ng-show="showicons" style="cursor:pointer; position:absolute; right: 5px; margin-top: -28px; padding: 1px 6px;" class="text-danger btn btn-default pull-right" ng-click="deleteActivity(activity.Id)" style="font-size: 14px;"><span class="fa fa-times"></span></button>
-                        <button type="button" ng-show="showicons" style="cursor:pointer; position:absolute; right: 35px; margin-top: -28px; padding: 1px 6px;" class="text-primary btn btn-default pull-right" ng-click="createTodoItem(activity.Id)" style="margin-right: 5px; font-size: 14px;"><span class="fa fa-pencil"></span></button>
-                    <button type="button" ng-show="showicons" style="cursor:pointer; position:absolute;right: 65px; margin-top: -28px; padding: 1px 6px;" class="text-primary btn btn-default pull-right" ng-click="saveActivity()" style="margin-right: 5px; font-size: 14px;"><span class="fa fa-floppy-o"></span></button>
+                    <input data-id="{{activity.Id}}" type="text" class="form-control list-group-item activity" style="border-radius: 0;" 
+                           value="{{activity.Focus}}" ng-model="activity.Name" ng-keydown="showicons=true" ng-focus="activity.Focus"/>
+                    <div class="pull-right" ng-show="showicons">
+                        <button type="button" class="btn btn-default activity-action" ng-click="deleteActivity(category, $index)" style="right:5px">
+                            <span class="fa fa-times"></span>
+                        </button>
+                        <button type="button" class="btn btn-default activity-action" ng-click="createTodoItem(activity.Id)" style="right:35px;">
+                            <span class="fa fa-pencil"></span>
+                        </button>
+                        <button type="button" class="btn btn-default activity-action" ng-click="saveActivity()" style="right:70px;">
+                            <span class="fa fa-floppy-o"></span>
+                        </button>
+                    </div>
                 </li>
             </ul>
-            <button type="button" class="list-group-item btn-default text-muted" ng-click="addActivity(category)"><span class="fa fa-plus text-info"></span> <span class="text-muted">Add new activity</span></button>
+            <button type="button" class="list-group-item btn-default text-muted" ng-click="addActivity(category)">
+                <span class="fa fa-plus text-info"></span> <span class="text-muted">Add activity</span>
+            </button>
         </div>
-        <div class="col-md-4 card category" id="newCategory">
-            <li class="list-group-item list-group-item-primary" style="border-bottom: 1px solid #e1e1e1;">
+        <div ng-show="showNewCategory" class="col-md-4 card category">
+            <div class="list-group-item list-group-item-primary bordered">
                 <div class="input-group">
-                    <input id="categoryName" type="text" class="form-control" ng-model="category.name" placeholder="Category name.." />
+                    <input id="categoryName" type="text" class="form-control" ng-model="category.name" placeholder="{{constants.categoryName}}" />
                     <span class="input-group-addon btn btn-sm btn-info" ng-click="saveCategory()">Save</span>
                     <span class="input-group-addon btn btn-sm" ng-click="cancelAddingCategory()"><span class="fa fa-times text-danger"></span></span>
                 </div>
-
-                <!--<input id="categoryName" type="text" class="form-control" ng-model="category.name" placeholder="Category name.."/>
-                <button type="button" class="btn btn-sm btn-info" ng-click="saveCategory()">Save</button>-->
-            </li>
+            </div>
         </div>
     </div>
     <div class="col-md-3">
-        <button ng-click="addCategory()" type="button" class="btn btn-default btn-lg" style="padding: 20px 15px;">
-            <span class="fa fa-plus text-info"></span> Add
-            Category
+        <button ng-click="addCategory()" type="button" class="btn btn-default btn-lg">
+            <span class="fa fa-plus lead text-info"></span> Add Category
         </button>
-    </div>
-</div>
-
-
-<div class="modal fade" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document" style="width: 450px;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Add activity to {{activity.categoryName}}</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label class="control-label">Name:</label>
-                    <input type="text" class="form-control" name="name" value="" ng-model="activity.name" required="" title="Name..">
-                    <span class="help-block"></span>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Description:</label>
-                    <input type="text" class="form-control" name="description" value="" ng-model="activity.description" required="" title="Description..">
-                    <span class="help-block"></span>
-                </div>
-                <button type="button" class="btn btn-success btn-block" ng-click="saveActivity()" data-dismiss="modal">Save activity</button>
-                <a class="btn btn-default btn-block" ng-click="cancelSaveActivity()" data-dismiss="modal">Cancel</a>
-            </div>
-        </div>
     </div>
 </div>

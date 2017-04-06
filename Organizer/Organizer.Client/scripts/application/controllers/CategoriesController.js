@@ -1,10 +1,13 @@
-﻿app.controller('CategoriesController', function ($scope) {
+﻿app.controller('CategoriesController', function ($scope, $timeout) {
     $scope.category = {
         name: '',
     }
+    $scope.activity = {};
+    $scope.showicons = false;
+    $scope.showNewCategory = false;
 
     $scope.initializeCategories = function () {
-        var categories = appController.getCategories();
+        var categories = categoriesCtrl.getAll();
         $scope.categories = JSON.parse(categories);
 
         $("#categories").sortable({
@@ -16,16 +19,16 @@
                 var priority = $('#categories > div').index(ui.item);
                 var categoryId = $(ui.item).data('id');
                 if (priority > -1) {
-                    appController.updateCategoryPriority(categoryId, priority + 1);
+                    category.updatePriority(categoryId, priority + 1);
                 }
             }
         });
-        $('#newCategory').hide();
+        $scope.showNewCategory = false;
         $scope.category.name = null;
     }
 
     $scope.addCategory = function () {
-        $('#newCategory').show();
+        $scope.showNewCategory = true;
         $('#categoryName').focus();
 
         setTimeout(function () {
@@ -36,42 +39,46 @@
     }
 
     $scope.cancelAddingCategory = function () {
-        $('#newCategory').hide();
-        $('#categoryName').val('');
+        $scope.showNewCategory = false;
+        $scope.category.name = null;
     }
 
     $scope.saveCategory = function ($event) {
         if ($scope.category.name) {
             var priority = $scope.categories.length + 1;
-            appController.addCategory($scope.category.name.toString(), priority);
+            categoriesCtrl.add($scope.category.name.toString(), priority);
             $scope.initializeCategories();
         }
     }
 
-    $scope.deleteCategory = function (id) {
-        appController.deleteCategory(id);
-        $scope.initializeCategories();
+    $scope.deleteCategory = function (category, index) {
+        var category = $scope.categories.splice(index, 1)[0];
+        if (category && category.Id != 0) {
+            categoriesCtrl.delete(category.Id);
+        }
     }
 
-    $scope.showicons = false;
-
     $scope.saveActivity = function () {
-        appController.saveActivity(this.activity.CategoryId, this.activity.Name, this.activity.Id || 0);
+        categoriesCtrl.saveActivity(this.activity.CategoryId, this.activity.Name, this.activity.Id || 0);
     }
 
     $scope.addActivity = function (category) {
-        category.Activities.push({
-            CategoryId: category.Id,
-            Name: 'Activity name..',
-            Id: 0,
-        });
+        $scope.activity.CategoryId = category.Id;
+        $scope.activity.Name = 'Activity name..';
+        $scope.activity.Id = 0;
+        category.Activities.push($scope.activity);
 
-        $scope.categoryIndex = index;
-        $scope.focusIndex = category.Activities.length - 1;
+        $timeout(function () {
+            var $elem = $("[data-id="+category.Id+"] input:last-of-type");
+            $elem.focus();
+            $elem.select();
+        }, 0);
     }
 
-    $scope.deleteActivity = function (id) {
-        appController.deleteActivity(id);
-        $scope.initializeCategories();
+    $scope.deleteActivity = function (category, index) {
+        var removed = category.Activities.splice(index, 1)[0];
+        if (removed && removed.Id != 0) {
+            categoriesCtrl.deleteActivity(removed.Id);
+        }
     }
 });

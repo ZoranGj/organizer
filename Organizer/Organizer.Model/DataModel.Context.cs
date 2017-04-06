@@ -28,5 +28,6 @@ namespace Organizer.Model
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Activity> Activities { get; set; }
         public virtual DbSet<TodoItem> TodoItems { get; set; }
+        public virtual DbSet<Tag> Tags { get; set; }
     }
 }

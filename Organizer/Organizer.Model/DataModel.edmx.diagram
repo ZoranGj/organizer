@@ -10,6 +10,8 @@
         <AssociationConnector Association="DataModel.CategoryActivity" />
         <EntityTypeShape EntityType="DataModel.TodoItem" Width="1.5" PointX="8.75" PointY="2.375" />
         <AssociationConnector Association="DataModel.ActivityTodoItem" />
+        <EntityTypeShape EntityType="DataModel.Tag" Width="1.5" PointX="6.25" PointY="5.375" />
+        <AssociationConnector Association="DataModel.TodoItemTag" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -13,7 +13,7 @@
     $scope.initializeTodoItems = function () {
         $scope.allTags = ['coursera', 'pluralsight', 'web-development', 'software-architecture', 'machine learning' ];
 
-        var categories = appController.getCategories();
+        var categories = categoriesCtrl.getAll();
         $scope.categories = JSON.parse(categories);
 
         $scope.initializeTodoItemsByCategory($scope.filter.category);
@@ -28,22 +28,22 @@
     }
 
     $scope.initializeTodoItemsByCategory = function (categoryId) {
-        var todoItems = appController.getTodoItems(categoryId);
+        var todoItems = todosCtrl.getAll(categoryId);
         $scope.todoItems = JSON.parse(todoItems);
 
-        var activityItems = appController.getActivityItems(categoryId);
+        var activityItems = categoriesCtrl.getActivityItems(categoryId);
         $scope.activityItems = JSON.parse(activityItems);
     }
 
     $scope.addTodoItem = function () {
         if ($scope.todoItem.ActivityId) {
-            appController.addTodoItem($scope.todoItem.Description, new Date($scope.todoItem.Deadline), $scope.todoItem.ActivityId, parseInt($scope.todoItem.Duration), $scope.todoItem.Tags);
+            todosCtrl.add($scope.todoItem.Description, new Date($scope.todoItem.Deadline), $scope.todoItem.ActivityId, parseInt($scope.todoItem.Duration));
             $scope.initializeTodoItems();
         }
     }
 
     $scope.deleteTodoItem = function (todoItemId) {
-        appController.deleteTodoItem(todoItemId);
+        todosCtrl.delete(todoItemId);
         $scope.initializeTodoItems();
     }
 
@@ -52,7 +52,7 @@
     }
 
     $scope.resolveItem = function (id) {
-        appController.resolveTodoItem(id, this.item.Resolved);
+        todosCtrl.resolve(id, this.item.Resolved);
     }
 
     $scope.todoItemClass = function (item) {
@@ -60,11 +60,11 @@
     }
 
     $scope.updateTodoItem = function (item) {
-        appController.updateTodoItem(item.Id, item.Notes, item.Tags.join(','));
+        todosCtrl.update(item.Id, item.Notes, item.Tags.join(','));
     }
 
     $scope.init = function () {
-        var todoItems = appController.getTodoItems(0);
+        var todoItems = todosCtrl.getAll(0);
         var t = JSON.parse(todoItems);
         for (var i in t) {
             var y = new Date(t[i].Deadline);
@@ -75,63 +75,6 @@
                 end: t[i].Deadline,
             });
         }
-
-
-        gapi.load('client:auth2', function(){
-            
-
-            gapi.client.init({
-                apiKey: 'AIzaSyA3dxTjqHLI3PKMmG06jwBnA7Jpbd2ehlU',
-                clientId: '731395181410-s9c1ndqht9e6mnkf20v4tvcjm9efu39j.apps.googleusercontent.com',
-            }).then(function () {
-                // Listen for sign-in state changes.
-                gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-
-                // Handle the initial sign-in state.
-                updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-
-                if (!gapi.auth2.getAuthInstance().isSignedIn.get()) {
-                    gapi.auth2.getAuthInstance().signIn();
-                }
-
-                var event = {
-                    'summary': 'Google I/O 2015',
-                    'location': '800 Howard St., San Francisco, CA 94103',
-                    'description': 'A chance to hear more about Google\'s developer products.',
-                    'start': {
-                        'dateTime': '2015-05-28T09:00:00-07:00',
-                        'timeZone': 'America/Los_Angeles'
-                    },
-                    'end': {
-                        'dateTime': '2015-05-28T17:00:00-07:00',
-                        'timeZone': 'America/Los_Angeles'
-                    },
-                    'recurrence': [
-                      'RRULE:FREQ=DAILY;COUNT=2'
-                    ],
-                    'attendees': [
-                      { 'email': 'lpage@example.com' },
-                      { 'email': 'sbrin@example.com' }
-                    ],
-                    'reminders': {
-                        'useDefault': false,
-                        'overrides': [
-                          { 'method': 'email', 'minutes': 24 * 60 },
-                          { 'method': 'popup', 'minutes': 10 }
-                        ]
-                    }
-                };
-
-                var request = gapi.client.calendar.events.insert({
-                    'calendarId': 'zoran.gjuroski@gmail.com',
-                    'resource': event
-                });
-
-                request.execute(function (event) {
-                    appendPre('Event created: ' + event.htmlLink);
-                });
-            });
-        });
     }
 
     var date = new Date();

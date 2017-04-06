@@ -1,0 +1,22 @@
+﻿<div class="container" ng-init="initReportsTags()">
+    <div class="filter">
+        <div class="col-md-3">
+            <label>Choose tag:</label>
+            <div>
+                <select ng-model="tag" class="form-control table-input" ng-change="tagChanged()"
+                        ng-options="item.Id as item.Name for item in tags"></select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div>
+                <a class="btn btn-default" href="#reports">
+                    View reports for: activities <span class="fa fa-caret-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+</div>

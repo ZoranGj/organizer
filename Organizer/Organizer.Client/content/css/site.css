@@ -4,6 +4,50 @@
     background: url('https://images.template.net/wp-content/uploads/2016/04/22084512/Light-Colored-Wooden-Background.jpg');
 }
 
+.bordered {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.resolved {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.btn {
+    border-radius: 0 !important;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+.panel-bg {
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 2px 4px 7px rgba(0,0,0,.1);
+    padding-bottom: 15px;
+}
+
+
+table, td, th {
+    border: 1px solid #fff !important;
+    font-size: 14px;
+}
+
+.cell-input {
+    padding: 4px !important;
+    margin: 0 !important;
+}
+
+.table-input {
+    border: 1px solid #e1e1e1;
+    box-shadow: none;
+    margin: 0;
+    height: 42px;
+    border-radius: 0;
+}
+
+/* ------- CATEGORIES STYLES -------- */
+
 .card {
     width: 30%;
     margin-bottom: 60px;
@@ -15,9 +59,44 @@
         margin-right: 60px !important;
     }
 
+
+.placeholder {
+    border: 1px solid #aaa;
+    background-color: white;
+    opacity: 0.5;
+    -webkit-box-shadow: 0px 0px 10px #888;
+    -moz-box-shadow: 0px 0px 10px #888;
+    box-shadow: 0px 0px 10px #888;
+    height: 284px;
+}
+
 .list-group {
     margin-bottom: 0;
+    display: inline-block;
+    width: 100%;
+    height: 210px;
+    overflow-y: auto;
 }
+
+.list-group-item {
+    padding: 7px 15px;
+    border: 1px solid #eee;
+}
+
+button.list-group-item {
+    background: #fafafa;
+    border-top: 1px solid #e1e1e1;
+}
+
+.activity-action {
+    cursor: pointer;
+    position: absolute;
+    margin-top: -28px;
+    padding: 1px 6px;
+}
+
+/* ------- END:CATEGORIES STYLES -------- */
+
 
 #menu {
     margin-bottom: 20px;
@@ -40,66 +119,10 @@
     background: rgba(255, 255, 255, 0.5);
     margin: 0 40px;
 }
-
-.placeholder {
-    border: 1px solid #aaa;
-    background-color: white;
-    opacity: 0.5;
-    -webkit-box-shadow: 0px 0px 10px #888;
-    -moz-box-shadow: 0px 0px 10px #888;
-    box-shadow: 0px 0px 10px #888;
-    height: 284px;
-}
-
-table, td, th {
-    border: 1px solid #fff !important;
-    font-size: 14px;
-}
-
 #viewContainer {
     margin-top: 100px;
 }
 
-.cell-input {
-    padding: 4px !important;
-    margin: 0 !important;
-}
-
-.table-input {
-    border: 1px solid #e1e1e1;
-    box-shadow: none;
-    margin: 0;
-    height: 42px;
-    border-radius: 0;
-}
-
-.list-group {
-    display: inline-block;
-    width: 100%;
-    height: 210px;
-    overflow-y: auto;
-}
-
-.list-group-item {
-    padding: 7px 15px;
-    border: 1px solid #eee;
-}
-
-button.list-group-item {
-    background: #fafafa;
-    border-top: 1px solid #e1e1e1;
-}
-
-body, html {
-    width: 100%;
-    height: 100%;
-}
-
-.panel-bg {
-    background: rgba(255, 255, 255, 0.5);
-    box-shadow: 2px 4px 7px rgba(0,0,0,.1);
-    padding-bottom: 15px;
-}
 
 .float-action {
     float: right;
@@ -107,14 +130,6 @@ body, html {
     right: 22px;
     margin-top: -38px;
     border-radius: 0;
-}
-
-.resolved {
-    background: rgba(255, 255, 255, 0.3) !important;
-}
-
-.btn {
-    border-radius: 0 !important;
 }
 
 .filter {

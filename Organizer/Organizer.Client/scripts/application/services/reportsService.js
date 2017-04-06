@@ -7,7 +7,7 @@
             labels = [];
             items = [];
 
-            var productivityItems = appController.loadProductivityReports(categoryId);
+            var productivityItems = reportsCtrl.loadProductivityReports(categoryId);
             var itemList = JSON.parse(productivityItems);
             var plannedTime = 0;
 

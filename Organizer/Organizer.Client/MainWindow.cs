@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Organizer.Client.API;
 
 namespace Organizer.Client
 {
@@ -22,6 +23,9 @@ namespace Organizer.Client
             InitializeComponent();
             InitializeChromium();
             chromeBrowser.RegisterJsObject("appController", new AppController(chromeBrowser, this));
+            chromeBrowser.RegisterJsObject("categoriesCtrl", new CategoriesController(chromeBrowser, this));
+            chromeBrowser.RegisterJsObject("todosCtrl", new TodosController(chromeBrowser, this));
+            chromeBrowser.RegisterJsObject("reportsCtrl", new ReportsController(chromeBrowser, this));
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
@@ -38,7 +42,7 @@ namespace Organizer.Client
         public void InitializeChromium(bool index = true)
         {
             CefSettings settings = new CefSettings();
-
+            settings.RemoteDebuggingPort = 8088;
             // Note that if you get an error or a white screen, you may be doing something wrong !
             // Try to load a local file that you're sure that exists and give the complete path instead to test
             // for example, replace page with a direct path instead :

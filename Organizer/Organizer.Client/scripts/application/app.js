@@ -25,29 +25,34 @@ app.config(['$routeProvider',
             templateUrl: 'templates/reports.html',
             controller: 'ReportsController'
         }).
+        when('/reports_tags', {
+            templateUrl: 'templates/reports_tags.html',
+            controller: 'ReportsController'
+        }).
         otherwise({
             redirectTo: '/categories'
         });
   }]);
 
-app.directive('customAutofocus', function() {
-    return{
+app.directive('autoFocus', function () {
+    return {
         restrict: 'A',
-
         link: function (scope, element, attrs) {
-            scope.$watch(function () {
-                return scope.$eval(attrs.customAutofocus);
-            }, function (newValue) {
-                if (newValue === true) {
-                    element[0].focus();
-                    element[0].select();
-
-                    scope.showicons = true;
-                }
-            });
+            //var model = attrs.changeModel;
+            //scope.$watch(model, function () {
+            //    alert();
+            //    return scope.$eval(attrs.autoFocus);
+            //}, function (newValue) {
+            //    if (newValue === true) {
+            //        element[0].focus();
+            //        element[0].select();
+            //        //scope.showicons = true;
+            //    }
+            //});
         }
     };
-})
+});
+
 //app.config(function(NotificationProvider) {
 //    NotificationProvider.setOptions({
 //        delay: 10000,

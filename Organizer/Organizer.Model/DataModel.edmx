@@ -9,6 +9,8 @@
     <EntitySet Name="Categories" EntityType="DataModel.Store.Categories" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Activities" EntityType="DataModel.Store.Activities" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TodoItems" EntityType="DataModel.Store.TodoItems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tags" EntityType="DataModel.Store.Tags" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TodoItemTag" EntityType="DataModel.Store.TodoItemTag" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="CategoryActivity" Association="DataModel.Store.CategoryActivity">
       <End Role="Category" EntitySet="Categories" />
       <End Role="Activity" EntitySet="Activities" />
@@ -16,6 +18,14 @@
     <AssociationSet Name="ActivityTodoItem" Association="DataModel.Store.ActivityTodoItem">
       <End Role="Activity" EntitySet="Activities" />
       <End Role="TodoItem" EntitySet="TodoItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TodoItemTag_TodoItem" Association="DataModel.Store.FK_TodoItemTag_TodoItem">
+      <End Role="TodoItem" EntitySet="TodoItems" />
+      <End Role="TodoItemTag" EntitySet="TodoItemTag" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TodoItemTag_Tag" Association="DataModel.Store.FK_TodoItemTag_Tag">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="TodoItemTag" EntitySet="TodoItemTag" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Categories">
@@ -53,7 +63,21 @@
     <Property Name="Resolved" Type="bit" Nullable="false" />
     <Property Name="Duration" Type="int" Nullable="false" />
     <Property Name="Notes" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Tags" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tags">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TodoItemTag">
+    <Key>
+      <PropertyRef Name="TodoItems_Id" />
+      <PropertyRef Name="Tags_Id" />
+    </Key>
+    <Property Name="TodoItems_Id" Type="int" Nullable="false" />
+    <Property Name="Tags_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="CategoryActivity">
     <End Role="Category" Type="DataModel.Store.Categories" Multiplicity="1" />
@@ -79,6 +103,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TodoItemTag_TodoItem">
+    <End Role="TodoItem" Type="DataModel.Store.TodoItems" Multiplicity="1" />
+    <End Role="TodoItemTag" Type="DataModel.Store.TodoItemTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TodoItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TodoItemTag">
+        <PropertyRef Name="TodoItems_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TodoItemTag_Tag">
+    <End Role="TodoItemTag" Type="DataModel.Store.TodoItemTag" Multiplicity="*" />
+    <End Role="Tag" Type="DataModel.Store.Tags" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TodoItemTag">
+        <PropertyRef Name="Tags_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -94,6 +142,11 @@
           <AssociationSet Name="ActivityTodoItem" Association="DataModel.ActivityTodoItem">
             <End Role="Activity" EntitySet="Activities" />
             <End Role="TodoItem" EntitySet="TodoItems" />
+          </AssociationSet>
+          <EntitySet Name="Tags" EntityType="DataModel.Tag" />
+          <AssociationSet Name="TodoItemTag" Association="DataModel.TodoItemTag">
+            <End Role="TodoItem" EntitySet="TodoItems" />
+            <End Role="Tag" EntitySet="Tags" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Category">
@@ -147,7 +200,7 @@
           <Property Name="Resolved" Type="Boolean" Nullable="false" />
           <Property Name="Duration" Type="Int32" Nullable="false" />
           <Property Name="Notes" Type="String" Nullable="true" />
-          <Property Name="Tags" Type="String" Nullable="false" />
+          <NavigationProperty Name="Tags" Relationship="DataModel.TodoItemTag" FromRole="TodoItem" ToRole="Tag" />
         </EntityType>
         <Association Name="ActivityTodoItem">
           <End Type="DataModel.Activity" Role="Activity" Multiplicity="1" />
@@ -160,6 +213,18 @@
               <PropertyRef Name="ActivityId" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="TodoItems" Relationship="DataModel.TodoItemTag" FromRole="Tag" ToRole="TodoItem" />
+        </EntityType>
+        <Association Name="TodoItemTag">
+          <End Type="DataModel.TodoItem" Role="TodoItem" Multiplicity="*" />
+          <End Type="DataModel.Tag" Role="Tag" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -203,10 +268,25 @@
           <ScalarProperty Name="Resolved" ColumnName="Resolved" />
           <ScalarProperty Name="Duration" ColumnName="Duration" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
-          <ScalarProperty Name="Tags" ColumnName="Tags" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Tags">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Tag)">
+        <MappingFragment StoreEntitySet="Tags">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="TodoItemTag" TypeName="DataModel.TodoItemTag" StoreEntitySet="TodoItemTag">
+      <EndProperty Name="TodoItem">
+        <ScalarProperty Name="Id" ColumnName="TodoItems_Id" />
+      </EndProperty>
+      <EndProperty Name="Tag">
+        <ScalarProperty Name="Id" ColumnName="Tags_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
