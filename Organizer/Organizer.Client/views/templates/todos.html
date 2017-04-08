@@ -76,38 +76,20 @@
                 <td>
                     <div class="modal fade" id="dialogTestDialog{{$index}}" tabindex="-1" role="dialog" aria-labelledby="executionOptionLabel"
                          aria-hidden="true">
-                        <div class="modal-dialog" style="width: 500px;">
+                        <div class="modal-dialog" style="width: 800px;">
                             <div class="modal-content" style="margin:0;">
                                 <div class="well modal-body">
                                     <span>Task Notes/</span>
                                     <textarea ng-model="item.Notes" class="form-control" style="height:200px;"></textarea>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading"><h4><i class="fa fa-tag fa-lg"></i> Tags</h4></div>
-                                        <div class="panel-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <tag-manager tags="item.Tags" autocomplete="allTags"></tag-manager>
-                                                    <hr>
-                                                    <h3>Current Tags</h3>
-                                                    <ul class="list-unstyled">
-                                                        <li ng-repeat="tag in tags">{{tag}}</li>
-                                                    </ul>
-
-                                                </div>
-
-                                            </div>
-                                        </div><!--/panel-body-->
-                                    </div>
-                                    <div>
-                                        <!--<tag-manager tags="item.Tags" autocomplete="allTags"></tag-manager>-->
-                                        <!--<hr>
-                                        <h3>Current Tags</h3>
+                                    <br />
+                                    <div class="tags">
+                                        <tag-manager tags="item.Tags" autocomplete="allTags"></tag-manager>
                                         <ul class="list-unstyled">
-                                            <li ng-repeat="tag in item.Tags">{{tag}}</li>
-                                        </ul>-->
+                                            <li ng-repeat="tag in tags">{{tag}}</li>
+                                        </ul>
                                     </div>
                                 </div>
-                                <div class="modal-footer" style="border-top: 0;">
+                                <div class="modal-footer">
                                     <button type="button" class="btn btn-info" data-dismiss="modal" ng-click="updateTodoItem(item)">
                                         Update Info
                                     </button>
@@ -119,7 +101,7 @@
                     <button type="button" style="margin-right: 5px;" class="btn btn-default btn-sm pull-left" data-toggle="modal" data-target="#dialogTestDialog{{$index}}">
                         <span class="fa fa-ellipsis-h"></span>
                     </button>
-                    <button type="button"  class="btn btn-danger btn-sm pull-left" ng-click="deleteTodoItem(item.Id)"> <span class="fa fa-times"></span></button>
+                    <button type="button" class="btn btn-danger btn-sm pull-left" ng-click="deleteTodoItem(item.Id)"> <span class="fa fa-times"></span></button>
                     <span ng-show="item.Resolved" class="item-label pull-left"><span class="label label-success">Resolved</span></span>
                 </td>
             </tr>

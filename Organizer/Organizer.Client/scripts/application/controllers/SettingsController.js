@@ -5,6 +5,6 @@
     }
 
     $scope.updateCategory = function (category) {
-        categoriesCtrl.updateCategoryData(category.Id, parseInt(category.MinHoursPerWeek), parseInt(category.MaxHoursPerWeek));
+        categoriesCtrl.updateSetting(category.Id, parseInt(category.MinHoursPerWeek), parseInt(category.MaxHoursPerWeek));
     }
 });

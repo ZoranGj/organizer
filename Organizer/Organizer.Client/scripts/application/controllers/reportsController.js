@@ -1,4 +1,4 @@
-﻿app.controller('ReportsController', function ($scope, reports, REPORT_TYPE) {
+﻿app.controller('ReportsController', function ($scope, REPORT_TYPE) {
     $scope.categoryChanged = function () {
         $scope.initReports($scope.category);
     }
@@ -14,7 +14,20 @@
         }
 
         if ($scope.category != 0) {
-            reports.init($scope.category);
+            var labels = [];
+            var items = [];
+
+            var productivityItems = reportsCtrl.loadProductivityReports($scope.category);
+            var itemList = JSON.parse(productivityItems);
+            var plannedTime = 0;
+
+            for (var i in itemList) {
+                labels.push(itemList[i].DisplayLabel);
+                items.push(itemList[i].ActualTime);
+            }
+            var firstItem = itemList[0];
+            var categoryMin = firstItem ? firstItem.MinHoursPerWeek : 0;
+            var categoryMax = firstItem ? firstItem.MaxHoursPerWeek : 10;
 
             //todo: create directive for report
             var ctx = document.getElementById("myChart").getContext('2d');
@@ -64,15 +77,13 @@
             };
             Chart.pluginService.register(horizonalLinePlugin);
 
-            var categoryMin = parseInt($scope.category.minHoursPerWeek);
-            var categoryMax = parseInt($scope.category.maxHoursPerWeek);
             var myChart = new Chart(ctx, {
                 type: REPORT_TYPE.bar,
                 data: {
-                    labels: reports.labels(),
+                    labels: labels,
                     datasets: [{
                         label: 'Productivity',
-                        data: reports.items(),
+                        data: items,
                         backgroundColor: "rgba(153,255,51,1)",
                         fill: false,
                         lineTension: 0.1,

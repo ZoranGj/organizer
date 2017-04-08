@@ -6,8 +6,10 @@ using Organizer.Model.DTO;
 using Organizer.Model.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Organizer.Client.API
@@ -22,6 +24,7 @@ namespace Organizer.Client.API
         {
             _todoItemsProvider = new TodoItemsProvider();
             _tagsProvider = new TagsProvider();
+            categories = new CategoriesController(originalBrowser, mainForm);
         }
 
         public string LoadProductivityReports(int id)
@@ -36,98 +39,43 @@ namespace Organizer.Client.API
             return null;
         }
 
-        public string LoadTagsReports(string tag)
+        public string LoadTagsReports(int tagId)
         {
-            if (!string.IsNullOrEmpty(tag))
-            {
-                var todoItems = _tagsProvider.GetAll().First(t => t.Name == tag).TodoItems.Where(t => t.Resolved).ToList();
-                var todoItemsCopy = new List<TodoItem>();
-                if (!todoItems.Any())
-                {
-                    return null;
-                }
+            CultureInfo culture = Thread.CurrentThread.CurrentCulture;
+            var todoItems = _tagsProvider.GetById(tagId).TodoItems.Where(x => x.Resolved).ToList();
+            return TagsReports(todoItems).Serialize();
+        }
 
-                for (var i = 0; i < todoItems.Count(); i++)
-                {
-                    var item = todoItems.ElementAt(i);
-                    todoItemsCopy.Add(item);
-                    if (todoItems.Count() > i + 1)
-                    {
+        public List<ActivityReport> TagsReports(List<TodoItem> todoItems, Category category = null)
+        {
+            CultureInfo culture = Thread.CurrentThread.CurrentCulture;
+            var first = todoItems.FirstOrDefault();
+            var last = todoItems.LastOrDefault();
+            if (first == null) return new List<ActivityReport>();
 
-                        var nextItem = todoItems.ElementAt(i + 1);
-                        int dateDiff = ((int)(nextItem.Deadline - item.Deadline).TotalDays / 7);
-                        if (dateDiff > 0)
-                        {
-                            todoItemsCopy = todoItemsCopy.Concat(Enumerable.Range(1, dateDiff - 1).Select(x => new TodoItem
-                            {
-                                Deadline = item.Deadline.AddDays(7 * x),
-                                ActivityId = item.ActivityId,
-                                AddedOn = item.AddedOn.AddDays(7 * x),
-                                Resolved = true,
-                                Duration = 0
-                            })).ToList();
-                        }
-                        todoItemsCopy.Add(nextItem);
-                        i++;
-                    }
-                }
-
-                var groupedByWeek = todoItemsCopy.OrderBy(x => x.Deadline).GroupBy(item => GetStartOfWeek(item.Deadline));
-                var productivityList = groupedByWeek.Select(x => new ActivityReport
-                {
-                    ActualTime = x.Sum(y => y.Duration),
-                    From = x.Key,
-                    NumberOfTodos = x.Count(),
-                }).ToList();
-                return productivityList.Serialize();
-            }
-
-            return null;
+            var startDate = GetStartOfWeek(first.Deadline);
+            var dateDifference = (last.Deadline - startDate).Days / 7;
+            var reports = Enumerable.Range(0, dateDifference + 1)
+                   .Select(d => new { Start = startDate.AddDays(d * 7), End = startDate.AddDays((d * 7) + 5) })
+                   .Select(r =>
+                   {
+                       var todos = todoItems.Where(t => t.Deadline >= r.Start && t.Deadline <= r.End);
+                       return new ActivityReport
+                       {
+                           ActualTime = todos.Sum(y => y.Duration),
+                           From = r.Start,
+                           NumberOfTodos = todos.Count(),
+                           MaxHoursPerWeek = category == null ? 0 : category.MaxHoursPerWeek,
+                           MinHoursPerWeek = category == null ? 0 : category.MinHoursPerWeek
+                       };
+                   });
+            return reports.ToList();
         }
 
         public List<ActivityReport> ActivityReports(Category category)
         {
             var todoItems = _todoItemsProvider.GetAll(category.Id).Where(x => x.Resolved).OrderBy(x => x.Deadline).ToList();
-            var todoItemsCopy = new List<TodoItem>();
-            if (!todoItems.Any())
-            {
-                return null;
-            }
-
-            for (var i = 0; i < todoItems.Count(); i++)
-            {
-                var item = todoItems.ElementAt(i);
-                todoItemsCopy.Add(item);
-                if (todoItems.Count() > i + 1)
-                {
-
-                    var nextItem = todoItems.ElementAt(i + 1);
-                    int dateDiff = ((int)(nextItem.Deadline - item.Deadline).TotalDays / 7);
-                    if (dateDiff > 0)
-                    {
-                        todoItemsCopy = todoItemsCopy.Concat(Enumerable.Range(1, dateDiff - 1).Select(x => new TodoItem
-                        {
-                            Deadline = item.Deadline.AddDays(7 * x),
-                            ActivityId = item.ActivityId,
-                            AddedOn = item.AddedOn.AddDays(7 * x),
-                            Resolved = true,
-                            Duration = 0
-                        })).ToList();
-                    }
-                    todoItemsCopy.Add(nextItem);
-                    i++;
-                }
-            }
-
-            var groupedByWeek = todoItemsCopy.OrderBy(x => x.Deadline).GroupBy(item => GetStartOfWeek(item.Deadline));
-            return groupedByWeek.Select(x => new ActivityReport
-            {
-                ActualTime = x.Sum(y => y.Duration),
-                From = x.Key,
-                NumberOfTodos = x.Count(),
-                MaxHoursPerWeek = category.MaxHoursPerWeek,
-                MinHoursPerWeek = category.MinHoursPerWeek
-            }).ToList();
+            return TagsReports(todoItems, category);
         }
 
         public static DateTime GetStartOfWeek(DateTime value)

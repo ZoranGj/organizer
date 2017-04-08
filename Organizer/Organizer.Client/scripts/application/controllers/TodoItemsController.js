@@ -11,7 +11,7 @@
     };
 
     $scope.initializeTodoItems = function () {
-        $scope.allTags = ['coursera', 'pluralsight', 'web-development', 'software-architecture', 'machine learning' ];
+        $scope.allTags = JSON.parse(todosCtrl.getTagNames());
 
         var categories = categoriesCtrl.getAll();
         $scope.categories = JSON.parse(categories);

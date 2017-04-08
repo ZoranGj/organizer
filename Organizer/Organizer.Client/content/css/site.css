@@ -21,12 +21,23 @@ body, html {
     height: 100%;
 }
 
+#menu {
+    margin-bottom: 20px;
+    background: #fff;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+    #menu * {
+        background: #fff;
+    }
+    #menu li a {
+        font-size: 15px;
+    }
+
 .panel-bg {
     background: rgba(255, 255, 255, 0.5);
     box-shadow: 2px 4px 7px rgba(0,0,0,.1);
     padding-bottom: 15px;
 }
-
 
 table, td, th {
     border: 1px solid #fff !important;
@@ -97,32 +108,36 @@ button.list-group-item {
 
 /* ------- END:CATEGORIES STYLES -------- */
 
-
-#menu {
-    margin-bottom: 20px;
-    background: #fff;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
-}
-    #menu * {
-        background: #fff;
-    }
-    #menu li a, .navbar-brand {
-        padding-top: 20px;
-        padding-bottom: 20px;
-        color: #333;
-    }
-    #menu li a {
-        font-size: 15px;
-    }
+/* ------- TAGS STYLES ------- */
 
 #toDoList {
     background: rgba(255, 255, 255, 0.5);
     margin: 0 40px;
 }
+.tags {
+   margin-bottom: 5px;
+} 
+
+.tags .tag {
+    display: inline-block;
+    margin-right: 5px;
+    font-size: 14px;
+    font-weight: normal;
+    border-radius: 0;
+}
+  
+.tag .close {
+    font-size: 16px;
+    margin-left: 5px;
+    color: #fff;
+    opacity: 0.8;
+}
+
+/* ------- END:TAGS STYLES -------- */
+
 #viewContainer {
     margin-top: 100px;
 }
-
 
 .float-action {
     float: right;
@@ -154,22 +169,6 @@ button.list-group-item {
     padding: 7px 5px;
     border-radius: 0;
 }
-
-.tags {
-   margin-bottom: 5px;
-} 
-
-.tags .tag {
-   display: inline-block;
-   margin-right: 5px;
-   font-size: 13px;
-}
-  
-.tag .close {
-   font-size: 14px;
-   margin-left: 5px;
-}
-
 
 .ui-autocomplete{
     z-index: 1101 !important;

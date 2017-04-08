@@ -100,5 +100,12 @@ namespace Organizer.Client.API
             var data = tagsProvider.GetAll().Select(x => new TagDto { Id = x.Id, Name = x.Name });
             return data.Serialize();
         }
+
+        public string GetTagNames()
+        {
+            var tagsProvider = new TagsProvider();
+            var data = tagsProvider.GetAll().Select(x => x.Name ).ToList();
+            return data.Serialize();
+        }
     }
 }
