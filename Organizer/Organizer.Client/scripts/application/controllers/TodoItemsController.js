@@ -63,27 +63,40 @@
         todosCtrl.update(item.Id, item.Notes, item.Tags.join(','));
     }
 
-    $scope.init = function () {
-        var todoItems = todosCtrl.getAll(0);
-        var t = JSON.parse(todoItems);
-        for (var i in t) {
-            var y = new Date(t[i].Deadline);
-            y.setHours(y.getHours() - t[i].Duration)
+    $scope.calendarCategory = 0;
+
+    $scope.initCalendarView = function () {
+        var categories = categoriesCtrl.getAll();
+        $scope.calendarCategories = JSON.parse(categories);
+        $scope.calendarCategoryChanged();
+    }
+
+    $scope.initializeCalendar = function (todos) {
+        if ($scope.events.length) {
+            $scope.events = [];
+        }
+        for (var i in todos) {
+            var start = new Date(todos[i].Deadline);
+            start.setHours(start.getHours() - todos[i].Duration)
             $scope.events.push({
-                title: t[i].Description,
-                start: y,
-                end: t[i].Deadline,
+                id: todos[i].Id,
+                title: todos[i].Description,
+                start: start,
+                end: todos[i].Deadline,
             });
         }
+    }
+
+    $scope.calendarCategoryChanged = function () {
+        var todoItems = todosCtrl.getAll($scope.calendarCategory);
+        var t = JSON.parse(todoItems);
+        $scope.initializeCalendar(t);
     }
 
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
-
-    $scope.changeTo = 'Hungarian';
-    /* event source that contains custom events on the scope */
 
     $scope.events = [];
     //$scope.events = [

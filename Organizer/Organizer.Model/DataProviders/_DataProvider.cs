@@ -11,8 +11,8 @@ namespace Model.DataProviders {
 		private DataContext _dbContext;
 		protected DbSet<T> _dbSet;
 
-		public DataProvider() {
-			_dbContext = new DataContext();
+		public DataProvider(DataContext dbContext) {
+			_dbContext = dbContext;
 			_dbSet = _dbContext.Set<T>();
 		}
 

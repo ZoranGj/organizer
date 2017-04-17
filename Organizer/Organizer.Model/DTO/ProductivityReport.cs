@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Organizer.Model.DTO
 {
-    public class ActivityReport : Report
+    public class ProductivityReport : Report
     {
         public int CategoryId { get; set; }
         public int MinHoursPerWeek { get; set; }

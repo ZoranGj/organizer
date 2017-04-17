@@ -60,16 +60,28 @@
 
     $scope.saveActivity = function () {
         categoriesCtrl.saveActivity(this.activity.CategoryId, this.activity.Name, this.activity.Id || 0);
+        $scope.initializeCategories();
     }
 
     $scope.addActivity = function (category) {
+        if (category.Activities.filter(function (item) {
+                return item.Draft == true;
+            }).length > 0) {
+            focusActivity(category);
+            return;
+        }
+
         $scope.activity.CategoryId = category.Id;
         $scope.activity.Name = 'Activity name..';
+        $scope.activity.Draft = true;
         $scope.activity.Id = 0;
         category.Activities.push($scope.activity);
+        focusActivity(category);
+    }
 
+    function focusActivity(category) {
         $timeout(function () {
-            var $elem = $("[data-id="+category.Id+"] input:last-of-type");
+            var $elem = $("[data-id=" + category.Id + "] input:last-of-type");
             $elem.focus();
             $elem.select();
         }, 0);

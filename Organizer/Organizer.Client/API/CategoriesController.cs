@@ -18,55 +18,50 @@ namespace Organizer.Client.API
 
         public CategoriesController(ChromiumWebBrowser originalBrowser, MainWindow mainForm) : base(originalBrowser, mainForm)
         {
-            _categoriesProvider = new CategoriesProvider();
-            _acivitiesProvider = new ActivitiesProvider();
+            var dbContext = new DataContext();
+            _categoriesProvider = new CategoriesProvider(dbContext);
+            _acivitiesProvider = new ActivitiesProvider(dbContext);
         }
 
         #region Categories
 
         public string GetAll()
         {
-            var categoryProvider = new CategoriesProvider();
-            var data = categoryProvider.GetAll();
+            var data = _categoriesProvider.GetAll();
             return data.Serialize();
         }
 
         public Category Get(int id)
         {
-            var categoryProvider = new CategoriesProvider();
-            return categoryProvider.GetById(id);
+            return _categoriesProvider.GetById(id);
         }
 
         public void Add(string name, int priority)
         {
             var id = new Random().Next(10000);
-            var categoryProvider = new CategoriesProvider();
-            categoryProvider.Insert(new Category
+            _categoriesProvider.Insert(new Category
             {
                 Id = id,
                 Name = name,
                 Priority = priority
             });
-            categoryProvider.Save();
+            _categoriesProvider.Save();
         }
 
         public void Delete(int id)
         {
-            var categoryProvider = new CategoriesProvider();
-            categoryProvider.Delete(id);
-            categoryProvider.Save();
+            _categoriesProvider.Delete(id);
+            _categoriesProvider.Save();
         }
 
         public void UpdatePriority(int id, int newPriority)
         {
-            var categoryProvider = new CategoriesProvider();
-            categoryProvider.UpdatePriority(id, newPriority);
+            _categoriesProvider.UpdatePriority(id, newPriority);
         }
 
         public void UpdateSetting(int id, int minHoursPerWeek, int maxHoursPerWeek)
         {
-            var categoryProvider = new CategoriesProvider();
-            categoryProvider.UpdateCategoryData(id, (short)minHoursPerWeek, (short)maxHoursPerWeek);
+            _categoriesProvider.UpdateCategoryData(id, (short)minHoursPerWeek, (short)maxHoursPerWeek);
         }
 
         #endregion
@@ -75,11 +70,10 @@ namespace Organizer.Client.API
 
         public void SaveActivity(int categoryId, string name, int activityId)
         {
-            var activityProvider = new ActivitiesProvider();
             if (activityId == 0)
             {
                 var id = new Random().Next(100000);
-                activityProvider.Insert(new Activity
+                _acivitiesProvider.Insert(new Activity
                 {
                     Id = id,
                     Name = name,
@@ -90,25 +84,23 @@ namespace Organizer.Client.API
             }
             else
             {
-                var activity = activityProvider.GetById(activityId);
+                var activity = _acivitiesProvider.GetById(activityId);
                 activity.Name = name;
-                activityProvider.Update(activity);
+                _acivitiesProvider.Update(activity);
             }
-            activityProvider.Save();
+            _acivitiesProvider.Save();
         }
 
         public void DeleteActivity(int id)
         {
-            var activityProvider = new ActivitiesProvider();
-            activityProvider.Delete(id);
-            activityProvider.Save();
+            _acivitiesProvider.Delete(id);
+            _acivitiesProvider.Save();
         }
 
         public string GetActivityItems(int categoryId)
         {
-            var activityProvider = new ActivitiesProvider();
             var dictionary = new Dictionary<int, string>();
-            return activityProvider.GetAll(categoryId).Select(x => new ActivityDto()
+            return _acivitiesProvider.GetAll(categoryId).Select(x => new ActivityDto()
             {
                 Name = x.Name,
                 Id = x.Id

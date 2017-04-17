@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace Model.DataProviders {
 	public class CategoriesProvider : DataProvider<Category> {
+        public CategoriesProvider(DataContext db) : base(db) { }
+
         public new List<Category> GetAll()
         {
             return _dbSet.OrderBy(x => x.Priority).ToList();

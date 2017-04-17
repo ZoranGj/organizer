@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Model.DataProviders {
 	public class TodoItemsProvider : DataProvider<TodoItem> {
+        public TodoItemsProvider(DataContext db) : base(db) { }
+
         public IEnumerable<TodoItem> GetAll(int categoryId)
         {
             return _dbSet.Include("Activity").Where(x => x.Activity.CategoryId == categoryId);

@@ -19,8 +19,9 @@ namespace Organizer.Client.API
 
         public TodosController(ChromiumWebBrowser originalBrowser, MainWindow mainForm) : base(originalBrowser, mainForm)
         {
-            _todoItemsProvider = new TodoItemsProvider();
-            _tagsProvider = new TagsProvider();
+            var dbContext = new DataContext();
+            _todoItemsProvider = new TodoItemsProvider(dbContext);
+            _tagsProvider = new TagsProvider(dbContext);
         }
 
         public string GetAll(int categoryId)
@@ -65,12 +66,23 @@ namespace Organizer.Client.API
             }
             else
             {
-                item.Tags = tags.Split(',')
-                                .Select(tag => {
-                                    var dbTag = _tagsProvider.Get(tag);
-                                    return dbTag ?? new Tag { Name = tag };
-                                })
-                                .ToList();
+                item.Tags = new List<Tag>();
+
+                foreach (var tag in tags.Split(','))
+                {
+                    var dbTag = _tagsProvider.Get(tag);
+                    if (dbTag != null)
+                    {
+                        item.Tags.Add(dbTag);
+                    }
+                    else
+                    {
+                        item.Tags.Add(new Tag
+                        {
+                            Name = tag,
+                        });
+                    }
+                }
             }
 
             _todoItemsProvider.Update(item);
@@ -80,8 +92,7 @@ namespace Organizer.Client.API
         public void Add(string description, DateTime deadline, int activityId, int duration)
         {
             var id = new Random().Next(100000);
-            var todoItemProvider = new TodoItemsProvider();
-            todoItemProvider.Insert(new TodoItem
+            _todoItemsProvider.Insert(new TodoItem
             {
                 Id = id,
                 ActivityId = activityId,
@@ -91,20 +102,18 @@ namespace Organizer.Client.API
                 Duration = duration,
                 //Recurring = (short)recurring
             });
-            todoItemProvider.Save();
+            _todoItemsProvider.Save();
         }
 
         public string GetTags()
         {
-            var tagsProvider = new TagsProvider();
-            var data = tagsProvider.GetAll().Select(x => new TagDto { Id = x.Id, Name = x.Name });
+            var data = _tagsProvider.GetAll().Select(x => new TagDto { Id = x.Id, Name = x.Name });
             return data.Serialize();
         }
 
         public string GetTagNames()
         {
-            var tagsProvider = new TagsProvider();
-            var data = tagsProvider.GetAll().Select(x => x.Name ).ToList();
+            var data = _tagsProvider.GetAll().Select(x => x.Name ).ToList();
             return data.Serialize();
         }
     }

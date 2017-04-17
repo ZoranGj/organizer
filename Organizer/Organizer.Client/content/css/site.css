@@ -32,6 +32,15 @@ body, html {
     #menu li a {
         font-size: 15px;
     }
+    #menu .menu-icon {
+        color: #21b384;
+        margin-right: 2px;
+        font-size: 18px;
+    }
+
+.green {
+    color: #21b384;
+}
 
 .panel-bg {
     background: rgba(255, 255, 255, 0.5);
@@ -39,7 +48,15 @@ body, html {
     padding-bottom: 15px;
 }
 
-table, td, th {
+.navbar-right{
+    margin-right: 15px !important;
+}
+
+.lead {
+    margin-bottom: 0 !important;
+}
+
+.table-white, .table-white td, .table-white th {
     border: 1px solid #fff !important;
     font-size: 14px;
 }
@@ -91,12 +108,17 @@ table, td, th {
 
 .list-group-item {
     padding: 7px 15px;
-    border: 1px solid #eee;
+    border-bottom: 1px solid #ccc;
+    border: 0;
+}
+
+.list-group > li:first-of-type input {
+    border-top: 1px solid #cacaca;
 }
 
 button.list-group-item {
     background: #fafafa;
-    border-top: 1px solid #e1e1e1;
+    /*border-top: 1px solid #e1e1e1;*/
 }
 
 .activity-action {
@@ -172,4 +194,17 @@ button.list-group-item {
 
 .ui-autocomplete{
     z-index: 1101 !important;
+}
+
+/* Calendar override: */
+.fc td, .fc th {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.fc th {
+    padding: 9px 0 !important;
+}
+
+.fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead {
+    border-color: #fff !important;
 }

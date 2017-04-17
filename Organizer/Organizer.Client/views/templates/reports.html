@@ -1,16 +1,15 @@
 ﻿<div class="container" ng-init="initReports()">
     <div class="filter">
         <div class="col-md-3">
-            <label>Choose activity group:</label>
             <div>
-                <select ng-model="category" class="form-control table-input" ng-change="categoryChanged()"
+                <select ng-model="category" class="form-control" ng-change="categoryChanged()"
                         ng-options="item.Id as item.Name for item in categories"></select>
             </div>
         </div>
         <div class="col-md-3">
             <div>
                 <a class="btn btn-default" href="#reports_tags">
-                    View reports for: tags<span class="fa fa-caret-right"></span>
+                    Tags reports <span class="fa fa-caret-right green"></span>
                 </a>
             </div>
         </div>
