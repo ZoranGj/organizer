@@ -15,12 +15,14 @@ namespace Organizer.Client.API
     {
         private readonly CategoriesProvider _categoriesProvider;
         private readonly ActivitiesProvider _acivitiesProvider;
+        private readonly TodoItemsProvider _todoItemsProvider;
 
         public CategoriesController(ChromiumWebBrowser originalBrowser, MainWindow mainForm) : base(originalBrowser, mainForm)
         {
             var dbContext = new DataContext();
             _categoriesProvider = new CategoriesProvider(dbContext);
             _acivitiesProvider = new ActivitiesProvider(dbContext);
+            _todoItemsProvider = new TodoItemsProvider(dbContext);
         }
 
         #region Categories
@@ -50,7 +52,10 @@ namespace Organizer.Client.API
 
         public void Delete(int id)
         {
-            _categoriesProvider.Delete(id);
+            var category = Get(id);
+            category.Activities.ToList().ForEach(a => _acivitiesProvider.Delete(a.Id));
+
+            _categoriesProvider.Delete(category);
             _categoriesProvider.Save();
         }
 
@@ -93,7 +98,10 @@ namespace Organizer.Client.API
 
         public void DeleteActivity(int id)
         {
-            _acivitiesProvider.Delete(id);
+            var activity = _acivitiesProvider.GetById(id);
+            activity.TodoItems.ToList().ForEach(t => _todoItemsProvider.Delete(t.Id));
+
+            _acivitiesProvider.Delete(activity.Id);
             _acivitiesProvider.Save();
         }
 

@@ -20,11 +20,6 @@ namespace Organizer.Model
         {
         }
     
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            throw new UnintentionalCodeFirstException();
-        }
-    
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Activity> Activities { get; set; }
         public virtual DbSet<TodoItem> TodoItems { get; set; }

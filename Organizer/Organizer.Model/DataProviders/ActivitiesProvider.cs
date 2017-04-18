@@ -1,9 +1,7 @@
-﻿using Organizer.Model;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using Organizer.Model;
 
 namespace Model.DataProviders {
 	public class ActivitiesProvider : DataProvider<Activity> {
@@ -12,6 +10,15 @@ namespace Model.DataProviders {
         public IEnumerable<Activity> GetAll(int categoryId)
         {
             return _dbSet.Where(x => x.CategoryId == categoryId);
+        }
+
+        public new void Delete(object Id)
+        {
+            var activity = _dbSet.Find(Id);
+            var todoItems = activity.TodoItems.ToList();
+            todoItems.ForEach(a => activity.TodoItems.Remove(a));
+
+            _dbSet.Remove(activity);
         }
     }
 }

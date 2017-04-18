@@ -1,10 +1,7 @@
-﻿using Organizer.Model;
-using Organizer.Model.DTO;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using Organizer.Model;
 
 namespace Model.DataProviders {
 	public class CategoriesProvider : DataProvider<Category> {
@@ -27,6 +24,11 @@ namespace Model.DataProviders {
             //Update(category);
             Update(GetById(swappedCategory.Id));
             Save();
+        }
+
+        public void Delete(Category category)
+        {
+            _dbSet.Remove(category);
         }
 
         public void UpdateCategoryData(int id, short minHoursPerWeek, short maxHoursPerWeek)

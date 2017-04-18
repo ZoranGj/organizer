@@ -86,7 +86,10 @@ body, html {
     .card:not(:nth-of-type(3n)) {
         margin-right: 60px !important;
     }
-
+    .card .wrapper {
+        height:230px;
+        overflow-y: auto;
+    }
 
 .placeholder {
     border: 1px solid #aaa;
@@ -103,7 +106,6 @@ body, html {
     display: inline-block;
     width: 100%;
     height: 210px;
-    overflow-y: auto;
 }
 
 .list-group-item {
@@ -123,9 +125,18 @@ button.list-group-item {
 
 .activity-action {
     cursor: pointer;
-    position: absolute;
-    margin-top: -28px;
     padding: 1px 6px;
+    
+    /*position: absolute;
+    margin-top: -28px;*/
+    
+    position: relative;
+    margin-top: -30px;
+    display: inline-block;
+    float: right;
+    color: #fff;
+    font-weight: normal;
+    border: 1px solid #e1e1e1;
 }
 
 /* ------- END:CATEGORIES STYLES -------- */

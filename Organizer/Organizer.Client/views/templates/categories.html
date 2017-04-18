@@ -1,27 +1,29 @@
 ﻿<div ng-init="initializeCategories()" class="col-md-12">
     <div id="categories">
         <div data-id="{{category.Id}}" ng-repeat="category in categories" class="col-md-4 card category">
-            <div class="list-group-item list-group-item-primary">
-                <strong style="font-size: 14px;">{{category.Name}}</strong>
-                <span class="fa fa-times text-danger pull-right lead" ng-click="deleteCategory(category, $index)"></span>
+                <div class="list-group-item list-group-item-primary">
+                    <strong style="font-size: 14px;">{{category.Name}}</strong>
+                    <span class="fa fa-times text-danger pull-right lead" ng-click="deleteCategory(category, $index)"></span>
+                </div>
+            <div class="wrapper">
+                <ul class="list-group">
+                    <li ng-repeat="activity in category.Activities" ng-mouseenter="showicons=true" ng-focus="showicons=true" ng-mouseleave="showicons=false">
+                        <input data-id="{{activity.Id}}" type="text" class="form-control list-group-item activity" style="border-radius: 0;"
+                               ng-model="activity.Name" ng-keydown="showicons=true" />
+                        <div class="pull-right" ng-show="showicons">
+                            <button type="button" class="btn btn-default activity-action label-success" ng-click="deleteActivity(category, $index)" style="right:5px;">
+                                <span class="fa fa-times"></span>
+                            </button>
+                            <button type="button" class="btn btn-default activity-action label-success" ng-click="createTodoItem(activity.Id)" style="right:35px;">
+                                <span class="fa fa-pencil"></span>
+                            </button>
+                            <button type="button" class="btn btn-default activity-action label-success" ng-click="saveActivity()" style="right:65px;">
+                                <span class="fa fa-floppy-o"></span>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
             </div>
-            <ul class="list-group">
-                <li ng-repeat="activity in category.Activities" ng-mouseenter="showicons=true" ng-focus="showicons=true" ng-mouseleave="showicons=false">
-                    <input data-id="{{activity.Id}}" type="text" class="form-control list-group-item activity" style="border-radius: 0;" 
-                           ng-model="activity.Name" ng-keydown="showicons=true"/>
-                    <div class="pull-right" ng-show="showicons">
-                        <button type="button" class="btn btn-default activity-action" ng-click="deleteActivity(category, $index)" style="right:5px">
-                            <span class="fa fa-times"></span>
-                        </button>
-                        <button type="button" class="btn btn-default activity-action" ng-click="createTodoItem(activity.Id)" style="right:35px;">
-                            <span class="fa fa-pencil"></span>
-                        </button>
-                        <button type="button" class="btn btn-default activity-action" ng-click="saveActivity()" style="right:70px;">
-                            <span class="fa fa-floppy-o"></span>
-                        </button>
-                    </div>
-                </li>
-            </ul>
             <button type="button" class="list-group-item btn-default text-muted" ng-click="addActivity(category)">
                 <span class="fa fa-plus text-info"></span> <span class="text-muted">Add activity</span>
             </button>

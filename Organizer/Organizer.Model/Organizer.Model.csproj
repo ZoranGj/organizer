@@ -107,6 +107,7 @@
     <Compile Include="DTO\ToDoItemDto.cs" />
     <Compile Include="DTO\_Report.cs" />
     <Compile Include="Extensions\CollectionsExtensions.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\ReportsExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
