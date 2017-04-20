@@ -40,7 +40,7 @@ namespace Organizer.Client.API
 
         public void Add(string name, int priority)
         {
-            var id = new Random().Next(10000);
+            var id = new Random().Next(100000);
             _categoriesProvider.Insert(new Category
             {
                 Id = id,
@@ -53,7 +53,10 @@ namespace Organizer.Client.API
         public void Delete(int id)
         {
             var category = Get(id);
-            category.Activities.ToList().ForEach(a => _acivitiesProvider.Delete(a.Id));
+            category.Activities.ToList().ForEach(a => {
+                a.TodoItems.ToList().ForEach(t => _todoItemsProvider.Delete(t.Id));
+                _acivitiesProvider.Delete(a.Id);
+            });
 
             _categoriesProvider.Delete(category);
             _categoriesProvider.Save();

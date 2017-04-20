@@ -93,4 +93,26 @@
             categoriesCtrl.deleteActivity(removed.Id);
         }
     }
+
+    $scope.onTimeSet = function (newDate, oldDate) {
+        $scope.todoItem.Deadline = newDate;
+    }
+
+    $scope.todoItemDialog = function (activity) {
+        $scope.initTodoItem(activity.Id);
+        $("#addTodoItemDialog").modal();
+    }
+
+    $scope.initTodoItem = function (activityId, clear) {
+        $scope.todoItem = {
+            ActivityId: activityId,
+            Description: '',
+            Duration: 0,
+            Resolved: false
+        };
+    }
+
+    $scope.saveTodoItem = function () {
+        todosCtrl.add($scope.todoItem.Description, $scope.todoItem.Deadline, parseInt($scope.todoItem.ActivityId), parseInt($scope.todoItem.Duration), $scope.todoItem.Resolved);
+    }
 });

@@ -49,6 +49,18 @@
             </div>
         </div>
     </div>
+
+    <script>
+        window.onerror = function (errorMessage, url, lineNumber)
+        {
+            try {
+                throw new Error("get current stack trace");
+            } catch (e) {
+                stackTrace = e.trace;
+                alert(errorMessage);
+            }
+        };
+    </script>
     
     <script src="../scripts/application/app.js"></script>
     <script src="../scripts/application/constants.js"></script>

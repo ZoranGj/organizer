@@ -56,6 +56,33 @@ body, html {
     margin-bottom: 0 !important;
 }
 
+.center {
+    margin-top: 50px;
+}
+
+.modal-body.well {
+    margin-bottom: 0;
+    border-bottom: 0;
+}
+
+.modal-header {
+    padding-bottom: 5px;
+}
+
+.modal-footer {
+    padding: 0;
+}
+    .modal-footer .btn-group button {
+        height: 40px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border: none;
+        border-right: 1px solid #ddd;
+    }
+    .modal-footer .btn-group:last-child > button {
+        border-right: 0;
+    }
+
 .table-white, .table-white td, .table-white th {
     border: 1px solid #fff !important;
     font-size: 14px;

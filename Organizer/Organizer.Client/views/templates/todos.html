@@ -68,8 +68,8 @@
             <tr ng-repeat="item in todoItems" class="test-row" ng-class="todoItemClass(item)">
                 <td><input type="checkbox" ng-model="item.Resolved" ng-change="resolveItem(item.Id)">  {{item.Description}} (<i class="text-muted">{{item.RecurringMode}}</i>)</td>
                 <td>
-                    <span ng-bind="item.Deadline |  date:'MM/dd/yyyy hh:mm'"></span> 
-                    (<small ng-bind="item.AddedOn |  date:'MM/dd/yyyy'"></small>)
+                    <span ng-bind="item.Deadline | date:'MM/dd/yyyy hh:mm'"></span> 
+                    (<small ng-bind="item.AddedOn | date:'MM/dd/yyyy'"></small>)
                 </td>
                 <td>{{item.Duration}}</td>
                 <td>{{item.Activity}}</td>
@@ -90,9 +90,16 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-info" data-dismiss="modal" ng-click="updateTodoItem(item)">
-                                        Update Info
-                                    </button>
+                                    <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-info" data-dismiss="modal" ng-click="updateTodoItem(item)">
+                                                Update Info
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -89,7 +89,7 @@ namespace Organizer.Client.API
             _todoItemsProvider.Save();
         }
 
-        public void Add(string description, DateTime deadline, int activityId, int duration)
+        public void Add(string description, DateTime deadline, int activityId, int duration, bool resolved = false)
         {
             var id = new Random().Next(100000);
             _todoItemsProvider.Insert(new TodoItem
@@ -100,6 +100,7 @@ namespace Organizer.Client.API
                 AddedOn = DateTime.Now,
                 Description = description,
                 Duration = duration,
+                Resolved = resolved,
                 //Recurring = (short)recurring
             });
             _todoItemsProvider.Save();

@@ -32,6 +32,8 @@
         var firstItem = itemList[0];
         var categoryMin = firstItem ? firstItem.MinHoursPerWeek : 0;
         var categoryMax = firstItem ? firstItem.MaxHoursPerWeek : 10;
+        $("#myChart").remove();
+        $("#chartWrapper").append('<canvas id="myChart"></canvas>');
         var ctx = document.getElementById("myChart").getContext('2d');
         reports.create(ctx, REPORT_TYPE.bar, data, 'Productivity', {
             "horizontalLine": [{
@@ -85,6 +87,10 @@
             data.labels.push(itemList[i].DisplayLabel);
             data.items.push(itemList[i].ActualTime);
         }
+
+        $("#myChart").remove();
+        $("#chartWrapper").append('<canvas id="myChart"></canvas>');
+
         var ctx = document.getElementById("myChart").getContext('2d');
         reports.create(ctx, REPORT_TYPE.bar, data, 'Tags', {
             scales: {

@@ -15,8 +15,8 @@ namespace Model.DataProviders {
         public new void Delete(object Id)
         {
             var activity = _dbSet.Find(Id);
-            var todoItems = activity.TodoItems.ToList();
-            todoItems.ForEach(a => activity.TodoItems.Remove(a));
+            //var todoItems = activity.TodoItems.ToList();
+            //todoItems.ForEach(a => activity.TodoItems.Remove(a));
 
             _dbSet.Remove(activity);
         }
