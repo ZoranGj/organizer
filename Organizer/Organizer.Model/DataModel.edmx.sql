@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/04/2017 07:51:46
+-- Date Created: 04/22/2017 20:08:10
 -- Generated from EDMX file: D:\Projects\Prototypes\organizer\organizer\Organizer\Organizer.Model\DataModel.edmx
 -- --------------------------------------------------
 
@@ -23,6 +23,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ActivityTodoItem]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TodoItems] DROP CONSTRAINT [FK_ActivityTodoItem];
 GO
+IF OBJECT_ID(N'[dbo].[FK_TodoItemTag_TodoItem]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TodoItemTag] DROP CONSTRAINT [FK_TodoItemTag_TodoItem];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TodoItemTag_Tag]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TodoItemTag] DROP CONSTRAINT [FK_TodoItemTag_Tag];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -37,6 +43,12 @@ GO
 IF OBJECT_ID(N'[dbo].[TodoItems]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TodoItems];
 GO
+IF OBJECT_ID(N'[dbo].[Tags]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Tags];
+GO
+IF OBJECT_ID(N'[dbo].[TodoItemTag]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TodoItemTag];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -44,7 +56,7 @@ GO
 
 -- Creating table 'Categories'
 CREATE TABLE [dbo].[Categories] (
-    [Id] int  NOT NULL,
+    [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Notes] nvarchar(max)  NULL,
     [Priority] int  NOT NULL,
@@ -55,7 +67,7 @@ GO
 
 -- Creating table 'Activities'
 CREATE TABLE [dbo].[Activities] (
-    [Id] int  NOT NULL,
+    [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Priority] smallint  NOT NULL,
     [Description] nvarchar(max)  NULL,

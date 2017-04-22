@@ -94,7 +94,7 @@ namespace Organizer.Client.API
             var id = new Random().Next(100000);
             _todoItemsProvider.Insert(new TodoItem
             {
-                Id = id,
+                //Id = id,
                 ActivityId = activityId,
                 Deadline = deadline,
                 AddedOn = DateTime.Now,

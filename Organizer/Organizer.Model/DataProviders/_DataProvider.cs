@@ -27,10 +27,15 @@ namespace Model.DataProviders {
 		}
 
 		public void Update(T obj) {
-			_dbContext.Entry(obj).State = EntityState.Modified;
-		}
+            SetModified(obj);
+        }
 
-		public void Delete(object Id) {
+        public void SetModified(object entity)
+        {
+			_dbContext.Entry(entity).State = EntityState.Modified;
+        }
+
+        public void Delete(object Id) {
 			T getObjById = _dbSet.Find(Id);
 			_dbSet.Remove(getObjById);
 		}

@@ -21,8 +21,6 @@ namespace Model.DataProviders {
             swappedCategory.Priority = category.Priority;
             category.Priority = newPriority;
 
-            //Update(category);
-            Update(GetById(swappedCategory.Id));
             Save();
         }
 

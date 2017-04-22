@@ -19,7 +19,7 @@
                 var priority = $('#categories > div').index(ui.item);
                 var categoryId = $(ui.item).data('id');
                 if (priority > -1) {
-                    category.updatePriority(categoryId, priority + 1);
+                    categoriesCtrl.updatePriority(categoryId, priority + 1);
                 }
             }
         });

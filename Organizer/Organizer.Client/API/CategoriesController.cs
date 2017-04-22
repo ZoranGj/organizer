@@ -13,13 +13,19 @@ namespace Organizer.Client.API
 {
     public class CategoriesController : AppController
     {
-        private readonly CategoriesProvider _categoriesProvider;
-        private readonly ActivitiesProvider _acivitiesProvider;
-        private readonly TodoItemsProvider _todoItemsProvider;
+        private CategoriesProvider _categoriesProvider;
+        private ActivitiesProvider _acivitiesProvider;
+        private TodoItemsProvider _todoItemsProvider;
 
         public CategoriesController(ChromiumWebBrowser originalBrowser, MainWindow mainForm) : base(originalBrowser, mainForm)
         {
             var dbContext = new DataContext();
+            Setup(dbContext);
+        }
+
+        public CategoriesController() { }
+
+        public void Setup(DataContext dbContext) {
             _categoriesProvider = new CategoriesProvider(dbContext);
             _acivitiesProvider = new ActivitiesProvider(dbContext);
             _todoItemsProvider = new TodoItemsProvider(dbContext);
@@ -43,7 +49,7 @@ namespace Organizer.Client.API
             var id = new Random().Next(100000);
             _categoriesProvider.Insert(new Category
             {
-                Id = id,
+                //Id = id,
                 Name = name,
                 Priority = priority
             });
@@ -83,7 +89,7 @@ namespace Organizer.Client.API
                 var id = new Random().Next(100000);
                 _acivitiesProvider.Insert(new Activity
                 {
-                    Id = id,
+                    //Id = id,
                     Name = name,
                     Description = null,
                     CategoryId = categoryId,

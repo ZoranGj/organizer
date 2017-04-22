@@ -22,6 +22,8 @@ namespace Organizer.Client
         private static ChromiumWebBrowser _instanceBrowser = null;
         private static MainWindow _instanceMainForm = null;
 
+        public AppController() { }
+
         public AppController(ChromiumWebBrowser originalBrowser, MainWindow mainForm)
         {
             _instanceBrowser = originalBrowser;

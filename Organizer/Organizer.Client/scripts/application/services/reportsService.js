@@ -2,7 +2,6 @@
     var reports = {};
 
     reports.init = function () {
-        return;
         var horizonalLinePlugin = {
             afterDraw: function (chartInstance) {
                 var yScale = chartInstance.scales["y-axis-0"];
