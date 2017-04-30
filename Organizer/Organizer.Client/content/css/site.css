@@ -16,6 +16,10 @@
     border-radius: 0 !important;
 }
 
+.btn-h {
+    height: 41px;
+}
+
 body, html {
     width: 100%;
     height: 100%;
@@ -245,4 +249,9 @@ button.list-group-item {
 
 .fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead {
     border-color: #fff !important;
+}
+
+.tooltip {
+    position: fixed;
+    z-index: 2010 !important;
 }

@@ -8,11 +8,28 @@ namespace Organizer.Model.DTO
 {
     public class ToDoItemDto
     {
+        private TodoItem data;
+
+        public ToDoItemDto(TodoItem data)
+        {
+            Id = data.Id;
+            Activity = data.Activity.Name;
+            Category = data.Activity.Category == null ? null : data.Activity.Category.Name;
+            Description = data.Description;
+            AddedOn = data.AddedOn;
+            Deadline = data.Deadline;
+            Resolved = data.Resolved;
+            Duration = data.Duration;
+            Notes = data.Notes;
+            Tags = !data.Tags.Any() ? new List<string>() : data.Tags.Select(t => t.Name).ToList();
+        }
+
         public int Id { get; set; }
         public string Description { get; set; }
         public DateTime AddedOn { get; set; }
         public DateTime Deadline { get; set; }
         public string Activity { get; set; }
+        public string Category { get; set; }
         public bool Resolved { get; set; }
         public int Duration { get; set; }
         public string Notes { get; set; }

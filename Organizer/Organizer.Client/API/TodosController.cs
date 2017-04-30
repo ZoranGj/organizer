@@ -28,19 +28,14 @@ namespace Organizer.Client.API
         {
             _todoItemsProvider.InitRecurringTodos();
             var data = categoryId == 0 ? _todoItemsProvider.GetAll() : _todoItemsProvider.GetAll(categoryId);
-            return data.Select(x => new ToDoItemDto
-            {
-                Id = x.Id,
-                Activity = x.Activity.Name,
-                Description = x.Description,
-                AddedOn = x.AddedOn,
-                Deadline = x.Deadline,
-                Resolved = x.Resolved,
-                Duration = x.Duration,
-                Notes = x.Notes,
-                Tags = !x.Tags.Any() ? new List<string>() : x.Tags.Select(t => t.Name).ToList()
-                //RecurringTypeId = x.Recurring
-            }).ToList().Serialize();
+            return data.Select(x => new ToDoItemDto(x)).ToList().Serialize();
+        }
+
+        public string Get(int todoItemId)
+        {
+            var data = _todoItemsProvider.GetById(todoItemId);
+            var dto = new ToDoItemDto(data);
+            return dto.Serialize();
         }
 
         public void Delete(int todoItemId)

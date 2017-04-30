@@ -1,34 +1,38 @@
-﻿var app = angular.module('ngApp', ['ui.bootstrap.datetimepicker', 'ui.calendar', 'ui-notification']);
+﻿var app = angular.module('ngApp', ['ngRoute', 'ui.bootstrap', 'ui.calendar', 'ui-notification']);
 
-//appCtrl.showDevTools();
+appCtrl.showDevTools();
 app.config(['$routeProvider',
   function ($routeProvider) {
       $routeProvider.
         when('/categories', {
-            templateUrl: 'templates/categories.html',
+            templateUrl: 'categories.html',
             controller: 'CategoriesController'
         }).
         when('/todos', {
-            templateUrl: 'templates/todos.html',
+            templateUrl: 'todos.html',
             controller: 'TodoItemsController'
         }).
         when('/calendar', {
-            templateUrl: 'templates/calendar.html',
-            controller: 'TodoItemsController'
+            templateUrl: 'calendar.html',
+            controller: 'CalendarController'
         }).
         when('/settings', {
-            templateUrl: 'templates/settings.html',
+            templateUrl: 'settings.html',
             controller: 'SettingsController'
         }).
         when('/reports', {
-            templateUrl: 'templates/reports.html',
+            templateUrl: 'reports.html',
             controller: 'ReportsController'
         }).
         when('/reports_tags', {
-            templateUrl: 'templates/reports_tags.html',
+            templateUrl: 'reports_tags.html',
             controller: 'ReportsController'
         }).
         otherwise({
             redirectTo: '/categories'
         });
   }]);
+
+app.config(['$locationProvider', function ($locationProvider) {
+    $locationProvider.hashPrefix('');
+}]);

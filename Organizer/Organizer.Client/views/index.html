@@ -19,10 +19,14 @@
     <script type="text/javascript" src="https://momentjs.com/downloads/moment.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
     <script type="text/javascript" src="../scripts/libraries/datetimepicker.js"></script>
     <script type="text/javascript" src="../scripts/libraries/datetimepicker.templates.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.0/ui-bootstrap-tpls.min.js"></script>
 
     <script type="text/javascript" src="../scripts/libraries/calendar.js"></script>
     <!--<script type="text/javascript" src="http://arshaw.com/js/fullcalendar-1.5.3/fullcalendar/gcal.js"></script>-->
@@ -30,7 +34,7 @@
     <script type="text/javascript" src="../scripts/libraries/angular-ui-notification.js"></script>
 </head>
 <body ng-app="ngApp">
-    <div>
+    <div ng-app="MainController">
         <div id="menu" class="navbar navbar-default navbar-fixed-top">
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -50,6 +54,23 @@
         </div>
     </div>
 
+    <div class="modal fade" id="notification" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h3 class="modal-title" id="lineModalLabel">{{notification.title}}</h3>
+                </div>
+                <div class="modal-body">
+                    <p>{{notification.message}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         window.onerror = function (errorMessage, url, lineNumber)
         {
@@ -65,10 +86,13 @@
     <script src="../scripts/application/app.js"></script>
     <script src="../scripts/application/constants.js"></script>
     <script src="../scripts/application/services/reportsService.js"></script>
+    <script src="../scripts/application/services/notificationsService.js"></script>
     <script src="../scripts/application/controllers/categoriesController.js"></script>
     <script src="../scripts/application/controllers/todoItemsController.js"></script>
     <script src="../scripts/application/controllers/settingsController.js"></script>
     <script src="../scripts/application/controllers/reportsController.js"></script>
+    <script src="../scripts/application/controllers/calendarController.js"></script>
     <script src="../scripts/application/directives/tags.js"></script>
+    <script src="../scripts/application/directives/calendarEvent.js"></script>
 </body>
 </html>

@@ -1,0 +1,29 @@
+﻿<div ng-init="initCalendarView()">
+    <div class="filter">
+        <div class="col-md-3">
+            <select ng-model="calendarCategory" class="form-control table-input" ng-change="calendarCategoryChanged()"
+                    ng-options="item.Id as item.Name for item in calendarCategories">
+                <option value="">All activities</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <div class="btn-group">
+                <button class="btn btn-success btn-h" ng-click="changeView('agendaDay', 'myCalendar3')">AgendaDay</button>
+                <button class="btn btn-success btn-h" ng-click="changeView('agendaWeek', 'myCalendar3')">AgendaWeek</button>
+                <button class="btn btn-success btn-h" ng-click="changeView('month', 'myCalendar3')">Month</button>
+                <a href="#todos" class="btn btn-default" style="height: 42px; padding: 10px;">
+                    <span class="fa fa-tasks"></span>
+                    View todo list
+                </a>
+            </div>
+        </div>
+        <!--<div class="col-md-3">
+            <select class="form-control table-input" ng-model="filter.resolved" ng-change="statusChanged()">
+                <option value="">All</option>
+                <option value="false">Active</option>
+                <option value="true">Resolved</option>
+            </select>
+        </div>-->
+    </div>
+    <div ui-calendar="uiConfig.calendar" class="col-md-12 calendar" calendar="calendar" ng-model="eventSources"></div>
+</div>
