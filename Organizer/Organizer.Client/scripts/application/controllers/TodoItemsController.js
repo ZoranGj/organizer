@@ -10,6 +10,24 @@
         status: 0
     };
 
+    $scope.deadlineTime = new Date();
+    $scope.dateFormat = 'dd.MM.yyyy';
+    $scope.deadlinePicker = {
+        opened: false
+    };
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+    };
+    $scope.todoItemMessage = "text-success";
+
+    $scope.openDatePicker = function () {
+        $scope.deadlinePicker.opened = true;
+    };
+    $scope.deadlineTimeChanged = function () {
+        $scope.todoItem.Deadline.setHours($scope.deadlineTime.getHours(), $scope.deadlineTime.getMinutes(), $scope.deadlineTime.getSeconds());
+    }
+
     $scope.initializeTodoItems = function () {
         $scope.allTags = JSON.parse(todosCtrl.getTagNames());
 

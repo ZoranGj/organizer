@@ -23,8 +23,9 @@
     <table class="table table-bordered table-white">
         <thead>
             <tr>
-                <th class="col-md-5">Task description</th>
+                <th class="col-md-4">Task description</th>
                 <th class="col-md-2">DEADLINE</th>
+                <th class="col-md-1">Time</th>
                 <th class="col-md-1">Duration</th>
                 <th class="col-md-2">Activity</th>
                 <th></th>
@@ -36,23 +37,18 @@
                     <input type="text" class="table-input form-control" placeholder="Description.." ng-model="todoItem.Description"/>
                 </td>
                 <td class="cell-input">
-                    <div class="dropdown">
-                        <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="" href="">
-                            <div class="input-group">
-                                <input type="text" class="table-input form-control" data-ng-model="todoItem.Deadline">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                            </div>
-                        </a>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                            <datetimepicker data-ng-model="todoItem.Deadline" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }" data-on-set-time="onTimeSet(newDate, oldDate)"/>
-                        </ul>
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{dateFormat}}" ng-model="todoItem.Deadline" is-open="deadlinePicker.opened"
+                               datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </td>
+                <td>
+                    <div class="timepicker-wrap">
+                        <div uib-timepicker ng-model="deadlineTime" ng-change="deadlineTimeChanged()" hour-step="1" minute-step="5" show-meridian="false"></div>
                     </div>
-                    <!--<select ng-model="todoItem.Recurring" class="form-control table-input">
-                        <option value="0">Standard</option>
-                        <option value="1">Daily</option>
-                        <option value="2">Weekly</option>
-                        <option value="3">Weekends</option>
-                    </select>-->
                 </td>
                 <td class="cell-input">
                     <input type="text" class="table-input form-control" placeholder="Duration (hours).." ng-model="todoItem.Duration" />
