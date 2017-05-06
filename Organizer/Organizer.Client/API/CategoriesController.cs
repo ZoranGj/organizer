@@ -44,6 +44,11 @@ namespace Organizer.Client.API
             return _categoriesProvider.GetById(id);
         }
 
+        public string GetCategory(int id)
+        {
+            return _categoriesProvider.GetById(id).Serialize();
+        }
+
         public void Add(string name, int priority)
         {
             var id = new Random().Next(100000);

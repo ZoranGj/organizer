@@ -5,6 +5,7 @@
     $scope.activity = {};
     $scope.showicons = false;
     $scope.showNewCategory = false;
+    $scope.relatedItems = [];
 
     $scope.initializeCategories = function () {
         var categories = categoriesCtrl.getAll();
@@ -94,8 +95,16 @@
         }
     }
 
+    $scope.deadlineChanged = function () {
+        $scope.relatedItems = [];
+        var data = JSON.parse(todosCtrl.getOverlappingItems($scope.todoItem.Deadline));
+        if (data) {
+            $scope.relatedItems = data;
+        }
+    }
+
     $scope.onTimeSet = function (newDate, oldDate) {
-        $scope.todoItem.Deadline = newDate;
+        $scope.todoItem.Deadline = newDate; 
     }
 
     $scope.todoItemDialog = function (activity) {
@@ -104,6 +113,7 @@
     }
 
     $scope.initTodoItem = function (activityId, clear) {
+        $scope.relatedItems = [];
         $scope.todoItem = {
             ActivityId: activityId,
             Description: '',
@@ -131,6 +141,7 @@
     $scope.openDatePicker = function () {
         $scope.deadlinePicker.opened = true;
     };
+
     $scope.deadlineTimeChanged = function () {
         $scope.todoItem.Deadline.setHours($scope.deadlineTime.getHours(), $scope.deadlineTime.getMinutes(), $scope.deadlineTime.getSeconds());
     }

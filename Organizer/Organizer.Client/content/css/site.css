@@ -156,11 +156,7 @@ button.list-group-item {
 
 .activity-action {
     cursor: pointer;
-    padding: 1px 6px;
-    
-    /*position: absolute;
-    margin-top: -28px;*/
-    
+    padding: 1px 6px;    
     position: relative;
     margin-top: -30px;
     display: inline-block;
@@ -172,19 +168,35 @@ button.list-group-item {
 
 .timepicker-wrap {
     display: inline-block;
+    float: left;
 }
 
 #todoItemMessage {
     display: inline-block;
-    float: right;
-    margin-top: 30px;
-    margin-right: 13px;
-    font-size: 16px;
+    float: left;
+    width: 57%;
+    margin-left: 25px;
+    margin-top: 13px;
+    font-size: 15px;
     word-break: break-word;
     word-wrap: break-word;
 }
 
+.items-info {
+    float: left;
+    display: inline-block;
+    margin-left: 27px;
+}
+
 /* ------- END:CATEGORIES STYLES -------- */
+
+/* ------- TODO ITEMS STYLES ------- */
+
+.timepicker-wrap .btn {
+    padding: 0 !important;
+}
+
+/* ------- END:TODO ITEMS STYLES*/
 
 /* ------- TAGS STYLES ------- */
 

@@ -26,7 +26,6 @@ namespace Organizer.Client.API
 
         public string GetAll(int categoryId)
         {
-            _todoItemsProvider.InitRecurringTodos();
             var data = categoryId == 0 ? _todoItemsProvider.GetAll() : _todoItemsProvider.GetAll(categoryId);
             return data.Select(x => new ToDoItemDto(x)).ToList().Serialize();
         }
@@ -111,6 +110,14 @@ namespace Organizer.Client.API
         {
             var data = _tagsProvider.GetAll().Select(x => x.Name ).ToList();
             return data.Serialize();
+        }
+
+        public string GetOverlappingItems(DateTime deadline)
+        {
+            var items = _todoItemsProvider
+                            .GetAllForDeadline(deadline)
+                            .Select(item => new ToDoItemDto(item)).ToList();
+            return items.Serialize();
         }
     }
 }
