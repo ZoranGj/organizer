@@ -33,7 +33,7 @@ namespace Organizer.Client.API
         public string LoadTagsReports(int tagId)
         {
             CultureInfo culture = Thread.CurrentThread.CurrentCulture;
-            var todoItems = _todoItemsProvider.GetAllForTag(tagId).ToList();
+            var todoItems = _tagsProvider.GetById(tagId).TodoItems.Where(x => x.Resolved).OrderBy(x => x.Deadline).ToList();
             return todoItems.ProductivityReports().Serialize();
         }
     }
