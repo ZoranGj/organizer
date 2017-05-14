@@ -15,7 +15,10 @@
         </div>
     </div>
 
-    <div id="chartWrapper">
+    <div id="chartWrapper" ng-show="displayDiagram">
         <canvas id="myChart"></canvas>
     </div>
+    <p class="no-data" ng-show="msgNoData">
+        There aren't recorded activities for the chosen Goal yet. Go and be productive!
+    </p>
 </div>

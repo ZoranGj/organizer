@@ -6,13 +6,6 @@
                 <option value="">All activities</option>
             </select>
         </div>
-        <!--<div class="col-md-3">
-            <select class="form-control table-input" ng-model="filter.resolved" ng-change="statusChanged()">
-                <option value="">All</option>
-                <option value="false">Active</option>
-                <option value="true">Resolved</option>
-            </select>
-        </div>-->
         <div class="col-md-3">
             <a href="#calendar" class="btn btn-default" style="height: 41px; padding: 10px;">
                 <span class="fa fa-calendar"></span>
@@ -47,7 +40,7 @@
                 </td>
                 <td>
                     <div class="timepicker-wrap">
-                        <div uib-timepicker ng-model="deadlineTime" ng-change="deadlineTimeChanged()" hour-step="1" minute-step="5" show-meridian="false"></div>
+                        <div uib-timepicker ng-model="deadlineTime" ng-change="deadlineTimeChanged()" hour-step="1" minute-step="5" show-meridian="false" show-spinners="false"></div>
                     </div>
                 </td>
                 <td class="cell-input">
@@ -58,18 +51,21 @@
                             ng-options="activityItem.Id as activityItem.Name for activityItem in activityItems"></select>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-default pull-left" ng-click="addTodoItem(1727)"> <span class="fa fa-plus"></span> Todo Item</button>
+                    <button type="button" class="btn btn-success pull-left" ng-click="addTodoItem(1727)"> <span class="fa fa-plus"></span> Todo Item</button>
                 </td>
             </tr>
             <tr ng-repeat="item in todoItems" class="test-row" ng-class="todoItemClass(item)">
-                <td><input type="checkbox" ng-model="item.Resolved" ng-change="resolveItem(item.Id)">  {{item.Description}} (<i class="text-muted">{{item.RecurringMode}}</i>)</td>
+                <td>
+                    <input type="checkbox" ng-model="item.Resolved" ng-change="resolveItem(item.Id)">  
+                    <span>{{item.Description}} </span>
+                </td>
                 <td>
                     <span ng-bind="item.Deadline | date:'MM/dd/yyyy hh:mm'"></span> 
                     (<small ng-bind="item.AddedOn | date:'MM/dd/yyyy'"></small>)
                 </td>
                 <td>{{item.Duration}}</td>
                 <td>{{item.Activity}}</td>
-                <td>
+                <td colspan="2">
                     <div class="modal fade" id="dialogTestDialog{{$index}}" tabindex="-1" role="dialog" aria-labelledby="executionOptionLabel"
                          aria-hidden="true">
                         <div class="modal-dialog" style="width: 800px;">

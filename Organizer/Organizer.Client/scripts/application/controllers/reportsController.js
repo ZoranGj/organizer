@@ -3,6 +3,9 @@
     $scope.category = 0;
 
     $scope.initReports = function () {
+        $scope.msgNoData = false;
+        $scope.displayDiagram = true;
+
         reports.init();
 
         $scope.categories = JSON.parse(categoriesCtrl.getAll());
@@ -24,6 +27,16 @@
         };
         var productivityItems = reportsCtrl.loadProductivityReports($scope.category);
         var itemList = JSON.parse(productivityItems);
+
+        if (itemList.length == 0){
+            $scope.msgNoData = true;
+            $scope.displayDiagram = false;
+            return;
+        }
+        else {
+            $scope.msgNoData = false;
+            $scope.displayDiagram = true;
+        }
 
         for (var i in itemList) {
             data.labels.push(itemList[i].DisplayLabel);
@@ -66,6 +79,9 @@
     }
 
     $scope.initTagsReports = function () {
+        $scope.msgNoTags = false;
+        $scope.displayTagsDiagram = true;
+
         var tags = todosCtrl.getTags();
         $scope.tags = JSON.parse(tags);
         
@@ -82,6 +98,16 @@
         };
         var tagItems = reportsCtrl.loadTagsReports(id);
         var itemList = JSON.parse(tagItems);
+
+        if (itemList.length == 0) {
+            $scope.msgNoTags = true;
+            $scope.displayTagsDiagram = false;
+            return;
+        }
+        else {
+            $scope.msgNoTags = false;
+            $scope.displayTagsDiagram = true;
+        }
 
         for (var i in itemList) {
             data.labels.push(itemList[i].DisplayLabel);
