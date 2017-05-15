@@ -37,12 +37,30 @@
         <div id="menu" class="navbar navbar-default navbar-fixed-top">
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#categories"><span class="menu-icon fa fa-calendar-check-o"></span> Goals</a></li>
-                    <li><a href="#todos"><span class="menu-icon fa fa-tasks"></span> Work</a></li>
-                    <li><a href="#reports"><span class="menu-icon fa fa-bar-chart"></span> Productivity</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="#settings"><span class="menu-icon fa fa-cog"></span> Settings</a></li>
+                    <li>
+                        <a href="#categories">
+                            <span class="menu-icon fa fa-calendar-check-o"></span> 
+                            <span class="menu-text">Goals</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#todos">
+                            <span class="menu-icon fa fa-tasks"></span> 
+                            <span class="menu-text">Work</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#calendar">
+                            <span class="menu-icon fa fa-calendar"></span>
+                            <span class="menu-text">Calendar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#reports">
+                            <span class="menu-icon fa fa-bar-chart"></span>
+                            <span class="menu-text">Productivity</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -58,13 +76,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <h3 class="modal-title" id="lineModalLabel">{{notification.title}}</h3>
+                    <h4 class="modal-title text-center" id="lineModalLabel">{{notification.title}}</h4>
                 </div>
                 <div class="modal-body">
                     <p>{{notification.message}}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -88,7 +106,6 @@
     <script src="../scripts/application/services/notificationsService.js"></script>
     <script src="../scripts/application/controllers/categoriesController.js"></script>
     <script src="../scripts/application/controllers/todoItemsController.js"></script>
-    <script src="../scripts/application/controllers/settingsController.js"></script>
     <script src="../scripts/application/controllers/reportsController.js"></script>
     <script src="../scripts/application/controllers/calendarController.js"></script>
     <script src="../scripts/application/directives/tags.js"></script>

@@ -22,7 +22,7 @@
     function getBodyText(params) {
         var bodyHtml = "<div>";
         for (var i in params) {
-            bodyHtml += "<p><strong>" + i + ":</strong> " + params[i] + "</p>";
+            bodyHtml += "<p><strong class='green'>" + i + ":</strong> " + params[i] + "</p>";
         }
         bodyHtml += "</div>";
         return $sce.trustAsHtml(bodyHtml);

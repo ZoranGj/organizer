@@ -16,10 +16,6 @@ app.config(['$routeProvider',
             templateUrl: 'calendar.html',
             controller: 'CalendarController'
         }).
-        when('/settings', {
-            templateUrl: 'settings.html',
-            controller: 'SettingsController'
-        }).
         when('/reports', {
             templateUrl: 'reports.html',
             controller: 'ReportsController'

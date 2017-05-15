@@ -32,6 +32,7 @@ namespace Organizer.Client
         private void MainWindow_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
+            this.Dock = DockStyle.Fill;
             panel1.Dock = DockStyle.Fill;
         }
 

@@ -134,4 +134,9 @@
     $scope.deadlineTimeChanged = function () {
         $scope.todoItem.Deadline.setHours($scope.deadlineTime.getHours(), $scope.deadlineTime.getMinutes(), $scope.deadlineTime.getSeconds());
     }
+
+    $scope.updateCategory = function (category) {
+        console.log(category);
+        categoriesCtrl.updateSetting(category.Id, parseInt(category.MinHoursPerWeek), parseInt(category.MaxHoursPerWeek));
+    }
 });
