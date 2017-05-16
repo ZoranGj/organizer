@@ -1,11 +1,11 @@
-﻿<div ng-init="initializeCategories()" class="col-md-12">
-    <div id="categories">
+﻿<div id="categories" ng-init="initializeCategories()" class="col-md-12">
+    <div>
         <div data-id="{{category.Id}}" ng-repeat="category in categories" class="col-md-4 card category">
             <div class="list-group-item list-group-item-primary">
                 <strong class="activity-name">{{category.Name}}</strong>
                 <span class="fa fa-times text-danger pull-right lead action" ng-click="deleteCategory(category, $index)"></span>
                 
-                <div class="modal fade" id="categoryDialog{{$index}}" tabindex="-1" role="dialog" aria-labelledby="executionOptionLabel"
+                <div class="modal fade-scale" id="categoryDialog{{$index}}" tabindex="-1" role="dialog" aria-labelledby="executionOptionLabel"
                      aria-hidden="true">
                     <div class="modal-dialog" style="width: 550px;">
                         <div class="modal-content">
@@ -26,20 +26,14 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <div class="btn-group btn-group-justified" role="group" aria-label="group button">
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-info" data-dismiss="modal" ng-click="updateCategory(category)">Save</button>
-                                    </div>
-                                </div>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="updateCategory(category)">Save</button>
                             </div>
                         </div>   
                     </div>
                 </div>
 
-                <span class="fa fa-pencil text-blue pull-right lead action" data-toggle="modal" data-target="#categoryDialog{{$index}}"></span>
+                <span class="fa fa-cog text-blue pull-right lead action" data-toggle="modal" data-target="#categoryDialog{{$index}}"></span>
             </div>
             <div class="wrapper">
                 <ul class="list-group">
@@ -81,7 +75,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="addTodoItemDialog" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade-scale" id="addTodoItemDialog" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -108,7 +102,12 @@
                                 <div class="timepicker-wrap">
                                     <div uib-timepicker ng-model="deadlineTime" ng-change="deadlineTimeChanged()" hour-step="1" minute-step="5" show-meridian="false"></div>
                                 </div>
-                                <p id="todoItemMessage" ng-class="todoItemMessage">No overlapping with other work items at: {{todoItem.Deadline | date:'MM/dd/yyyy hh:mm'}}.</p>
+
+                                <div class="duration-wrap form-group">
+                                    <label>Duration</label>
+                                    <input type="text" class="table-input form-control" ng-model="todoItem.Duration" />
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
                         </div>
 
@@ -124,26 +123,17 @@
                             </ul>
                         </div>-->
                     </div>
-                    <div class="form-group">
-                        <label>Duration</label>
-                        <input type="text" class="table-input form-control" ng-model="todoItem.Duration">
-                    </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" ng-model="todoItem.Resolved"> Already resolved
+                            <input type="checkbox" ng-model="todoItem.Resolved"> <strong>Already resolved</strong>
                         </label>
                     </div>
+                    <p id="todoItemMessage" ng-class="todoItemMessage">No overlapping with other work items at: {{todoItem.Deadline | date:'MM/dd/yyyy hh:mm'}}.</p>
                 </form>
             </div>
             <div class="modal-footer">
-                <div class="btn-group btn-group-justified" role="group" aria-label="group button">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="initTodoItem(0, true)">Close</button>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-info" data-dismiss="modal" ng-click="saveTodoItem()">Save</button>
-                    </div>
-                </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="initTodoItem(0, true)">Close</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="saveTodoItem()">Save</button>
             </div>
         </div>
     </div>

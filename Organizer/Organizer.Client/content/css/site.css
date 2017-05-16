@@ -2,14 +2,11 @@
     font-size: 13px;
     color: #666;
     background: url('https://images.template.net/wp-content/uploads/2016/04/22084512/Light-Colored-Wooden-Background.jpg');
+    font-family: 'Raleway', sans-serif;
 }
 
 .bordered {
     border-bottom: 1px solid #e1e1e1;
-}
-
-.resolved {
-    background: rgba(255, 255, 255, 0.3) !important;
 }
 
 .btn {
@@ -95,23 +92,33 @@ body, html {
     border-bottom: 0;
 }
 
+.modal-content {
+    border-radius: 0;
+    padding: 10px 20px;
+}
+    .modal-content input[type='text'],
+    .modal-content input[type='number'],
+    .modal-content input[type='checkbox'],
+    .modal-content select,
+    .modal-content textare {
+        background: #fafafa;
+    }
+
 .modal-header {
     padding-bottom: 5px;
+    border-bottom: 0;
 }
 
 .modal-footer {
     padding: 0;
+    border: 0;
 }
-    .modal-footer .btn-group button {
-        height: 40px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        border: none;
-        border-right: 1px solid #ddd;
+    .modal-footer .btn {
+        width: 140px;
     }
-    .modal-footer .btn-group:last-child > button {
-        border-right: 0;
-    }
+        .modal-footer .btn.btn-default {
+            border-color: #4cae4c;
+        }
 
 .table-white, .table-white td, .table-white th {
     border: 1px solid #fff !important;
@@ -134,14 +141,14 @@ body, html {
 /* ------- CATEGORIES STYLES -------- */
 
 .card {
-    width: 30%;
-    margin-bottom: 60px;
-    background: rgba(255, 255, 255, 0.8);
+    width: 22%;
+    margin-bottom: 41px;
+    background: #fafafa;
     padding: 0;
     box-shadow: 2px 10px 10px rgba(0,0,0,.1);
 }
-    .card:not(:nth-of-type(3n)) {
-        margin-right: 60px !important;
+    .card:not(:nth-of-type(4n)) {
+        margin-right: 41px !important;
     }
     .card .wrapper {
         height:230px;
@@ -177,7 +184,7 @@ body, html {
 
 button.list-group-item {
     border-top: 1px solid #e1e1e1;
-    background: #f4f4f4;
+    background: #e9fbf5 !important;
     color: rgb(36, 200, 147) !important;
 }
 
@@ -207,13 +214,19 @@ button.list-group-item {
 
 .timepicker-wrap {
     display: inline-block;
+    float: left;
+}
+
+.duration-wrap {
+    display: inline-block;
+    float: left;
+    margin-bottom: 0;
+    margin-left: 35px;
+    margin-top: 11px;
 }
 
 #todoItemMessage {
-    display: inline-block;
-    float: right;
-    margin-top: 30px;
-    margin-right: 13px;
+    margin: 10px 0;
     font-size: 16px;
     word-break: break-word;
     word-wrap: break-word;
@@ -225,7 +238,7 @@ button.list-group-item {
 
 #toDoList {
     background: rgba(255, 255, 255, 0.5);
-    margin: 0 40px;
+    margin: 0 20px;
 }
 .tags {
    margin-bottom: 5px;
@@ -250,6 +263,8 @@ button.list-group-item {
 
 #viewContainer {
     margin-top: 100px;
+    padding-right: 15px;
+    padding-left: 0;
 }
 
 .float-action {
@@ -319,4 +334,25 @@ button.list-group-item {
     font-size: 30px;
     margin-top: 30px;
     text-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+}
+
+.reports {
+    margin: 0 25px;
+}
+
+#categories {
+    margin: 20px 0;
+}
+
+.fade-scale {
+  transform: scale(0);
+  opacity: 0;
+  -webkit-transition: all .1s linear;
+  -o-transition: all .1s linear;
+  transition: all .1s linear;
+}
+
+.fade-scale.in {
+  opacity: 1;
+  transform: scale(1);
 }
