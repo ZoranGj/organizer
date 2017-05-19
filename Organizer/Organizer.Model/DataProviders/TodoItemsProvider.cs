@@ -1,22 +1,14 @@
-﻿using Organizer.Model;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Organizer.Model;
 
 namespace Model.DataProviders {
 	public class TodoItemsProvider : DataProvider<TodoItem> {
         public TodoItemsProvider(DataContext db) : base(db) { }
 
-        public IEnumerable<TodoItem> GetAll(int categoryId)
+        public IEnumerable<TodoItem> GetAll(int goalId)
         {
-            return _dbSet.Include("Activity").Where(x => x.Activity.CategoryId == categoryId);
-        }
-
-        public void InitRecurringTodos()
-        {
-
+            return _dbSet.Include("Activity").Where(x => x.Activity.GoalId == goalId);
         }
 
         public void Resolve(int id, bool resolved)

@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="3b18182a940448d8a0834e86f4a4c957" Name="Diagram1" >
-        <EntityTypeShape EntityType="DataModel.Category" Width="1.5" PointX="2.25" PointY="1.25" />
+        <EntityTypeShape EntityType="DataModel.Goal" Width="1.5" PointX="2.25" PointY="1.25" />
         <EntityTypeShape EntityType="DataModel.Activity" Width="1.5" PointX="5.625" PointY="1.25" />
         <AssociationConnector Association="DataModel.CategoryActivity" />
         <EntityTypeShape EntityType="DataModel.TodoItem" Width="1.5" PointX="8.75" PointY="2.375" />

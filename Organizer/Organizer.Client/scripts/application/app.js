@@ -4,9 +4,9 @@ appCtrl.showDevTools();
 app.config(['$routeProvider',
   function ($routeProvider) {
       $routeProvider.
-        when('/categories', {
-            templateUrl: 'categories.html',
-            controller: 'CategoriesController'
+        when('/goals', {
+            templateUrl: 'goals.html',
+            controller: 'GoalsController'
         }).
         when('/todos', {
             templateUrl: 'todos.html',
@@ -25,7 +25,7 @@ app.config(['$routeProvider',
             controller: 'ReportsController'
         }).
         otherwise({
-            redirectTo: '/categories'
+            redirectTo: '/goals'
         });
   }]);
 

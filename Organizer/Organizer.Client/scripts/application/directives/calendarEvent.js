@@ -1,4 +1,4 @@
-﻿app.directive('calendarEvent', [function () { //'notifications',
+﻿app.directive('calendarEvent', [function () {
     return {
         restrict: 'A',
         scope: {

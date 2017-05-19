@@ -11,88 +11,86 @@ using System.Threading.Tasks;
 
 namespace Organizer.Client.API
 {
-    public class CategoriesController : AppController
+    public class GoalsController : AppController
     {
-        private CategoriesProvider _categoriesProvider;
+        private GoalsProvider _goalsProvider;
         private ActivitiesProvider _acivitiesProvider;
         private TodoItemsProvider _todoItemsProvider;
 
-        public CategoriesController(ChromiumWebBrowser originalBrowser, MainWindow mainForm) : base(originalBrowser, mainForm)
+        public GoalsController(ChromiumWebBrowser originalBrowser, MainWindow mainForm) : base(originalBrowser, mainForm)
         {
             var dbContext = new DataContext();
             Setup(dbContext);
         }
 
-        public CategoriesController() { }
+        public GoalsController() { }
 
         public void Setup(DataContext dbContext) {
-            _categoriesProvider = new CategoriesProvider(dbContext);
+            _goalsProvider = new GoalsProvider(dbContext);
             _acivitiesProvider = new ActivitiesProvider(dbContext);
             _todoItemsProvider = new TodoItemsProvider(dbContext);
         }
 
-        #region Categories
+        #region Goals
 
         public string GetAll()
         {
-            var data = _categoriesProvider.GetAll();
+            var data = _goalsProvider.GetAll();
             return data.Serialize();
         }
 
-        public Category Get(int id)
+        public Goal Get(int id)
         {
-            return _categoriesProvider.GetById(id);
+            return _goalsProvider.GetById(id);
         }
 
         public void Add(string name, int priority)
         {
             var id = new Random().Next(100000);
-            _categoriesProvider.Insert(new Category
+            _goalsProvider.Insert(new Goal
             {
-                //Id = id,
                 Name = name,
                 Priority = priority
             });
-            _categoriesProvider.Save();
+            _goalsProvider.Save();
         }
 
         public void Delete(int id)
         {
-            var category = Get(id);
-            category.Activities.ToList().ForEach(a => {
+            var goal = Get(id);
+            goal.Activities.ToList().ForEach(a => {
                 a.TodoItems.ToList().ForEach(t => _todoItemsProvider.Delete(t.Id));
                 _acivitiesProvider.Delete(a.Id);
             });
 
-            _categoriesProvider.Delete(category);
-            _categoriesProvider.Save();
+            _goalsProvider.Delete(goal);
+            _goalsProvider.Save();
         }
 
         public void UpdatePriority(int id, int newPriority)
         {
-            _categoriesProvider.UpdatePriority(id, newPriority);
+            _goalsProvider.UpdatePriority(id, newPriority);
         }
 
         public void UpdateSetting(int id, int minHoursPerWeek, int maxHoursPerWeek)
         {
-            _categoriesProvider.UpdateCategoryData(id, (short)minHoursPerWeek, (short)maxHoursPerWeek);
+            _goalsProvider.UpdateHours(id, (short)minHoursPerWeek, (short)maxHoursPerWeek);
         }
 
         #endregion
 
         #region Activities
 
-        public void SaveActivity(int categoryId, string name, int activityId)
+        public void SaveActivity(int goalId, string name, int activityId)
         {
             if (activityId == 0)
             {
                 var id = new Random().Next(100000);
                 _acivitiesProvider.Insert(new Activity
                 {
-                    //Id = id,
                     Name = name,
                     Description = null,
-                    CategoryId = categoryId,
+                    GoalId = goalId,
                     Priority = 2
                 });
             }
@@ -114,10 +112,10 @@ namespace Organizer.Client.API
             _acivitiesProvider.Save();
         }
 
-        public string GetActivityItems(int categoryId)
+        public string GetActivityItems(int goalId)
         {
             var dictionary = new Dictionary<int, string>();
-            return _acivitiesProvider.GetAll(categoryId).Select(x => new ActivityDto()
+            return _acivitiesProvider.GetAll(goalId).Select(x => new ActivityDto()
             {
                 Name = x.Name,
                 Id = x.Id

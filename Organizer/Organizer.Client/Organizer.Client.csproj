@@ -118,7 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\AppController.cs" />
-    <Compile Include="API\CategoriesController.cs" />
+    <Compile Include="API\GoalsController.cs" />
     <Compile Include="API\ReportsController.cs" />
     <Compile Include="API\TodosController.cs" />
     <Compile Include="MainWindow.cs">
@@ -215,7 +215,7 @@
     <Content Include="scripts\application\controllers\reportsController.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\application\controllers\categoriesController.js">
+    <Content Include="scripts\application\controllers\goalsController.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="scripts\application\controllers\todoItemsController.js">
@@ -269,7 +269,7 @@
     <Content Include="views\calendar.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="views\categories.html">
+    <Content Include="views\goals.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="views\reports.html">

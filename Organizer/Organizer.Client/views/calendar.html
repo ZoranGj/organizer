@@ -1,9 +1,9 @@
 ﻿<div ng-init="initCalendarView()">
     <div class="filter">
         <div class="col-md-3">
-            <select ng-model="calendarCategory" class="form-control table-input" ng-change="calendarCategoryChanged()"
-                    ng-options="item.Id as item.Name for item in calendarCategories">
-                <option value="">All activities</option>
+            <select ng-model="calendarGoal" class="form-control table-input" ng-change="calendarGoalChanged()"
+                    ng-options="item.Id as item.Name for item in calendarGoals">
+                <option value="">All goals</option>
             </select>
         </div>
         <div class="col-md-4">

@@ -24,10 +24,10 @@ namespace Organizer.Model
         public string Name { get; set; }
         public short Priority { get; set; }
         public string Description { get; set; }
-        public int CategoryId { get; set; }
+        public int GoalId { get; set; }
         public bool Completed { get; set; }
     
-        public virtual Category Category { get; set; }
+        public virtual Goal Goal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TodoItem> TodoItems { get; set; }
     }

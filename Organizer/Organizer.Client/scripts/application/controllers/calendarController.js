@@ -2,22 +2,22 @@
 function ($scope, $compile, uiCalendarConfig, notificationService) {
     
     $scope.events = [];
-    $scope.calendarCategory = 0;
+    $scope.calendarGoal = 0;
 
     $scope.loadTodoItemData = function (id) {
         var data = JSON.parse(todosCtrl.get(id));
         notificationService.showModal('Todo item information', {
             "Description": data.Description,
             "Activity": data.Activity,
-            "Activity is from goal": data.Category
+            "Activity is from goal": data.Goal
         });
         return data;
     }
 
     $scope.initCalendarView = function () {
-        var categories = categoriesCtrl.getAll();
-        $scope.calendarCategories = JSON.parse(categories);
-        $scope.calendarCategoryChanged();
+        var goals = goalsCtrl.getAll();
+        $scope.calendargoals = JSON.parse(goals);
+        $scope.calendarGoalChanged();
     }
 
     $scope.initializeCalendar = function (todos) {
@@ -37,10 +37,9 @@ function ($scope, $compile, uiCalendarConfig, notificationService) {
         }
     }
 
-    $scope.calendarCategoryChanged = function () {
-        var todoItems = todosCtrl.getAll($scope.calendarCategory);
-        var t = JSON.parse(todoItems);
-        $scope.initializeCalendar(t);
+    $scope.calendarGoalChanged = function () {
+        var todoItems = todosCtrl.getAll($scope.calendarGoal);
+        $scope.initializeCalendar(JSON.parse(todoItems));
     }
 
     $scope.alertOnEventClick = function (date, jsEvent, view) {

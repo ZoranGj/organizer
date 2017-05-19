@@ -47,17 +47,13 @@ body, html {
         text-align: center;
         padding: 9px 15px;
     }
-
     #menu .menu-icon {
         color: #23AA5A;
         margin-right: 2px;
-        font-size: 15px;
-        border: 2px solid #9dd0b2;
-        padding: 8px;
+        font-size: 22px;
         border-radius: 50%;
         min-width: 37px;
     }
-
     #menu .menu-text {
         display: block;
         margin-top: 4px;
@@ -138,7 +134,7 @@ body, html {
     border-radius: 0;
 }
 
-/* ------- CATEGORIES STYLES -------- */
+/* ------- goals STYLES -------- */
 
 .card {
     width: 22%;
@@ -232,7 +228,7 @@ button.list-group-item {
     word-wrap: break-word;
 }
 
-/* ------- END:CATEGORIES STYLES -------- */
+/* ------- END:goals STYLES -------- */
 
 /* ------- TAGS STYLES ------- */
 
@@ -340,7 +336,7 @@ button.list-group-item {
     margin: 0 25px;
 }
 
-#categories {
+#goals {
     margin: 20px 0;
 }
 

@@ -8,7 +8,7 @@ namespace Organizer.Model.DTO
 {
     public class ProductivityReport : Report
     {
-        public int CategoryId { get; set; }
+        public int GoalId { get; set; }
         public int MinHoursPerWeek { get; set; }
         public int MaxHoursPerWeek { get; set; }
         public int ActualTime { get; set; }

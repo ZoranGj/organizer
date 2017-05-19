@@ -10,12 +10,12 @@ namespace Organizer.Model.Extensions
 {
     public static class ReportsExtensions
     {
-        public static IEnumerable<ProductivityReport> ProductivityReports(this List<TodoItem> todoItems, Category category = null)
+        public static IEnumerable<ProductivityReport> ProductivityReports(this List<TodoItem> todoItems, Goal goal = null)
         {
             CultureInfo culture = Thread.CurrentThread.CurrentCulture;
             var first = todoItems.FirstOrDefault();
             var last = todoItems.LastOrDefault();
-            if (first == null) return new List<ProductivityReport>();
+            if (first == null || goal == null) return new List<ProductivityReport>();
 
             var startDate = first.Deadline.StartOfWeek(DayOfWeek.Monday);
             var dateDifference = (last.Deadline - startDate).Days / 7;
@@ -29,8 +29,8 @@ namespace Organizer.Model.Extensions
                            ActualTime = todos.Sum(y => y.Duration),
                            From = r.Start,
                            NumberOfTodos = todos.Count(),
-                           MaxHoursPerWeek = category == null ? 0 : category.MaxHoursPerWeek,
-                           MinHoursPerWeek = category == null ? 0 : category.MinHoursPerWeek
+                           MaxHoursPerWeek = goal.MaxHoursPerWeek,
+                           MinHoursPerWeek = goal.MinHoursPerWeek
                        };
                    });
             return reports.ToList();

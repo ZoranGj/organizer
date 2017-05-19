@@ -24,7 +24,7 @@ namespace Organizer.Client
             InitializeComponent();
             InitializeChromium();
             chromeBrowser.RegisterJsObject("appCtrl", new AppController(chromeBrowser, this));
-            chromeBrowser.RegisterJsObject("categoriesCtrl", new CategoriesController(chromeBrowser, this));
+            chromeBrowser.RegisterJsObject("goalsCtrl", new GoalsController(chromeBrowser, this));
             chromeBrowser.RegisterJsObject("todosCtrl", new TodosController(chromeBrowser, this));
             chromeBrowser.RegisterJsObject("reportsCtrl", new ReportsController(chromeBrowser, this));
         }

@@ -96,9 +96,6 @@
     <Compile Include="Activity.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Category.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -115,7 +112,7 @@
       <DependentUpon>DataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataProviders\ActivitiesProvider.cs" />
-    <Compile Include="DataProviders\CategoriesProvider.cs" />
+    <Compile Include="DataProviders\GoalsProvider.cs" />
     <Compile Include="DataProviders\TagsProvider.cs" />
     <Compile Include="DataProviders\TodoItemsProvider.cs" />
     <Compile Include="DataProviders\_DataProvider.cs" />
@@ -128,6 +125,9 @@
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\ReportsExtensions.cs" />
+    <Compile Include="Goal.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup\DbInitializer.cs" />
     <Compile Include="Tag.cs">

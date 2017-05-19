@@ -11,7 +11,7 @@ namespace Organizer.Client.API
 {
     public class ReportsController : AppController
     {
-        private readonly CategoriesController categories;
+        private readonly GoalsController goals;
         private readonly TodoItemsProvider _todoItemsProvider;
         private readonly TagsProvider _tagsProvider;
 
@@ -20,14 +20,14 @@ namespace Organizer.Client.API
             var dbContext = new DataContext();
             _todoItemsProvider = new TodoItemsProvider(dbContext);
             _tagsProvider = new TagsProvider(dbContext);
-            categories = new CategoriesController(originalBrowser, mainForm);
+            goals = new GoalsController(originalBrowser, mainForm);
         }
 
         public string LoadProductivityReports(int id)
         {
-            var category = categories.Get(id);
-            var todoItems = _todoItemsProvider.GetAll(category.Id).Where(x => x.Resolved).OrderBy(x => x.Deadline).ToList();
-            return todoItems.ProductivityReports(category).Serialize();
+            var goal = goals.Get(id);
+            var todoItems = _todoItemsProvider.GetAll(goal.Id).Where(x => x.Resolved).OrderBy(x => x.Deadline).ToList();
+            return todoItems.ProductivityReports(goal).Serialize();
         }
 
         public string LoadTagsReports(int tagId)

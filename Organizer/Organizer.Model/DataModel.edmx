@@ -6,13 +6,13 @@
     <edmx:StorageModels>
     <Schema Namespace="DataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="DataModelStoreContainer">
-    <EntitySet Name="Categories" EntityType="DataModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Goals" EntityType="DataModel.Store.Goals" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Activities" EntityType="DataModel.Store.Activities" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TodoItems" EntityType="DataModel.Store.TodoItems" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Tags" EntityType="DataModel.Store.Tags" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TodoItemTag" EntityType="DataModel.Store.TodoItemTag" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="CategoryActivity" Association="DataModel.Store.CategoryActivity">
-      <End Role="Category" EntitySet="Categories" />
+      <End Role="Category" EntitySet="Goals" />
       <End Role="Activity" EntitySet="Activities" />
     </AssociationSet>
     <AssociationSet Name="ActivityTodoItem" Association="DataModel.Store.ActivityTodoItem">
@@ -28,7 +28,7 @@
       <End Role="TodoItemTag" EntitySet="TodoItemTag" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="Categories">
+  <EntityType Name="Goals">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -47,7 +47,7 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Priority" Type="smallint" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="GoalId" Type="int" Nullable="false" />
     <Property Name="Completed" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TodoItems">
@@ -80,14 +80,14 @@
     <Property Name="Tags_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="CategoryActivity">
-    <End Role="Category" Type="DataModel.Store.Categories" Multiplicity="1" />
+    <End Role="Category" Type="DataModel.Store.Goals" Multiplicity="1" />
     <End Role="Activity" Type="DataModel.Store.Activities" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Category">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Activity">
-        <PropertyRef Name="CategoryId" />
+        <PropertyRef Name="GoalId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -132,10 +132,10 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="DataContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Categories" EntityType="DataModel.Category" />
+          <EntitySet Name="Goals" EntityType="DataModel.Goal" />
           <EntitySet Name="Activities" EntityType="DataModel.Activity" />
           <AssociationSet Name="CategoryActivity" Association="DataModel.CategoryActivity">
-            <End Role="Category" EntitySet="Categories" />
+            <End Role="Category" EntitySet="Goals" />
             <End Role="Activity" EntitySet="Activities" />
           </AssociationSet>
           <EntitySet Name="TodoItems" EntityType="DataModel.TodoItem" />
@@ -149,7 +149,7 @@
             <End Role="Tag" EntitySet="Tags" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Category">
+        <EntityType Name="Goal">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -169,20 +169,20 @@
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="Priority" Type="Int16" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="true" />
-          <NavigationProperty Name="Category" Relationship="DataModel.CategoryActivity" FromRole="Activity" ToRole="Category" />
-          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Goal" Relationship="DataModel.CategoryActivity" FromRole="Activity" ToRole="Category" />
+          <Property Name="GoalId" Type="Int32" Nullable="false" />
           <Property Name="Completed" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TodoItems" Relationship="DataModel.ActivityTodoItem" FromRole="Activity" ToRole="TodoItem" />
         </EntityType>
         <Association Name="CategoryActivity">
-          <End Type="DataModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="DataModel.Goal" Role="Category" Multiplicity="1" />
           <End Type="DataModel.Activity" Role="Activity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Activity">
-              <PropertyRef Name="CategoryId" />
+              <PropertyRef Name="GoalId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -232,9 +232,9 @@
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="DataContext">
-    <EntitySetMapping Name="Categories">
-      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Category)">
-        <MappingFragment StoreEntitySet="Categories">
+    <EntitySetMapping Name="Goals">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Goal)">
+        <MappingFragment StoreEntitySet="Goals">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
@@ -251,7 +251,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Priority" ColumnName="Priority" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="GoalId" ColumnName="GoalId" />
           <ScalarProperty Name="Completed" ColumnName="Completed" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -1,6 +1,6 @@
 ﻿app.controller('ReportsController', function ($scope, reports, REPORT_TYPE) {
-    //Category reports
-    $scope.category = 0;
+    //Goal reports
+    $scope.goal = 0;
 
     $scope.initReports = function () {
         $scope.msgNoData = false;
@@ -8,24 +8,24 @@
 
         reports.init();
 
-        $scope.categories = JSON.parse(categoriesCtrl.getAll());
-        if ($scope.categories.length && $scope.category == 0) {
-            $scope.category = $scope.categories[0].Id;
+        $scope.goals = JSON.parse(goalsCtrl.getAll());
+        if ($scope.goals.length && $scope.goal == 0) {
+            $scope.goal = $scope.goals[0].Id;
         }
 
-        createCategoryReport($scope.categories[0].Id);
+        createGoalReport($scope.goals[0].Id);
     }
 
-    $scope.categoryChanged = function () {
-        createCategoryReport($scope.category);
+    $scope.goalChanged = function () {
+        createGoalReport($scope.goal);
     }
 
-    function createCategoryReport(id) {
+    function createGoalReport(id) {
         var data = {
             labels: [],
             items: []
         };
-        var productivityItems = reportsCtrl.loadProductivityReports($scope.category);
+        var productivityItems = reportsCtrl.loadProductivityReports($scope.goal);
         var itemList = JSON.parse(productivityItems);
 
         if (itemList.length == 0){
@@ -43,18 +43,18 @@
             data.items.push(itemList[i].ActualTime);
         }
         var firstItem = itemList[0];
-        var categoryMin = firstItem ? firstItem.MinHoursPerWeek : 0;
-        var categoryMax = firstItem ? firstItem.MaxHoursPerWeek : 10;
+        var goalMin = firstItem ? firstItem.MinHoursPerWeek : 0;
+        var goalMax = firstItem ? firstItem.MaxHoursPerWeek : 10;
         $("#myChart").remove();
         $("#chartWrapper").append('<canvas id="myChart"></canvas>');
         var ctx = document.getElementById("myChart").getContext('2d');
         reports.create(ctx, REPORT_TYPE.bar, data, 'Productivity', {
             "horizontalLine": [{
-                "y": categoryMax,
+                "y": goalMax,
                 "style": "rgb(105,105,229)",
                 "text": "Ideal"
             }, {
-                "y": categoryMin,
+                "y": goalMin,
                 "style": "rgba(255, 0, 0, .4)",
                 "text": "Min"
             }],
@@ -64,7 +64,7 @@
                     ticks: {
                         beginAtZero: true,
                         steps: 1,
-                        max: categoryMax + 2
+                        max: goalMax + 2
                     }
                 }]
             }

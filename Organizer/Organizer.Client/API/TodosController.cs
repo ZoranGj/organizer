@@ -24,10 +24,9 @@ namespace Organizer.Client.API
             _tagsProvider = new TagsProvider(dbContext);
         }
 
-        public string GetAll(int categoryId)
+        public string GetAll(int goalId)
         {
-            _todoItemsProvider.InitRecurringTodos();
-            var data = categoryId == 0 ? _todoItemsProvider.GetAll() : _todoItemsProvider.GetAll(categoryId);
+            var data = goalId == 0 ? _todoItemsProvider.GetAll() : _todoItemsProvider.GetAll(goalId);
             return data.Select(x => new ToDoItemDto(x)).ToList().Serialize();
         }
 
@@ -96,7 +95,6 @@ namespace Organizer.Client.API
                 Description = description,
                 Duration = duration,
                 Resolved = resolved,
-                //Recurring = (short)recurring
             });
             _todoItemsProvider.Save();
         }

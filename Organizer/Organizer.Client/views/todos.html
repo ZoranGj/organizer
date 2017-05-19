@@ -1,8 +1,8 @@
 ﻿<div id="toDoList" ng-init="initializeTodoItems()">
     <div class="filter">
         <div class="col-md-3">
-            <select ng-model="filter.category" class="form-control table-input" ng-change="categoryChanged()"
-                    ng-options="item.Id as item.Name for item in categories">
+            <select ng-model="filter.goal" class="form-control table-input" ng-change="goalChanged()"
+                    ng-options="item.Id as item.Name for item in goals">
                 <option value="">All activities</option>
             </select>
         </div>
@@ -86,8 +86,8 @@
 <todo-item-dialog activities="activityItems" item="todoItem"/>
 
 <div class="modal fade-scale" id="multipleTodoItemsDialog" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="width: 800px;">
+    <div class="modal-dialog" style="width: 800px;">
+        <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 <h3 class="modal-title" id="lineModalLabel">Multiple todo items</h3>

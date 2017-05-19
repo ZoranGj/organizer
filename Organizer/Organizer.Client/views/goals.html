@@ -1,47 +1,47 @@
-﻿<div id="categories" ng-init="initializeCategories()" class="col-md-12">
-    <div>
-        <div data-id="{{category.Id}}" ng-repeat="category in categories" class="col-md-4 card category">
+﻿<div ng-init="initializeGoals()" class="col-md-12">
+    <div id="goals">
+        <div data-id="{{goal.Id}}" ng-repeat="goal in goals" class="col-md-4 card goal">
             <div class="list-group-item list-group-item-primary">
-                <strong class="activity-name">{{category.Name}}</strong>
-                <span class="fa fa-times text-danger pull-right lead action" ng-click="deleteCategory(category, $index)"></span>
+                <strong class="activity-name">{{goal.Name}}</strong>
+                <span class="fa fa-times text-danger pull-right lead action" ng-click="deleteGoal(goal, $index)"></span>
                 
-                <div class="modal fade-scale" id="categoryDialog{{$index}}" tabindex="-1" role="dialog" aria-labelledby="executionOptionLabel"
+                <div class="modal fade-scale" id="goalDialog{{$index}}" tabindex="-1" role="dialog" aria-labelledby="executionOptionLabel"
                      aria-hidden="true">
                     <div class="modal-dialog" style="width: 550px;">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                <h3 class="modal-title">Update category</h3>
+                                <h3 class="modal-title">Update goal</h3>
                             </div>
                             <div class="modal-body">
                                 <form>
                                     <div class="form-group">
                                         <label>MIN productivity (hours per week):</label>
-                                        <input type="text" class="table-input form-control" ng-model="category.MinHoursPerWeek" value="category.MinHoursPerWeek" />
+                                        <input type="text" class="table-input form-control" ng-model="goal.MinHoursPerWeek" value="goal.MinHoursPerWeek" />
                                     </div>
                                     <div class="form-group">
                                         <label>IDEAL productivity (hours per week):</label>
-                                        <input type="text" class="table-input form-control" ng-model="category.MaxHoursPerWeek" value="category.MinHoursPerWeek" />
+                                        <input type="text" class="table-input form-control" ng-model="goal.MaxHoursPerWeek" value="goal.MinHoursPerWeek" />
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="updateCategory(category)">Save</button>
+                                <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="updateGoal(goal)">Save</button>
                             </div>
                         </div>   
                     </div>
                 </div>
 
-                <span class="fa fa-cog text-blue pull-right lead action" data-toggle="modal" data-target="#categoryDialog{{$index}}"></span>
+                <span class="fa fa-cog text-blue pull-right lead action" data-toggle="modal" data-target="#goalDialog{{$index}}"></span>
             </div>
             <div class="wrapper">
                 <ul class="list-group">
-                    <li ng-repeat="activity in category.Activities" ng-mouseenter="showicons=true" ng-focus="showicons=true" ng-mouseleave="showicons=false">
+                    <li ng-repeat="activity in goal.Activities" ng-mouseenter="showicons=true" ng-focus="showicons=true" ng-mouseleave="showicons=false">
                         <input data-id="{{activity.Id}}" type="text" class="form-control list-group-item activity" style="border-radius: 0;"
                                ng-model="activity.Name" ng-keydown="showicons=true" />
                         <div class="pull-right" ng-show="showicons">
-                            <button type="button" class="btn btn-default activity-action label-success" ng-click="deleteActivity(category, $index)" style="right:5px;">
+                            <button type="button" class="btn btn-default activity-action label-success" ng-click="deleteActivity(goal, $index)" style="right:5px;">
                                 <span class="fa fa-times"></span>
                             </button>
                             <button type="button" class="btn btn-default activity-action label-success" ng-click="todoItemDialog(activity)" style="right:35px;">
@@ -54,23 +54,23 @@
                     </li>
                 </ul>
             </div>
-            <button type="button" class="list-group-item btn-default text-muted" ng-click="addActivity(category)">
+            <button type="button" class="list-group-item btn-default text-muted" ng-click="addActivity(goal)">
                 <span class="fa fa-plus green"></span> <span class="green">Add activity</span>
             </button>
         </div>
-        <div ng-show="showNewCategory" class="col-md-4 card category">
+        <div ng-show="showNewGoal" class="col-md-4 card goal">
             <div class="list-group-item list-group-item-primary bordered">
                 <div class="input-group">
-                    <input id="categoryName" type="text" class="form-control" ng-model="category.name" placeholder="{{constants.categoryName}}" />
-                    <span class="input-group-addon btn btn-sm btn-info" ng-click="saveCategory()">Save</span>
-                    <span class="input-group-addon btn btn-sm" ng-click="cancelAddingCategory()"><span class="fa fa-times text-danger"></span></span>
+                    <input id="goalName" type="text" class="form-control" ng-model="goal.name" placeholder="{{constants.goalName}}" />
+                    <span class="input-group-addon btn btn-sm btn-info" ng-click="saveGoal()">Save</span>
+                    <span class="input-group-addon btn btn-sm" ng-click="cancelAddingGoal()"><span class="fa fa-times text-danger"></span></span>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-        <button ng-click="addCategory()" type="button" class="btn btn-default btn-lg">
-            <span class="fa fa-plus lead text-info"></span> Add Category
+        <button ng-click="addGoal()" type="button" class="btn btn-default btn-lg">
+            <span class="fa fa-plus lead text-info"></span> Add Goal
         </button>
     </div>
 </div>

@@ -6,28 +6,28 @@
     }
 
     $scope.filter = {
-        category: 0,
+        goal: 0,
         status: 0
     };
   
     $scope.initializeTodoItems = function () {
         $scope.allTags = JSON.parse(todosCtrl.getTagNames());
 
-        var categories = categoriesCtrl.getAll();
-        $scope.categories = JSON.parse(categories);
+        var goals = goalsCtrl.getAll();
+        $scope.goals = JSON.parse(goals);
 
-        $scope.initializeTodoItemsByCategory($scope.filter.category);
+        $scope.initializeTodoItemsByGoal($scope.filter.goal);
     }
 
-    $scope.categoryChanged = function () {
-        $scope.initializeTodoItemsByCategory($scope.filter.category);
+    $scope.goalChanged = function () {
+        $scope.initializeTodoItemsByGoal($scope.filter.goal);
     }
 
-    $scope.initializeTodoItemsByCategory = function (categoryId) {
-        var todoItems = todosCtrl.getAll(categoryId);
+    $scope.initializeTodoItemsByGoal = function (goalId) {
+        var todoItems = todosCtrl.getAll(goalId);
         $scope.todoItems = JSON.parse(todoItems);
 
-        var activityItems = categoriesCtrl.getActivityItems(categoryId);
+        var activityItems = goalsCtrl.getActivityItems(goalId);
         $scope.activityItems = JSON.parse(activityItems);
     }
 

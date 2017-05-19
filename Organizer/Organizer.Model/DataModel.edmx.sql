@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/22/2017 20:08:10
+-- Date Created: 05/19/2017 18:09:14
 -- Generated from EDMX file: D:\Projects\Prototypes\organizer\organizer\Organizer\Organizer.Model\DataModel.edmx
 -- --------------------------------------------------
 
@@ -34,8 +34,8 @@ GO
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Categories]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Categories];
+IF OBJECT_ID(N'[dbo].[Goals]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Goals];
 GO
 IF OBJECT_ID(N'[dbo].[Activities]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Activities];
@@ -54,8 +54,8 @@ GO
 -- Creating all tables
 -- --------------------------------------------------
 
--- Creating table 'Categories'
-CREATE TABLE [dbo].[Categories] (
+-- Creating table 'Goals'
+CREATE TABLE [dbo].[Goals] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Notes] nvarchar(max)  NULL,
@@ -71,7 +71,7 @@ CREATE TABLE [dbo].[Activities] (
     [Name] nvarchar(max)  NOT NULL,
     [Priority] smallint  NOT NULL,
     [Description] nvarchar(max)  NULL,
-    [CategoryId] int  NOT NULL,
+    [GoalId] int  NOT NULL,
     [Completed] bit  NOT NULL
 );
 GO
@@ -108,9 +108,9 @@ GO
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
--- Creating primary key on [Id] in table 'Categories'
-ALTER TABLE [dbo].[Categories]
-ADD CONSTRAINT [PK_Categories]
+-- Creating primary key on [Id] in table 'Goals'
+ALTER TABLE [dbo].[Goals]
+ADD CONSTRAINT [PK_Goals]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -142,11 +142,11 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [CategoryId] in table 'Activities'
+-- Creating foreign key on [GoalId] in table 'Activities'
 ALTER TABLE [dbo].[Activities]
 ADD CONSTRAINT [FK_CategoryActivity]
-    FOREIGN KEY ([CategoryId])
-    REFERENCES [dbo].[Categories]
+    FOREIGN KEY ([GoalId])
+    REFERENCES [dbo].[Goals]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -154,7 +154,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_CategoryActivity'
 CREATE INDEX [IX_FK_CategoryActivity]
 ON [dbo].[Activities]
-    ([CategoryId]);
+    ([GoalId]);
 GO
 
 -- Creating foreign key on [ActivityId] in table 'TodoItems'
