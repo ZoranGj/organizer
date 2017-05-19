@@ -35,6 +35,7 @@ namespace Organizer.Model.DTO
         public string Notes { get; set; }
         public List<string> Tags { get; set; }
         public int RecurringTypeId { get; set; }
+        public bool PickerOpened { get; set; }
         public string RecurringMode
         {
             get

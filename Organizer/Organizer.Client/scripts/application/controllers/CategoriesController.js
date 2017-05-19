@@ -3,6 +3,7 @@
         name: '',
     }
     $scope.activity = {};
+    $scope.activities = [];
     $scope.showicons = false;
     $scope.showNewCategory = false;
 
@@ -94,10 +95,6 @@
         }
     }
 
-    $scope.onTimeSet = function (newDate, oldDate) {
-        $scope.todoItem.Deadline = newDate;
-    }
-
     $scope.todoItemDialog = function (activity) {
         $scope.initTodoItem(activity.Id);
         $("#addTodoItemDialog").modal();
@@ -113,30 +110,25 @@
         };
     }
 
-    $scope.saveTodoItem = function () {
-        todosCtrl.add($scope.todoItem.Description, $scope.todoItem.Deadline, parseInt($scope.todoItem.ActivityId), parseInt($scope.todoItem.Duration), $scope.todoItem.Resolved);
-    }
+    //$scope.deadlineTime = new Date();
+    //$scope.dateFormat = 'dd.MM.yyyy';
+    //$scope.deadlinePicker = {
+    //    opened: false
+    //};
+    //$scope.dateOptions = {
+    //    formatYear: 'yy',
+    //    startingDay: 1
+    //};
+    //$scope.todoItemMessage = "text-success";
 
-    $scope.deadlineTime = new Date();
-    $scope.dateFormat = 'dd.MM.yyyy';
-    $scope.deadlinePicker = {
-        opened: false
-    };
-    $scope.dateOptions = {
-        formatYear: 'yy',
-        startingDay: 1
-    };
-    $scope.todoItemMessage = "text-success";
-
-    $scope.openDatePicker = function () {
-        $scope.deadlinePicker.opened = true;
-    };
-    $scope.deadlineTimeChanged = function () {
-        $scope.todoItem.Deadline.setHours($scope.deadlineTime.getHours(), $scope.deadlineTime.getMinutes(), $scope.deadlineTime.getSeconds());
-    }
+    //$scope.openDatePicker = function () {
+    //    $scope.deadlinePicker.opened = true;
+    //};
+    //$scope.deadlineTimeChanged = function () {
+    //    $scope.todoItem.Deadline.setHours($scope.deadlineTime.getHours(), $scope.deadlineTime.getMinutes(), $scope.deadlineTime.getSeconds());
+    //}
 
     $scope.updateCategory = function (category) {
-        console.log(category);
         categoriesCtrl.updateSetting(category.Id, parseInt(category.MinHoursPerWeek), parseInt(category.MaxHoursPerWeek));
     }
 });

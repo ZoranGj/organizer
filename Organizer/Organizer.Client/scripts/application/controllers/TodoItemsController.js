@@ -9,25 +9,7 @@
         category: 0,
         status: 0
     };
-
-    $scope.deadlineTime = new Date();
-    $scope.dateFormat = 'dd.MM.yyyy';
-    $scope.deadlinePicker = {
-        opened: false
-    };
-    $scope.dateOptions = {
-        formatYear: 'yy',
-        startingDay: 1
-    };
-    $scope.todoItemMessage = "text-success";
-
-    $scope.openDatePicker = function () {
-        $scope.deadlinePicker.opened = true;
-    };
-    $scope.deadlineTimeChanged = function () {
-        $scope.todoItem.Deadline.setHours($scope.deadlineTime.getHours(), $scope.deadlineTime.getMinutes(), $scope.deadlineTime.getSeconds());
-    }
-
+  
     $scope.initializeTodoItems = function () {
         $scope.allTags = JSON.parse(todosCtrl.getTagNames());
 
@@ -41,10 +23,6 @@
         $scope.initializeTodoItemsByCategory($scope.filter.category);
     }
 
-    $scope.statusChanged = function () {
-
-    }
-
     $scope.initializeTodoItemsByCategory = function (categoryId) {
         var todoItems = todosCtrl.getAll(categoryId);
         $scope.todoItems = JSON.parse(todoItems);
@@ -53,20 +31,9 @@
         $scope.activityItems = JSON.parse(activityItems);
     }
 
-    $scope.addTodoItem = function () {
-        if ($scope.todoItem.ActivityId) {
-            todosCtrl.add($scope.todoItem.Description, new Date($scope.todoItem.Deadline), $scope.todoItem.ActivityId, parseInt($scope.todoItem.Duration));
-            $scope.initializeTodoItems();
-        }
-    }
-
     $scope.deleteTodoItem = function (todoItemId) {
         todosCtrl.delete(todoItemId);
         $scope.initializeTodoItems();
-    }
-
-    $scope.onTimeSet = function (newDate, oldDate) {
-        $scope.todoItem.Deadline = newDate;
     }
 
     $scope.resolveItem = function (id) {
@@ -77,7 +44,56 @@
         return item.Resolved ? 'resolved' : '';
     }
 
-    $scope.updateTodoItem = function (item) {
-        todosCtrl.update(item.Id, item.Notes, item.Tags.join(','));
+    $scope.todoItemDialog = function () {
+        $scope.initTodoItem($scope.todoItem.ActivityId);
+        $("#addTodoItemDialog").modal();
+    }
+
+    $scope.initTodoItem = function (activityId, clear) {
+        var todoItem = newTodoItem(activityId);
+        $scope.todoItem = todoItem;
+    }
+
+    function newTodoItem(activityId) {
+        return {
+            ActivityId: activityId,
+            Description: '',
+            Duration: 0,
+            Resolved: false,
+            Deadline: new Date()
+        };
+    }
+
+    //Multiple TodoItems dialog:
+    $scope.deadlineTime = new Date();
+    $scope.dateFormat = 'dd.MM.yyyy';
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+    };
+
+    $scope.openDatePicker = function (item) {
+        item.PickerOpened = true;
+    };
+
+    $scope.multipleTodoItemsDialog = function () {
+        initMultipleTodoItems();
+        $("#multipleTodoItemsDialog").modal();
+    }
+
+    $scope.saveMultipleTodoItems = function () {
+        angular.forEach($scope.multipleTodoItems, function (item) {
+            if (item.ActivityId && item.Duration && item.Deadline) {
+                todosCtrl.add(item.Description, item.Deadline, parseInt(item.ActivityId), parseInt(item.Duration), item.Resolved);
+            }
+        });
+    }
+
+    function initMultipleTodoItems () {
+        var multipleTodoItems = [];
+        for (var i = 0; i < 15; i++) {
+            multipleTodoItems.push(newTodoItem(0));
+        }
+        $scope.multipleTodoItems = multipleTodoItems;
     }
 });

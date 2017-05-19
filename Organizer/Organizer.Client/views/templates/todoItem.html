@@ -1,0 +1,56 @@
+﻿<div class="modal fade-scale" id="addTodoItemDialog" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title" id="lineModalLabel">New todo item</h3>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group" ng-if="activities && activities.length">
+                        <label>Activity</label>
+                        <select ng-model="todoItem.ActivityId" class="form-control table-input"
+                                ng-options="activityItem.Id as activityItem.Name for activityItem in activities"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" class="table-input form-control" placeholder="Description.." ng-model="todoItem.Description" />
+                    </div>
+                    <div class="form-group">
+                        <label>Deadline</label>
+                        <div class="datetimepicker-container">
+                            <p class="input-group">
+                                <input type="text" class="form-control" uib-datepicker-popup="{{dateFormat}}" ng-model="todoItem.Deadline" is-open="deadlinePicker.opened"
+                                       datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                            <div>
+                                <div class="timepicker-wrap">
+                                    <div uib-timepicker ng-model="deadlineTime" ng-change="deadlineTimeChanged()" hour-step="1" minute-step="5" show-meridian="false"></div>
+                                </div>
+
+                                <div class="duration-wrap form-group">
+                                    <label>Duration</label>
+                                    <input type="text" class="table-input form-control" ng-model="todoItem.Duration" />
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="todoItem.Resolved"> <strong>Already resolved</strong>
+                        </label>
+                    </div>
+                    <p id="todoItemMessage" ng-class="todoItemMessage">No overlapping with other work items at: {{todoItem.Deadline | date:'MM/dd/yyyy hh:mm'}}.</p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="initTodoItem(0, true)">Close</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="saveTodoItem()">Save</button>
+            </div>
+        </div>
+    </div>   
+</div>
