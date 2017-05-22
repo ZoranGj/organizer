@@ -6,26 +6,29 @@
                 <h3 class="modal-title" id="lineModalLabel">New todo item</h3>
             </div>
             <div class="modal-body">
-                <form>
+                <form name="todoForm">
                     <div class="form-group" ng-if="activities && activities.length">
                         <label>Activity</label>
-                        <select ng-model="todoItem.ActivityId" class="form-control table-input"
-                                ng-options="activityItem.Id as activityItem.Name for activityItem in activities"></select>
+                        <select ng-model="todoItem.ActivityId" name="activity" class="form-control table-input"
+                                ng-options="activityItem.Id as activityItem.Name for activityItem in activities" ng-required="activities && activities.length"></select>
+                        <span ng-show="todoForm.activity.$touched && todoForm.activity.$invalid" class="validate-msg">*The field is required</span>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <input type="text" class="table-input form-control" placeholder="Description.." ng-model="todoItem.Description" />
+                        <input type="text" name="description" class="table-input form-control" placeholder="Description.." ng-model="todoItem.Description" required />
+                        <span ng-show="todoForm.description.$touched && todoForm.description.$invalid" class="validate-msg">*The field is required</span>
                     </div>
                     <div class="form-group">
                         <label>Deadline</label>
                         <div class="datetimepicker-container">
                             <p class="input-group">
-                                <input type="text" class="form-control" uib-datepicker-popup="{{dateFormat}}" ng-model="todoItem.Deadline" is-open="deadlinePicker.opened"
-                                       datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                <input type="text" name="deadline" class="form-control" uib-datepicker-popup="{{dateFormat}}" ng-model="todoItem.Deadline" is-open="deadlinePicker.opened"
+                                       datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" required />
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-default" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
                             </p>
+                            <span ng-show="todoForm.deadline.$touched && todoForm.deadline.$invalid" class="validate-msg">*The field is required</span>
                             <div>
                                 <div class="timepicker-wrap">
                                     <div uib-timepicker ng-model="deadlineTime" ng-change="deadlineTimeChanged()" hour-step="1" minute-step="5" show-meridian="false"></div>
@@ -33,7 +36,8 @@
 
                                 <div class="duration-wrap form-group">
                                     <label>Duration</label>
-                                    <input type="text" class="table-input form-control" ng-model="todoItem.Duration" />
+                                    <input type="text" name="duration" class="table-input form-control" ng-model="todoItem.Duration" required/>
+                                    <span ng-show="todoForm.duration.$touched && todoForm.duration.$invalid" class="validate-msg">*The field is required</span>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -49,7 +53,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="initTodoItem(0, true)">Close</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="saveTodoItem()">Save</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="saveTodoItem()" ng-disabled="!todoForm.$valid">Save</button>
             </div>
         </div>
     </div>   

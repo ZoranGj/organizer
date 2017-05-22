@@ -16,11 +16,12 @@ namespace Organizer.Client.API
         private GoalsProvider _goalsProvider;
         private ActivitiesProvider _acivitiesProvider;
         private TodoItemsProvider _todoItemsProvider;
+        private DataContext _dbContext;
 
         public GoalsController(ChromiumWebBrowser originalBrowser, MainWindow mainForm) : base(originalBrowser, mainForm)
         {
-            var dbContext = new DataContext();
-            Setup(dbContext);
+            _dbContext = new DataContext();
+            Setup(_dbContext);
         }
 
         public GoalsController() { }
@@ -41,7 +42,10 @@ namespace Organizer.Client.API
 
         public Goal Get(int id)
         {
-            return _goalsProvider.GetById(id);
+            var goal = _goalsProvider.GetById(id);
+            _dbContext.Entry<Goal>(goal).Reload();
+
+            return goal;
         }
 
         public void Add(string name, int priority)
@@ -50,7 +54,9 @@ namespace Organizer.Client.API
             _goalsProvider.Insert(new Goal
             {
                 Name = name,
-                Priority = priority
+                Priority = priority,
+                MinHoursPerWeek = 2,
+                MaxHoursPerWeek = 8
             });
             _goalsProvider.Save();
         }
@@ -85,7 +91,6 @@ namespace Organizer.Client.API
         {
             if (activityId == 0)
             {
-                var id = new Random().Next(100000);
                 _acivitiesProvider.Insert(new Activity
                 {
                     Name = name,

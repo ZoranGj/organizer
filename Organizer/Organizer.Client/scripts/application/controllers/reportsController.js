@@ -82,11 +82,10 @@
         $scope.msgNoTags = false;
         $scope.displayTagsDiagram = true;
 
-        var tags = todosCtrl.getTags();
-        $scope.tags = JSON.parse(tags);
-        
+        var tags = JSON.parse(todosCtrl.getTags());
         if (tags.length && $scope.tag == 0) {
-            $scope.tag = $scope.tags[0].Id;
+            $scope.tags = tags;
+            $scope.tag = tags[0].Id;
             createTagsReport($scope.tag);
         }
     }

@@ -104,13 +104,14 @@
         $scope.todoItem = {
             ActivityId: activityId,
             Description: '',
-            Duration: 0,
+            Duration: '',
             Resolved: false,
             Deadline: new Date()
         };
     }
 
-    $scope.updateGoal = function (goal) {
+    $scope.updateGoal = function (goal, valid) {
+        if (valid === false) return;
         goalsCtrl.updateSetting(goal.Id, parseInt(goal.MinHoursPerWeek), parseInt(goal.MaxHoursPerWeek));
     }
 });

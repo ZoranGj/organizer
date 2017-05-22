@@ -14,20 +14,22 @@
                                 <h3 class="modal-title">Update goal</h3>
                             </div>
                             <div class="modal-body">
-                                <form>
+                                <form name="goalForm">
                                     <div class="form-group">
                                         <label>MIN productivity (hours per week):</label>
-                                        <input type="text" class="table-input form-control" ng-model="goal.MinHoursPerWeek" value="goal.MinHoursPerWeek" />
+                                        <input type="text" class="table-input form-control" name="min" ng-model="goal.MinHoursPerWeek" value="goal.MinHoursPerWeek" required />
+                                        <span ng-show="goalForm.min.$touched && goalForm.min.$invalid" class="validate-msg">*The field is required</span>
                                     </div>
                                     <div class="form-group">
                                         <label>IDEAL productivity (hours per week):</label>
-                                        <input type="text" class="table-input form-control" ng-model="goal.MaxHoursPerWeek" value="goal.MinHoursPerWeek" />
+                                        <input type="text" class="table-input form-control" name="max" ng-model="goal.MaxHoursPerWeek" value="goal.MinHoursPerWeek" required />
+                                        <span ng-show="goalForm.max.$touched && goalForm.max.$invalid" class="validate-msg">*The field is required</span>
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="updateGoal(goal)">Save</button>
+                                <button type="button" class="btn btn-success" data-dismiss="modal" ng-disabled="!goalForm.$valid" ng-click="updateGoal(goal, goalForm.$valid)">Save</button>
                             </div>
                         </div>   
                     </div>
@@ -58,7 +60,7 @@
                 <span class="fa fa-plus green"></span> <span class="green">Add activity</span>
             </button>
         </div>
-        <div ng-show="showNewGoal" class="col-md-4 card goal">
+        <div id="newGoal" ng-show="showNewGoal" class="col-md-4 card goal">
             <div class="list-group-item list-group-item-primary bordered">
                 <div class="input-group">
                     <input id="goalName" type="text" class="form-control" ng-model="goal.name" placeholder="{{constants.goalName}}" />

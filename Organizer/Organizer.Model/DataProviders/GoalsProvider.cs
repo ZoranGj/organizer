@@ -29,12 +29,14 @@ namespace Model.DataProviders {
             _dbSet.Remove(goal);
         }
 
-        public void UpdateHours(int id, short minHoursPerWeek, short maxHoursPerWeek)
+        public Goal UpdateHours(int id, short minHoursPerWeek, short maxHoursPerWeek)
         {
             var goal = GetById(id);
             goal.MinHoursPerWeek = minHoursPerWeek;
             goal.MaxHoursPerWeek = maxHoursPerWeek;
             Save();
+
+            return goal;
         }
     }
 }

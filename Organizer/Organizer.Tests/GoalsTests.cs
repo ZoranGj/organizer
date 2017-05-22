@@ -1,47 +1,47 @@
-﻿using Model.DataProviders;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using Moq;
 using NUnit.Framework;
 using Organizer.Model;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
+using Model.DataProviders;
 
 namespace Organizer.Tests
 {
     [TestFixture]
-    public class CategoriesTests
+    public class GoalsTests
     {
-        CategoriesProvider mockDbProvider;
-        Mock<DbSet<Category>> mockDbSet;
+        GoalsProvider mockDbProvider;
+        Mock<DbSet<Goal>> mockDbSet;
 
         [SetUp]
         public void Initialize()
         {
             var mockDbContext = new Mock<DataContext>();
-            mockDbSet = new Mock<DbSet<Category>>();
-            mockDbContext.Setup(m => m.Categories).Returns(mockDbSet.Object);
-            mockDbContext.Setup(c => c.Set<Category>()).Returns(mockDbSet.Object);
+            mockDbSet = new Mock<DbSet<Goal>>();
+            mockDbContext.Setup(m => m.Goals).Returns(mockDbSet.Object);
+            mockDbContext.Setup(c => c.Set<Goal>()).Returns(mockDbSet.Object);
 
-            mockDbProvider = new CategoriesProvider(mockDbContext.Object);
+            mockDbProvider = new GoalsProvider(mockDbContext.Object);
         }
 
         [Test]
-        public void SaveValidCategory_AdedInDb()
+        public void SaveValidGoal_AdedInDb()
         {
-            var category = new Category
+            var goal = new Goal
             {
                 Id = 15,
-                Name = "Test category",
+                Name = "Test goal",
                 Priority = 10,
             };
-            mockDbProvider.Insert(category);
+            mockDbProvider.Insert(goal);
             mockDbProvider.Save();
 
-            mockDbSet.Verify(s => s.Add(It.IsAny<Category>()), Times.Once());
+            mockDbSet.Verify(s => s.Add(It.IsAny<Goal>()), Times.Once());
         }
 
         [Test]
-        public void GetCategories_OrderedByPriority()
+        public void GetGoals_OrderedByPriority()
         {
             var data = InitializeData();
             var dataOrdered = data.OrderBy(c => c.Priority).ToList();
@@ -52,7 +52,7 @@ namespace Organizer.Tests
         }
 
         [Test]
-        public void UpdatePriority_SwapsCategories()
+        public void UpdatePriority_SwapsGoals()
         {
             var data = InitializeData();
             var swapItem = data.First(c => c.Id == 5);
@@ -72,7 +72,7 @@ namespace Organizer.Tests
         }
 
         [Test]
-        public void GetCategory_ReturnsObject()
+        public void GetGoal_ReturnsObject()
         {
             var data = InitializeData();
 
@@ -80,24 +80,24 @@ namespace Organizer.Tests
             Assert.That(dataFromDb, Is.Not.Null);
         }
 
-        private IEnumerable<Category> InitializeData()
+        private IEnumerable<Goal> InitializeData()
         {
-            var data = new List<Category>
+            var data = new List<Goal>
             {
-                new Category { Id = 1, Name = "Category1", Priority = 5 },
-                new Category { Id = 2, Name = "Category2", Priority = 2 },
-                new Category { Id = 3, Name = "Category3", Priority = 4 },
-                new Category { Id = 4, Name = "Category4", Priority = 1 },
-                new Category { Id = 5, Name = "Category5", Priority = 3 },
+                new Goal { Id = 1, Name = "Goal1", Priority = 5 },
+                new Goal { Id = 2, Name = "Goal2", Priority = 2 },
+                new Goal { Id = 3, Name = "Goal3", Priority = 4 },
+                new Goal { Id = 4, Name = "Goal4", Priority = 1 },
+                new Goal { Id = 5, Name = "Goal5", Priority = 3 },
             };
             var dataQ = data.AsQueryable();
 
-            mockDbSet.As<IQueryable<Category>>().Setup(m => m.Provider).Returns(dataQ.Provider);
-            mockDbSet.As<IQueryable<Category>>().Setup(m => m.Expression).Returns(dataQ.Expression);
-            mockDbSet.As<IQueryable<Category>>().Setup(m => m.ElementType).Returns(dataQ.ElementType);
-            mockDbSet.As<IQueryable<Category>>().Setup(m => m.GetEnumerator()).Returns(dataQ.GetEnumerator());
+            mockDbSet.As<IQueryable<Goal>>().Setup(m => m.Provider).Returns(dataQ.Provider);
+            mockDbSet.As<IQueryable<Goal>>().Setup(m => m.Expression).Returns(dataQ.Expression);
+            mockDbSet.As<IQueryable<Goal>>().Setup(m => m.ElementType).Returns(dataQ.ElementType);
+            mockDbSet.As<IQueryable<Goal>>().Setup(m => m.GetEnumerator()).Returns(dataQ.GetEnumerator());
             mockDbSet.Setup(m => m.Find(It.IsAny<object[]>())).Returns<object[]>(ids => data.FirstOrDefault(d => d.Id == (int)ids[0]));
-            mockDbSet.Setup(m => m.Add(It.IsAny<Category>())).Callback<Category>(data.Add);
+            mockDbSet.Setup(m => m.Add(It.IsAny<Goal>())).Callback<Goal>(data.Add);
 
             return data;
         }

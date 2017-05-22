@@ -33,7 +33,10 @@ namespace Organizer.Client
         {
             this.WindowState = FormWindowState.Maximized;
             this.Dock = DockStyle.Fill;
-            panel1.Dock = DockStyle.Fill;
+
+            int h = Screen.PrimaryScreen.WorkingArea.Height;
+            int w = Screen.PrimaryScreen.WorkingArea.Width;
+            this.ClientSize = new Size(w, h);
         }
 
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
@@ -62,7 +65,7 @@ namespace Organizer.Client
             chromeBrowser = new ChromiumWebBrowser(page);
 
             // Add it to the form and fill it to the form window.
-            panel1.Controls.Add(chromeBrowser);
+            this.Controls.Add(chromeBrowser);
             chromeBrowser.Dock = DockStyle.Fill;
 
             // Allow the use of local resources in the browser

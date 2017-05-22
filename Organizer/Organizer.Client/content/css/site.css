@@ -14,7 +14,8 @@
 }
 
 .btn-h {
-    height: 41px;
+    height: 42px;
+    padding: 10px;
 }
 
 .action {
@@ -62,7 +63,7 @@ body, html {
     }
 
 .green {
-    color: #21b384;
+    color: #5aa35a;
 }
 
 .panel-bg {
@@ -134,6 +135,11 @@ body, html {
     border-radius: 0;
 }
 
+.validate-msg {
+    color: #bd3434;
+    font-size: 13px;
+}
+
 /* ------- goals STYLES -------- */
 
 .card {
@@ -190,6 +196,10 @@ button.list-group-item {
     padding: 9px 15px;
 }
 
+#newGoal .list-group-item.list-group-item-primary {
+    background: #fff;
+    padding: 5px;
+}
 .activity-name {
     font-size: 14px;
     color: #fff;
