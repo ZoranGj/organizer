@@ -66,6 +66,14 @@ body, html {
     color: #5aa35a;
 }
 
+.red {
+    color: #c15252;
+}
+
+.badge {
+    background-color: #777 !important;
+}
+
 .panel-bg {
     background: rgba(255, 255, 255, 0.5);
     box-shadow: 2px 4px 7px rgba(0,0,0,.1);
@@ -362,3 +370,16 @@ button.list-group-item {
   opacity: 1;
   transform: scale(1);
 }
+
+#todoNotifications {
+    width: 450px;
+    padding: 20px;
+}
+    #todoNotifications ul {
+        list-style: none;
+        padding-left: 27px;
+    }
+        #todoNotifications ul li {
+            color: #888;
+            margin-bottom: 3px;
+        }

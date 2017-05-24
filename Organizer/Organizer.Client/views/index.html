@@ -57,7 +57,10 @@
                         </a>
                     </li>
                     <li class="dropdown dropdown-large">
-                        <a class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="menu-icon fa fa-bell"></span>
+                            <span class="menu-text">Notifications <span class="badge text-danger">{{expiredNotifications}}</span></span>
+                        </a>
 
                         <notifications items="todoItemNotifications"></notifications>
                     </li>

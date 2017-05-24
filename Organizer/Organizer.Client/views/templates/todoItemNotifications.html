@@ -1,12 +1,24 @@
-﻿<div class="dropdown-menu dropdown-menu-large row">
-    <h4>Expired items in the last 7 days:</h4>
+﻿<div id="todoNotifications" class="dropdown-menu dropdown-menu-large row">
+    <h4 class="red">Expired items in the last 7 days:</h4>
     <ul>
-        <li ng-repeat="item in items | filter: { Expired: true }">{{item.Description}}</li>
+        <li ng-repeat="item in items | filter: { Expired: true }">
+            {{item.Description}}. 
+            Expired on 
+            <strong ng-bind="item.Deadline | date:'MM/dd/yyyy'"></strong>
+            at
+            <strong ng-bind="item.Deadline | date:'hh:mm'"></strong>
+        </li>
     </ul>
 
     <br />
-    <h4>Upcoming in the next 3 days:</h4>
+    <h4 class="green">Upcoming in the next 3 days:</h4>
     <ul>
-        <li ng-repeat="item in items | filter: { Expired: false }">{{item.Description}}</li>
+        <li ng-repeat="item in items | filter: { Expired: false }">
+            {{item.Description}}.
+            Will expire on
+            <strong ng-bind="item.Deadline | date:'MM/dd/yyyy'"></strong>
+            at
+            <strong ng-bind="item.Deadline | date:'hh:mm'"></strong>
+        </li>
     </ul>
 </div>
