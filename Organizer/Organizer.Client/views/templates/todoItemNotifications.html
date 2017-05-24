@@ -1,0 +1,12 @@
+﻿<div class="dropdown-menu dropdown-menu-large row">
+    <h4>Expired items in the last 7 days:</h4>
+    <ul>
+        <li ng-repeat="item in items | filter: { Expired: true }">{{item.Description}}</li>
+    </ul>
+
+    <br />
+    <h4>Upcoming in the next 3 days:</h4>
+    <ul>
+        <li ng-repeat="item in items | filter: { Expired: false }">{{item.Description}}</li>
+    </ul>
+</div>

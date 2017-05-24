@@ -38,6 +38,7 @@
 
     $scope.resolveItem = function (id) {
         todosCtrl.resolve(id, this.item.Resolved);
+        $scope.$parent.initialize();
     }
 
     $scope.todoItemClass = function (item) {
@@ -87,6 +88,7 @@
                 todosCtrl.add(item.Description, item.Deadline, parseInt(item.ActivityId), parseInt(item.Duration), item.Resolved);
             }
         });
+        $scope.$parent.initialize();
     }
 
     function initMultipleTodoItems () {

@@ -3,7 +3,8 @@
         restrict: 'E',
         scope: {
             todoItem: '=item',
-            activities: '=activities'
+            activities: '=activities',
+            refreshAction: '&refreshAction'
         },
         controller: function ($scope) {
             $scope.deadlineTime = new Date();
@@ -26,6 +27,7 @@
 
             $scope.saveTodoItem = function () {
                 todosCtrl.add($scope.todoItem.Description, $scope.todoItem.Deadline, parseInt($scope.todoItem.ActivityId), parseInt($scope.todoItem.Duration), $scope.todoItem.Resolved);
+                $scope.refreshAction();
             }
         },
         templateUrl: 'templates/todoItem.html',

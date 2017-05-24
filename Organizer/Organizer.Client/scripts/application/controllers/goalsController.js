@@ -62,6 +62,7 @@
     $scope.saveActivity = function () {
         goalsCtrl.saveActivity(this.activity.GoalId, this.activity.Name, this.activity.Id || 0);
         $scope.initializeGoals();
+        $scope.$parent.initialize();
     }
 
     $scope.addActivity = function (goal) {

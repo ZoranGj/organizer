@@ -6,8 +6,6 @@ namespace Organizer.Model.DTO
 {
     public class ToDoItemDto
     {
-        private TodoItem data;
-
         public ToDoItemDto(TodoItem data)
         {
             Id = data.Id;
@@ -20,6 +18,7 @@ namespace Organizer.Model.DTO
             Duration = data.Duration;
             Notes = data.Notes;
             Tags = !data.Tags.Any() ? new List<string>() : data.Tags.Select(t => t.Name).ToList();
+            Expired = DateTime.Now >= data.Deadline && !data.Resolved;
         }
 
         public int Id { get; set; }
@@ -33,5 +32,6 @@ namespace Organizer.Model.DTO
         public string Notes { get; set; }
         public List<string> Tags { get; set; }
         public bool PickerOpened { get; set; }
+        public bool Expired { get; set; }
     }
 }

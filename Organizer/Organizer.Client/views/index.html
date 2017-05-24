@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../scripts/libraries/angular-ui-notification.js"></script>
 </head>
 <body ng-app="ngApp">
-    <div ng-app="MainController">
+    <div ng-controller="MainController">
         <div id="menu" class="navbar navbar-default navbar-fixed-top">
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -55,6 +55,11 @@
                             <span class="menu-icon fa fa-bar-chart"></span>
                             <span class="menu-text">Productivity</span>
                         </a>
+                    </li>
+                    <li class="dropdown dropdown-large">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+
+                        <notifications items="todoItemNotifications"></notifications>
                     </li>
                 </ul>
             </div>
@@ -99,6 +104,7 @@
     <script src="../scripts/application/constants.js"></script>
     <script src="../scripts/application/services/reportsService.js"></script>
     <script src="../scripts/application/services/notificationsService.js"></script>
+    <script src="../scripts/application/controllers/mainController.js"></script>
     <script src="../scripts/application/controllers/goalsController.js"></script>
     <script src="../scripts/application/controllers/todoItemsController.js"></script>
     <script src="../scripts/application/controllers/reportsController.js"></script>
@@ -106,5 +112,6 @@
     <script src="../scripts/application/directives/tags.js"></script>
     <script src="../scripts/application/directives/calendarEvent.js"></script>
     <script src="../scripts/application/directives/todoItem.js"></script>
+    <script src="../scripts/application/directives/notifications.js"></script>
 </body>
 </html>

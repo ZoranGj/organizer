@@ -211,7 +211,9 @@
     <Content Include="scripts\application\controllers\calendarController.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="scripts\application\controllers\mainController.js" />
+    <Content Include="scripts\application\controllers\mainController.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="scripts\application\controllers\reportsController.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -222,6 +224,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="scripts\application\directives\calendarEvent.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\directives\notifications.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="scripts\application\directives\tags.js">
@@ -282,6 +287,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="views\templates\todoItem.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="views\templates\todoItemNotifications.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="views\todos.html">

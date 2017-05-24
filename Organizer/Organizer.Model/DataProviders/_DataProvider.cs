@@ -3,6 +3,8 @@ using System.Data.Entity;
 using System.Linq;
 
 using Organizer.Model;
+using System.Linq.Expressions;
+using System;
 
 namespace Model.DataProviders {
 	public class DataProvider<T> where T : class {
@@ -18,7 +20,12 @@ namespace Model.DataProviders {
 			return _dbSet.ToList();
 		}
 
-		public T GetById(object Id) {
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>> conditions)
+        {
+            return _dbSet.Where(conditions).ToList();
+        }
+
+        public T GetById(object Id) {
 			return _dbSet.Find(Id);
 		}
 
