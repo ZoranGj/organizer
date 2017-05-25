@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/19/2017 18:09:14
+-- Date Created: 05/25/2017 22:08:07
 -- Generated from EDMX file: D:\Projects\Prototypes\organizer\organizer\Organizer\Organizer.Model\DataModel.edmx
 -- --------------------------------------------------
 
@@ -61,7 +61,8 @@ CREATE TABLE [dbo].[Goals] (
     [Notes] nvarchar(max)  NULL,
     [Priority] int  NOT NULL,
     [MinHoursPerWeek] smallint  NOT NULL,
-    [MaxHoursPerWeek] smallint  NOT NULL
+    [MaxHoursPerWeek] smallint  NOT NULL,
+    [Color] nvarchar(max)  NOT NULL
 );
 GO
 

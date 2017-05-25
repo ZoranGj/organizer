@@ -17,6 +17,7 @@ namespace Organizer.Model.DTO
             Resolved = data.Resolved;
             Duration = data.Duration;
             Notes = data.Notes;
+            Color = data.Activity.Goal == null ? null : data.Activity.Goal.Color;
             Tags = !data.Tags.Any() ? new List<string>() : data.Tags.Select(t => t.Name).ToList();
             Expired = DateTime.Now >= data.Deadline && !data.Resolved;
         }
@@ -33,5 +34,6 @@ namespace Organizer.Model.DTO
         public List<string> Tags { get; set; }
         public bool PickerOpened { get; set; }
         public bool Expired { get; set; }
+        public string Color { get; set; }
     }
 }

@@ -15,21 +15,21 @@ namespace Organizer.Client.API
     {
         private readonly GoalsController goals;
         private readonly TodoItemsProvider _todoItemsProvider;
+        private readonly GoalsProvider _goalsProvider;
         private readonly TagsProvider _tagsProvider;
         private const int expiredItemsDays = 7;
         private const int upcomingItemsDays = 3;
 
-        public ReportsController(ChromiumWebBrowser originalBrowser, MainWindow mainForm) : base(originalBrowser, mainForm)
+        public ReportsController(ChromiumWebBrowser originalBrowser, MainWindow mainForm, DataContext dbContext) : base(originalBrowser, mainForm)
         {
-            var dbContext = new DataContext();
             _todoItemsProvider = new TodoItemsProvider(dbContext);
             _tagsProvider = new TagsProvider(dbContext);
-            goals = new GoalsController(originalBrowser, mainForm);
+            _goalsProvider = new GoalsProvider(dbContext);
         }
 
         public string LoadProductivityReports(int id)
         {
-            var goal = goals.Get(id);
+            var goal = _goalsProvider.GetById(id);
             var todoItems = _todoItemsProvider.GetAll(goal.Id).Where(x => x.Resolved).OrderBy(x => x.Deadline).ToList();
             return todoItems.ProductivityReports(goal).Serialize();
         }

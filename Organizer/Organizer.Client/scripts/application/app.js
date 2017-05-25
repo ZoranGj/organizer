@@ -1,4 +1,4 @@
-﻿var app = angular.module('ngApp', ['ngRoute', 'ui.bootstrap', 'ui.calendar', 'ui-notification']);
+﻿var app = angular.module('ngApp', ['ngRoute', 'ui.bootstrap', 'ui.calendar', 'ui-notification', 'color.picker']);
 
 appCtrl.showDevTools();
 app.config(['$routeProvider',

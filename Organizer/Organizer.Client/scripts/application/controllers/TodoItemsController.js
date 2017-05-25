@@ -16,14 +16,19 @@
         var goals = goalsCtrl.getAll();
         $scope.goals = JSON.parse(goals);
 
-        $scope.initializeTodoItemsByGoal($scope.filter.goal);
+        if ($scope.goals.length) {
+            $scope.filter.goal = $scope.goals[0].Id;
+            $scope.initializeTodoItemsByGoal();
+        }
     }
 
     $scope.goalChanged = function () {
-        $scope.initializeTodoItemsByGoal($scope.filter.goal);
+        $scope.initializeTodoItemsByGoal();
     }
 
     $scope.initializeTodoItemsByGoal = function (goalId) {
+        var goalId = $scope.filter.goal;
+
         var todoItems = todosCtrl.getAll(goalId);
         $scope.todoItems = JSON.parse(todoItems);
 
@@ -88,6 +93,11 @@
                 todosCtrl.add(item.Description, item.Deadline, parseInt(item.ActivityId), parseInt(item.Duration), item.Resolved);
             }
         });
+        $scope.refreshTodoItems();
+    }
+
+    $scope.refreshTodoItems = function () {
+        $scope.initializeTodoItemsByGoal();
         $scope.$parent.initialize();
     }
 

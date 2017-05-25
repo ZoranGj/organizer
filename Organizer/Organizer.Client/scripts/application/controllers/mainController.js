@@ -11,5 +11,9 @@
         }
     }
 
+    $scope.colorOptions = {
+        format: ['hexString'],
+    };
+
     $scope.initialize();
 });

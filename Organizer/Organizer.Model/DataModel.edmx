@@ -38,6 +38,7 @@
     <Property Name="Priority" Type="int" Nullable="false" />
     <Property Name="MinHoursPerWeek" Type="smallint" Nullable="false" />
     <Property Name="MaxHoursPerWeek" Type="smallint" Nullable="false" />
+    <Property Name="Color" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Activities">
     <Key>
@@ -160,6 +161,7 @@
           <Property Name="Priority" Type="Int32" Nullable="false" />
           <Property Name="MinHoursPerWeek" Type="Int16" Nullable="false" />
           <Property Name="MaxHoursPerWeek" Type="Int16" Nullable="false" />
+          <Property Name="Color" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Activity">
           <Key>
@@ -241,6 +243,7 @@
           <ScalarProperty Name="Priority" ColumnName="Priority" />
           <ScalarProperty Name="MinHoursPerWeek" ColumnName="MinHoursPerWeek" />
           <ScalarProperty Name="MaxHoursPerWeek" ColumnName="MaxHoursPerWeek" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

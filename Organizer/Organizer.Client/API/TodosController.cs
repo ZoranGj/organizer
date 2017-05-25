@@ -17,9 +17,8 @@ namespace Organizer.Client.API
         private readonly TodoItemsProvider _todoItemsProvider;
         private readonly TagsProvider _tagsProvider;
 
-        public TodosController(ChromiumWebBrowser originalBrowser, MainWindow mainForm) : base(originalBrowser, mainForm)
+        public TodosController(ChromiumWebBrowser originalBrowser, MainWindow mainForm, DataContext dbContext) : base(originalBrowser, mainForm)
         {
-            var dbContext = new DataContext();
             _todoItemsProvider = new TodoItemsProvider(dbContext);
             _tagsProvider = new TagsProvider(dbContext);
         }
@@ -85,10 +84,8 @@ namespace Organizer.Client.API
 
         public void Add(string description, DateTime deadline, int activityId, int duration, bool resolved = false)
         {
-            var id = new Random().Next(100000);
             _todoItemsProvider.Insert(new TodoItem
             {
-                //Id = id,
                 ActivityId = activityId,
                 Deadline = deadline,
                 AddedOn = DateTime.Now,
@@ -101,13 +98,13 @@ namespace Organizer.Client.API
 
         public string GetTags()
         {
-            var data = _tagsProvider.GetAll().Select(x => new TagDto { Id = x.Id, Name = x.Name });
+            var data = _tagsProvider.GetAll().Select(tag => new TagDto(tag));
             return data.Serialize();
         }
 
         public string GetTagNames()
         {
-            var data = _tagsProvider.GetAll().Select(x => x.Name ).ToList();
+            var data = _tagsProvider.GetAll().Select(x => x.Name).ToList();
             return data.Serialize();
         }
     }

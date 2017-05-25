@@ -1,7 +1,8 @@
 ﻿app.controller('GoalsController', function ($scope, $timeout) {
     $scope.goal = {
         name: '',
-    }
+        color: 'rgb(92,184,92)',
+    };
     $scope.activity = {};
     $scope.activities = [];
     $scope.showicons = false;
@@ -113,6 +114,6 @@
 
     $scope.updateGoal = function (goal, valid) {
         if (valid === false) return;
-        goalsCtrl.updateSetting(goal.Id, parseInt(goal.MinHoursPerWeek), parseInt(goal.MaxHoursPerWeek));
+        goalsCtrl.updateSetting(goal.Id, parseInt(goal.MinHoursPerWeek), parseInt(goal.MaxHoursPerWeek), goal.Color);
     }
 });

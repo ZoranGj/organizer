@@ -1,7 +1,7 @@
 ﻿<div ng-init="initializeGoals()" class="col-md-12">
     <div id="goals">
         <div data-id="{{goal.Id}}" ng-repeat="goal in goals" class="col-md-4 card goal">
-            <div class="list-group-item list-group-item-primary">
+            <div class="list-group-item list-group-item-primary" ng-style="{'background-color': goal.Color}">
                 <strong class="activity-name">{{goal.Name}}</strong>
                 <span class="fa fa-times text-danger pull-right lead action" ng-click="deleteGoal(goal, $index)"></span>
                 
@@ -24,6 +24,10 @@
                                         <label>IDEAL productivity (hours per week):</label>
                                         <input type="text" class="table-input form-control" name="max" ng-model="goal.MaxHoursPerWeek" value="goal.MinHoursPerWeek" required />
                                         <span ng-show="goalForm.max.$touched && goalForm.max.$invalid" class="validate-msg">*The field is required</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Color:</label>
+                                        <color-picker class="color-picker" options="$parent.colorOptions" ng-model="goal.Color"></color-picker>
                                     </div>
                                 </form>
                             </div>

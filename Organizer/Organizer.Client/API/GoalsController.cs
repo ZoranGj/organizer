@@ -18,10 +18,9 @@ namespace Organizer.Client.API
         private TodoItemsProvider _todoItemsProvider;
         private DataContext _dbContext;
 
-        public GoalsController(ChromiumWebBrowser originalBrowser, MainWindow mainForm) : base(originalBrowser, mainForm)
+        public GoalsController(ChromiumWebBrowser originalBrowser, MainWindow mainForm, DataContext dbContext) : base(originalBrowser, mainForm)
         {
-            _dbContext = new DataContext();
-            Setup(_dbContext);
+            Setup(dbContext);
         }
 
         public GoalsController() { }
@@ -36,7 +35,7 @@ namespace Organizer.Client.API
 
         public string GetAll()
         {
-            var data = _goalsProvider.GetAll();
+            var data = _goalsProvider.GetAll().Select(g => new GoalDto(g)).ToList();
             return data.Serialize();
         }
 
@@ -50,11 +49,11 @@ namespace Organizer.Client.API
 
         public void Add(string name, int priority)
         {
-            var id = new Random().Next(100000);
             _goalsProvider.Insert(new Goal
             {
                 Name = name,
                 Priority = priority,
+                Color = "rgb(92,184,92)",
                 MinHoursPerWeek = 2,
                 MaxHoursPerWeek = 8
             });
@@ -78,9 +77,9 @@ namespace Organizer.Client.API
             _goalsProvider.UpdatePriority(id, newPriority);
         }
 
-        public void UpdateSetting(int id, int minHoursPerWeek, int maxHoursPerWeek)
+        public void UpdateSetting(int id, int minHoursPerWeek, int maxHoursPerWeek, string color)
         {
-            _goalsProvider.UpdateHours(id, (short)minHoursPerWeek, (short)maxHoursPerWeek);
+            _goalsProvider.UpdateHours(id, (short)minHoursPerWeek, (short)maxHoursPerWeek, color);
         }
 
         #endregion

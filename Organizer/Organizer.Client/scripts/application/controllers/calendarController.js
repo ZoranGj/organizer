@@ -33,6 +33,7 @@ function ($scope, $compile, uiCalendarConfig, notificationService) {
                 start: start,
                 activity: todos[i].Activity,
                 end: new Date(todos[i].Deadline),
+                backgroundColor: todos[i].Color + ' !important',
             });
         }
     }
@@ -59,12 +60,15 @@ function ($scope, $compile, uiCalendarConfig, notificationService) {
         element.attr({
             'calendar-event' : '',
             'data': 'loadTodoItemData',
-            'id': event.id
+            'id': event.id,
+        });
+        $(element).css({
+            'background-color': event.Color + ' !important'
         });
         $(element).tooltip({
             title: event.activity + ': ' + event.title,
             placement: 'bottom'
-        })
+        });
         $compile(element)($scope);
     };
 

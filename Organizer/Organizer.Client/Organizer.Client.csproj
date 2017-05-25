@@ -180,6 +180,9 @@
     <Content Include="content\css\angular-ui-notification.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="content\css\angularjs-color-picker.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="content\css\bootstrap.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -201,6 +204,12 @@
     <Content Include="Organizer_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Organizer.mdf</DependentUpon>
+    </Content>
+    <Content Include="scripts\libraries\angularjs-color-picker.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\angularjs-color-picker.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="scripts\application\app.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

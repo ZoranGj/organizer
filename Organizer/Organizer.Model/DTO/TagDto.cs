@@ -10,5 +10,13 @@ namespace Organizer.Model.DTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public TagDto(Tag entity)
+        {
+            Id = entity.Id;
+            Name = entity.Name;
+        }
+
+        public TagDto() { }
     }
 }

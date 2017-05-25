@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Organizer.Client.API;
 using Model.Setup;
+using Organizer.Model;
 
 namespace Organizer.Client
 {
@@ -21,12 +22,13 @@ namespace Organizer.Client
 
         public MainWindow()
         {
+            var dbContext = new DataContext();
             InitializeComponent();
             InitializeChromium();
             chromeBrowser.RegisterJsObject("appCtrl", new AppController(chromeBrowser, this));
-            chromeBrowser.RegisterJsObject("goalsCtrl", new GoalsController(chromeBrowser, this));
-            chromeBrowser.RegisterJsObject("todosCtrl", new TodosController(chromeBrowser, this));
-            chromeBrowser.RegisterJsObject("reportsCtrl", new ReportsController(chromeBrowser, this));
+            chromeBrowser.RegisterJsObject("goalsCtrl", new GoalsController(chromeBrowser, this, dbContext));
+            chromeBrowser.RegisterJsObject("todosCtrl", new TodosController(chromeBrowser, this, dbContext));
+            chromeBrowser.RegisterJsObject("reportsCtrl", new ReportsController(chromeBrowser, this, dbContext));
         }
 
         private void MainWindow_Load(object sender, EventArgs e)

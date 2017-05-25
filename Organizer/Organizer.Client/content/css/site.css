@@ -334,13 +334,8 @@ button.list-group-item {
     z-index: 2010 !important;
 }
 
-.fc-event, .fc-event-dot {
-    background-color: rgb(92,184,92) !important;
-}
-
 .fc-event {
     border-radius: 0 !important;
-    border: 1px solid rgb(70,174,70) !important;
 }
 
 .no-data {
@@ -383,3 +378,10 @@ button.list-group-item {
             color: #888;
             margin-bottom: 3px;
         }
+
+.color-picker input {
+    width: 350px;
+    height: 41px;
+    box-shadow: none;
+    border: 1px solid #e1e1e1;
+}
