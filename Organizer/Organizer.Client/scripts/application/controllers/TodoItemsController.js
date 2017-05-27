@@ -108,4 +108,18 @@
         }
         $scope.multipleTodoItems = multipleTodoItems;
     }
+
+    $scope.updateTodoItem = function (item) {
+        todosCtrl.update(item.Id, item.Notes, item.Tags.join(','));
+    }
+
+    $scope.updateTodoDescription = function (id, value) {
+        if (!id || !value) return;
+        todosCtrl.updateDescription(id, value);
+    }
+
+    $scope.updateTodoDuration = function (id, value) {
+        if (!id || !value || isNaN(value)) return;
+        todosCtrl.updateDuration(id, parseInt(value));
+    }
 });

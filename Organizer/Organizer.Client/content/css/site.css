@@ -21,6 +21,7 @@
 .action {
     cursor: pointer;
     font-size: 15px;
+    color: #fff;
 }
 .action:not(:first-of-type){
     margin-right: 4px;
@@ -48,6 +49,14 @@ body, html {
         text-align: center;
         padding: 9px 15px;
     }
+        #menu li a.active {
+            background: rgb(92, 184, 92) !important;
+            color: #fff;
+        }
+        #menu li a.active * {
+            background: rgb(92, 184, 92) !important;
+            color: #fff;
+        }
     #menu .menu-icon {
         color: #23AA5A;
         margin-right: 2px;
@@ -194,8 +203,7 @@ body, html {
 
 button.list-group-item {
     border-top: 1px solid #e1e1e1;
-    background: #e9fbf5 !important;
-    color: rgb(36, 200, 147) !important;
+    background: #f2f2f2 !important;
 }
 
 .list-group-item.list-group-item-primary {
@@ -384,4 +392,21 @@ button.list-group-item {
     height: 41px;
     box-shadow: none;
     border: 1px solid #e1e1e1;
+}
+
+.editable-form {
+    display: inline-block;
+}
+    .editable-form input {
+        display: inline-block;
+        width: 182px !important;
+        border-radius: 0;
+    }
+    .editable-form button span {
+        font-size: 15px !important;
+    }
+
+.resolved {
+    background: #83c983;
+    color: #fff;
 }

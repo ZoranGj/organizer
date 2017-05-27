@@ -1,4 +1,4 @@
-﻿app.controller('GoalsController', function ($scope, $timeout) {
+﻿app.controller('GoalsController', function ($scope, $timeout, COLORS) {
     $scope.goal = {
         name: '',
         color: 'rgb(92,184,92)',
@@ -7,12 +7,14 @@
     $scope.activities = [];
     $scope.showicons = false;
     $scope.showNewGoal = false;
+    $scope.editableColor = COLORS.white;
 
     $scope.initializeGoals = function () {
         var goals = goalsCtrl.getAll();
         $scope.goals = JSON.parse(goals);
 
         $("#goals").sortable({
+            handle: '.fa-arrows',
             tolerance: 'pointer',
             revert: 'invalid',
             placeholder: 'col-md-4 card placeholder',
@@ -115,5 +117,10 @@
     $scope.updateGoal = function (goal, valid) {
         if (valid === false) return;
         goalsCtrl.updateSetting(goal.Id, parseInt(goal.MinHoursPerWeek), parseInt(goal.MaxHoursPerWeek), goal.Color);
+    }
+
+    $scope.updateGoalName = function (id, value) {
+        if (!id || !value) return;
+        goalsCtrl.updateName(id, value);
     }
 });

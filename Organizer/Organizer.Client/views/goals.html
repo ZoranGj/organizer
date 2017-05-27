@@ -2,9 +2,8 @@
     <div id="goals">
         <div data-id="{{goal.Id}}" ng-repeat="goal in goals" class="col-md-4 card goal">
             <div class="list-group-item list-group-item-primary" ng-style="{'background-color': goal.Color}">
-                <strong class="activity-name">{{goal.Name}}</strong>
+                <editable id="goal.Id" value="goal.Name" on-edit="updateGoalName(goal.Id, goal.Name)" color="editableColor"></editable>
                 <span class="fa fa-times text-danger pull-right lead action" ng-click="deleteGoal(goal, $index)"></span>
-                
                 <div class="modal fade-scale" id="goalDialog{{$index}}" tabindex="-1" role="dialog" aria-labelledby="executionOptionLabel"
                      aria-hidden="true">
                     <div class="modal-dialog" style="width: 550px;">
@@ -39,7 +38,8 @@
                     </div>
                 </div>
 
-                <span class="fa fa-cog text-blue pull-right lead action" data-toggle="modal" data-target="#goalDialog{{$index}}"></span>
+                <span class="fa fa-cog pull-right lead action" data-toggle="modal" data-target="#goalDialog{{$index}}"></span>
+                <span class="fa fa-arrows pull-right lead action"></span>
             </div>
             <div class="wrapper">
                 <ul class="list-group">
@@ -47,13 +47,13 @@
                         <input data-id="{{activity.Id}}" type="text" class="form-control list-group-item activity" style="border-radius: 0;"
                                ng-model="activity.Name" ng-keydown="showicons=true" />
                         <div class="pull-right" ng-show="showicons">
-                            <button type="button" class="btn btn-default activity-action label-success" ng-click="deleteActivity(goal, $index)" style="right:5px;">
+                            <button type="button" class="btn btn-default activity-action" ng-click="deleteActivity(goal, $index)" ng-style="{'background-color': goal.Color}" style="right:5px;">
                                 <span class="fa fa-times"></span>
                             </button>
-                            <button type="button" class="btn btn-default activity-action label-success" ng-click="todoItemDialog(activity)" style="right:35px;">
+                            <button type="button" class="btn btn-default activity-action" ng-click="todoItemDialog(activity)" ng-style="{'background-color': goal.Color}" style="right:35px;">
                                 <span class="fa fa-pencil"></span>
                             </button>
-                            <button type="button" class="btn btn-default activity-action label-success" ng-click="saveActivity()" style="right:65px;">
+                            <button type="button" class="btn btn-default activity-action" ng-click="saveActivity()" ng-style="{'background-color': goal.Color}" style="right:65px;">
                                 <span class="fa fa-floppy-o"></span>
                             </button>
                         </div>
@@ -61,7 +61,8 @@
                 </ul>
             </div>
             <button type="button" class="list-group-item btn-default text-muted" ng-click="addActivity(goal)">
-                <span class="fa fa-plus green"></span> <span class="green">Add activity</span>
+                <span class="fa fa-plus" ng-style="{'color': goal.Color}"></span> 
+                <span  ng-style="{'color': goal.Color}">Add activity</span>
             </button>
         </div>
         <div id="newGoal" ng-show="showNewGoal" class="col-md-4 card goal">

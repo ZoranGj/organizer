@@ -30,22 +30,31 @@
                 <th class="col-md-2">DEADLINE</th>
                 <th class="col-md-1">Time</th>
                 <th class="col-md-1">Duration</th>
+                <th class="col-md-2">Tags</th>
                 <th class="col-md-2">Activity</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="item in todoItems" class="test-row" ng-class="todoItemClass(item)">
+            <tr ng-repeat="item in todoItems" class="test-row" ng-class="{'resolved' : item.Resolved}">
                 <td>
                     <input type="checkbox" ng-model="item.Resolved" ng-change="resolveItem(item.Id)">  
-                    <span>{{item.Description}} </span>
+                    <editable id="item.Id" value="item.Description" on-edit="updateTodoDescription(item.Id, item.Description)"></editable>
                 </td>
                 <td>
                     <span ng-bind="item.Deadline | date:'MM/dd/yyyy hh:mm'"></span> 
                     (<small ng-bind="item.AddedOn | date:'MM/dd/yyyy'"></small>)
                 </td>
-                <td>{{item.Duration}}</td>
+                <td>
+                    <editable id="item.Id" value="item.Duration" on-edit="updateTodoDuration(item.Id, item.Duration)"></editable>
+                </td>
                 <td>{{item.Activity}}</td>
+                <td>
+                    <div class="tags">
+                        <div class="tag" ng-repeat="tag in item.Tags">
+                            {{tag}}
+                        </div>
+                    </div>                
+                </td>
                 <td colspan="2">
                     <div class="modal fade-scale" id="dialogTestDialog{{$index}}" tabindex="-1" role="dialog" aria-labelledby="executionOptionLabel"
                          aria-hidden="true">
@@ -76,7 +85,7 @@
                         <span class="fa fa-ellipsis-h"></span>
                     </button>
                     <button type="button" class="btn btn-danger btn-sm pull-left" ng-click="deleteTodoItem(item.Id)"> <span class="fa fa-times"></span></button>
-                    <span ng-show="item.Resolved" class="item-label pull-left"><span class="label label-success">Resolved</span></span>
+                    <!--<span ng-show="item.Resolved" class="item-label pull-left"><span class="label label-success">Resolved</span></span>-->
                 </td>
             </tr>
         </tbody>

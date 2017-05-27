@@ -36,36 +36,36 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#goals">
+                        <a href="#goals" ng-class="{active: isActiveView('goals')}">
                             <span class="menu-icon fa fa-calendar-check-o"></span> 
                             <span class="menu-text">Goals</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#todos">
+                        <a href="#todos" ng-class="{active: isActiveView('todos')}">
                             <span class="menu-icon fa fa-tasks"></span> 
                             <span class="menu-text">Work</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#calendar">
+                        <a href="#calendar" ng-class="{active: isActiveView('calendar')}">
                             <span class="menu-icon fa fa-calendar"></span>
                             <span class="menu-text">Calendar</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#reports">
+                        <a href="#reports" ng-class="{active: isActiveView('reports')}">
                             <span class="menu-icon fa fa-bar-chart"></span>
                             <span class="menu-text">Productivity</span>
                         </a>
                     </li>
-                    <li class="dropdown dropdown-large">
+                    <li class="dropdown dropdown-large" ng-show="upcomingNotifications.length > 0 || expiredNotifications.length > 0">
                         <a class="dropdown-toggle" data-toggle="dropdown">
                             <span class="menu-icon fa fa-bell"></span>
-                            <span class="menu-text">Notifications <span class="badge text-danger">{{expiredNotifications}}</span></span>
+                            <span class="menu-text">Notifications <span class="badge text-danger" ng-show="expiredNotifications.length > 0">{{expiredNotifications.length}}</span></span>
                         </a>
 
-                        <notifications items="todoItemNotifications"></notifications>
+                        <notifications expired="expiredNotifications" upcoming="upcomingNotifications"></notifications>
                     </li>
                 </ul>
             </div>
@@ -119,5 +119,6 @@
     <script src="../scripts/application/directives/calendarEvent.js"></script>
     <script src="../scripts/application/directives/todoItem.js"></script>
     <script src="../scripts/application/directives/notifications.js"></script>
+    <script src="../scripts/application/directives/editable.js"></script>
 </body>
 </html>

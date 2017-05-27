@@ -3,7 +3,8 @@
         return {
             restrict: 'E',
             scope: {
-                items: '='
+                expired: '=',
+                upcoming: '='
             },
             link: function(scope, element, attributes){
 

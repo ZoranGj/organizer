@@ -3,3 +3,7 @@
     "graph": "graph",
     "line": "line",
 });
+
+app.constant("COLORS", {
+    "white": '#fff',
+});

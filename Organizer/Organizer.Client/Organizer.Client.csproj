@@ -205,6 +205,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Organizer.mdf</DependentUpon>
     </Content>
+    <Content Include="scripts\application\directives\editable.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="scripts\libraries\angularjs-color-picker.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -290,6 +293,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="views\reports_tags.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="views\templates\editableInput.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="views\templates\modal.html">

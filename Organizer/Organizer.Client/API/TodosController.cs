@@ -96,6 +96,26 @@ namespace Organizer.Client.API
             _todoItemsProvider.Save();
         }
 
+        public void UpdateDescription(int id, string value)
+        {
+            var todo = _todoItemsProvider.GetById(id);
+            if (!todo.Description.Equals(value))
+            {
+                todo.Description = value;
+                _todoItemsProvider.Save();
+            }
+        }
+
+        public void UpdateDuration(int id, int value)
+        {
+            var todo = _todoItemsProvider.GetById(id);
+            if (todo.Duration != value)
+            {
+                todo.Duration = value;
+                _todoItemsProvider.Save();
+            }
+        }
+
         public string GetTags()
         {
             var data = _tagsProvider.GetAll().Select(tag => new TagDto(tag));

@@ -1,4 +1,4 @@
-﻿app.controller('MainController', function ($scope) {
+﻿app.controller('MainController', function ($scope, $route) {
     $scope.todoItemNotifications = [];
 
     $scope.initialize = function () {
@@ -7,13 +7,21 @@
             $scope.todoItemNotifications = data;
             $scope.expiredNotifications = data.filter(function (item) {
                 return item.Expired == true;
-            }).length;
+            });
+            $scope.upcomingNotifications = data.filter(function (item) {
+                return item.Expired == false;
+            });
         }
     }
 
     $scope.colorOptions = {
         format: ['hexString'],
     };
+
+    $scope.isActiveView = function (viewName) {
+        if (!viewName || !$route.current) return false;
+        return $route.current.activeView == viewName;
+    }
 
     $scope.initialize();
 });

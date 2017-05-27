@@ -6,23 +6,28 @@ app.config(['$routeProvider',
       $routeProvider.
         when('/goals', {
             templateUrl: 'goals.html',
-            controller: 'GoalsController'
+            controller: 'GoalsController',
+            activeView: 'goals'
         }).
         when('/todos', {
             templateUrl: 'todos.html',
-            controller: 'TodoItemsController'
+            controller: 'TodoItemsController',
+            activeView: 'todos'
         }).
         when('/calendar', {
             templateUrl: 'calendar.html',
-            controller: 'CalendarController'
+            controller: 'CalendarController',
+            activeView: 'calendar'
         }).
         when('/reports', {
             templateUrl: 'reports.html',
-            controller: 'ReportsController'
+            controller: 'ReportsController',
+            activeView: 'reports'
         }).
         when('/reports_tags', {
             templateUrl: 'reports_tags.html',
-            controller: 'ReportsController'
+            controller: 'ReportsController',
+            activeView: 'reports'
         }).
         otherwise({
             redirectTo: '/goals'

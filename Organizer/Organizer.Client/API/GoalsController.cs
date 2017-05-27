@@ -39,10 +39,10 @@ namespace Organizer.Client.API
             return data.Serialize();
         }
 
-        public Goal Get(int id)
+        public Goal Get(int id, bool reload = true)
         {
             var goal = _goalsProvider.GetById(id);
-            _dbContext.Entry<Goal>(goal).Reload();
+            if(reload) _dbContext.Entry<Goal>(goal).Reload();
 
             return goal;
         }
@@ -62,7 +62,7 @@ namespace Organizer.Client.API
 
         public void Delete(int id)
         {
-            var goal = Get(id);
+            var goal = Get(id, false);
             goal.Activities.ToList().ForEach(a => {
                 a.TodoItems.ToList().ForEach(t => _todoItemsProvider.Delete(t.Id));
                 _acivitiesProvider.Delete(a.Id);
@@ -80,6 +80,16 @@ namespace Organizer.Client.API
         public void UpdateSetting(int id, int minHoursPerWeek, int maxHoursPerWeek, string color)
         {
             _goalsProvider.UpdateHours(id, (short)minHoursPerWeek, (short)maxHoursPerWeek, color);
+        }
+
+        public void UpdateName(int id, string value)
+        {
+            var goal = _goalsProvider.GetById(id);
+            if (!goal.Name.Equals(value))
+            {
+                goal.Name = value;
+                _goalsProvider.Save();
+            }
         }
 
         #endregion
