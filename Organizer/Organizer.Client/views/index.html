@@ -62,7 +62,7 @@
                     <li class="dropdown dropdown-large" ng-show="upcomingNotifications.length > 0 || expiredNotifications.length > 0">
                         <a class="dropdown-toggle" data-toggle="dropdown">
                             <span class="menu-icon fa fa-bell"></span>
-                            <span class="menu-text">Notifications <span class="badge text-danger" ng-show="expiredNotifications.length > 0">{{expiredNotifications.length}}</span></span>
+                            <span class="menu-text">Status <span class="badge text-danger" ng-show="expiredNotifications.length > 0">{{expiredNotifications.length}}</span></span>
                         </a>
 
                         <notifications expired="expiredNotifications" upcoming="upcomingNotifications"></notifications>

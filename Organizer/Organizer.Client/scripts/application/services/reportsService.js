@@ -53,7 +53,7 @@
         if (myChart) {
             myChart.destroy();
         }
-
+        options.maintainAspectRatio = false;
         var myChart = new Chart(ctx, {
             type: type,
             data: {

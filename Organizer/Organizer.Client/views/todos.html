@@ -30,8 +30,8 @@
                 <th class="col-md-2">DEADLINE</th>
                 <th class="col-md-1">Time</th>
                 <th class="col-md-1">Duration</th>
-                <th class="col-md-2">Tags</th>
-                <th class="col-md-2">Activity</th>
+                <th class="col-md-3">Tags</th>
+                <th class="col-md-1">Activity</th>
             </tr>
         </thead>
         <tbody>
@@ -50,7 +50,7 @@
                 <td>{{item.Activity}}</td>
                 <td>
                     <div class="tags">
-                        <div class="tag" ng-repeat="tag in item.Tags">
+                        <div class="tag tag-todo" ng-repeat="tag in item.Tags">
                             {{tag}}
                         </div>
                     </div>                
