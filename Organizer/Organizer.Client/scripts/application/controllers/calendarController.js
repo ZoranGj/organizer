@@ -33,6 +33,9 @@ function ($scope, $compile, uiCalendarConfig, notificationService) {
                 start: start,
                 activity: todos[i].Activity,
                 end: new Date(todos[i].Deadline),
+                duration: todos[i].Duration,
+                addedOn: todos[i].AddedOn,
+                goal: todos[i].Goal,
                 backgroundColor: todos[i].Color + ' !important',
             });
         }
@@ -66,8 +69,9 @@ function ($scope, $compile, uiCalendarConfig, notificationService) {
             'background-color': event.Color + ' !important'
         });
         $(element).tooltip({
-            title: event.activity + ': ' + event.title,
-            placement: 'bottom'
+            title: '<strong class="green">'+ event.goal +'</strong><br /><strong>' + event.activity + '</strong>. Duration: ' + event.duration + ' hours.',
+            placement: 'bottom',
+            html: true
         });
         $compile(element)($scope);
     };

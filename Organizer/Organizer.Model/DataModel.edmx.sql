@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/25/2017 22:08:07
+-- Date Created: 05/31/2017 23:19:07
 -- Generated from EDMX file: D:\Projects\Prototypes\organizer\organizer\Organizer\Organizer.Model\DataModel.edmx
 -- --------------------------------------------------
 
@@ -29,6 +29,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_TodoItemTag_Tag]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TodoItemTag] DROP CONSTRAINT [FK_TodoItemTag_Tag];
 GO
+IF OBJECT_ID(N'[dbo].[FK_UserGoals]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Goals] DROP CONSTRAINT [FK_UserGoals];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -46,6 +49,9 @@ GO
 IF OBJECT_ID(N'[dbo].[Tags]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Tags];
 GO
+IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Users];
+GO
 IF OBJECT_ID(N'[dbo].[TodoItemTag]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TodoItemTag];
 GO
@@ -62,7 +68,8 @@ CREATE TABLE [dbo].[Goals] (
     [Priority] int  NOT NULL,
     [MinHoursPerWeek] smallint  NOT NULL,
     [MaxHoursPerWeek] smallint  NOT NULL,
-    [Color] nvarchar(max)  NOT NULL
+    [Color] nvarchar(max)  NOT NULL,
+    [User_Id] int  NULL
 );
 GO
 
@@ -98,6 +105,17 @@ CREATE TABLE [dbo].[Tags] (
 );
 GO
 
+-- Creating table 'Users'
+CREATE TABLE [dbo].[Users] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Username] nvarchar(max)  NOT NULL,
+    [Email] nvarchar(max)  NOT NULL,
+    [Password] nvarchar(max)  NOT NULL,
+    [IsAdmin] bit  NOT NULL,
+    [DateJoined] datetime  NOT NULL
+);
+GO
+
 -- Creating table 'TodoItemTag'
 CREATE TABLE [dbo].[TodoItemTag] (
     [TodoItems_Id] int  NOT NULL,
@@ -130,6 +148,12 @@ GO
 -- Creating primary key on [Id] in table 'Tags'
 ALTER TABLE [dbo].[Tags]
 ADD CONSTRAINT [PK_Tags]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Users'
+ALTER TABLE [dbo].[Users]
+ADD CONSTRAINT [PK_Users]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -195,6 +219,21 @@ GO
 CREATE INDEX [IX_FK_TodoItemTag_Tag]
 ON [dbo].[TodoItemTag]
     ([Tags_Id]);
+GO
+
+-- Creating foreign key on [User_Id] in table 'Goals'
+ALTER TABLE [dbo].[Goals]
+ADD CONSTRAINT [FK_UserGoals]
+    FOREIGN KEY ([User_Id])
+    REFERENCES [dbo].[Users]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserGoals'
+CREATE INDEX [IX_FK_UserGoals]
+ON [dbo].[Goals]
+    ([User_Id]);
 GO
 
 -- --------------------------------------------------

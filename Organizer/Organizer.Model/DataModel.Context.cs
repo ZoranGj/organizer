@@ -29,5 +29,6 @@ namespace Organizer.Model
         public virtual DbSet<Activity> Activities { get; set; }
         public virtual DbSet<TodoItem> TodoItems { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

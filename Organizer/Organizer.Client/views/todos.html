@@ -6,7 +6,7 @@
                 <option value="">All activities</option>
             </select>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" ng-if="filter.goal && activityItems.length > 0">
             <button type="button" class="btn btn-default" ng-click="todoItemDialog()" style="height: 41px; padding: 10px;">
                 <span class="fa fa-plus"></span>
                 Add todo item
@@ -92,53 +92,54 @@
     </table>
 </div>
 
+<div ng-if="activityItems.length > 0">
 <todo-item-dialog activities="activityItems" item="todoItem" refreshAction="refreshTodoItems()"/>
-
-<div class="modal fade-scale" id="multipleTodoItemsDialog" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="width: 800px;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h3 class="modal-title" id="lineModalLabel">Multiple todo items</h3>
-            </div>
-            <div class="modal-body">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="col-md-4">Task description</th>
-                            <th class="col-md-2">DEADLINE</th>
-                            <th class="col-md-1">Duration</th>
-                            <th class="col-md-2">Activity</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="item in multipleTodoItems" class="test-row">
-                            <td class="cell-input">
-                                <input type="text" class="table-input form-control" placeholder="Description.." ng-model="item.Description" />
-                            </td>
-                            <td class="cell-input">
-                                <p class="input-group">
-                                    <input type="text" class="form-control" uib-datepicker-popup="{{dateFormat}}" ng-model="item.Deadline" is-open="item.PickerOpened"
-                                           datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="openDatePicker(item)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                    </span>
-                                </p>
-                            </td>
-                            <td class="cell-input">
-                                <input type="text" class="table-input form-control" placeholder="Duration (hours).." ng-model="item.Duration" />
-                            </td>
-                            <td class="cell-input">
-                                <select ng-model="item.ActivityId" class="form-control table-input"
-                                        ng-options="activityItem.Id as activityItem.Name for activityItem in activityItems"></select>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="initTodoItem(0, true)">Close</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="saveMultipleTodoItems()">Save</button>
+    <div class="modal fade-scale" id="multipleTodoItemsDialog" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 800px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h3 class="modal-title" id="lineModalLabel">Multiple todo items</h3>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="col-md-4">Task description</th>
+                                <th class="col-md-2">DEADLINE</th>
+                                <th class="col-md-1">Duration</th>
+                                <th class="col-md-2">Activity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in multipleTodoItems" class="test-row">
+                                <td class="cell-input">
+                                    <input type="text" class="table-input form-control" placeholder="Description.." ng-model="item.Description" />
+                                </td>
+                                <td class="cell-input">
+                                    <p class="input-group">
+                                        <input type="text" class="form-control" uib-datepicker-popup="{{dateFormat}}" ng-model="item.Deadline" is-open="item.PickerOpened"
+                                               datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openDatePicker(item)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </p>
+                                </td>
+                                <td class="cell-input">
+                                    <input type="text" class="table-input form-control" placeholder="Duration (hours).." ng-model="item.Duration" />
+                                </td>
+                                <td class="cell-input">
+                                    <select ng-model="item.ActivityId" class="form-control table-input"
+                                            ng-options="activityItem.Id as activityItem.Name for activityItem in activityItems"></select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="initTodoItem(0, true)">Close</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="saveMultipleTodoItems()">Save</button>
+                </div>
             </div>
         </div>
     </div>

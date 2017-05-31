@@ -12,6 +12,8 @@
         <AssociationConnector Association="DataModel.ActivityTodoItem" />
         <EntityTypeShape EntityType="DataModel.Tag" Width="1.5" PointX="6.25" PointY="5.375" />
         <AssociationConnector Association="DataModel.TodoItemTag" />
+        <EntityTypeShape EntityType="DataModel.User" Width="1.5" PointX="3.125" PointY="5" />
+        <AssociationConnector Association="DataModel.UserGoals" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

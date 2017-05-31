@@ -10,6 +10,7 @@
     <EntitySet Name="Activities" EntityType="DataModel.Store.Activities" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TodoItems" EntityType="DataModel.Store.TodoItems" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Tags" EntityType="DataModel.Store.Tags" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="DataModel.Store.Users" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TodoItemTag" EntityType="DataModel.Store.TodoItemTag" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="CategoryActivity" Association="DataModel.Store.CategoryActivity">
       <End Role="Category" EntitySet="Goals" />
@@ -27,6 +28,10 @@
       <End Role="Tag" EntitySet="Tags" />
       <End Role="TodoItemTag" EntitySet="TodoItemTag" />
     </AssociationSet>
+    <AssociationSet Name="UserGoals" Association="DataModel.Store.UserGoals">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Goal" EntitySet="Goals" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Goals">
     <Key>
@@ -39,6 +44,7 @@
     <Property Name="MinHoursPerWeek" Type="smallint" Nullable="false" />
     <Property Name="MaxHoursPerWeek" Type="smallint" Nullable="false" />
     <Property Name="Color" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Activities">
     <Key>
@@ -72,6 +78,17 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsAdmin" Type="bit" Nullable="false" />
+    <Property Name="DateJoined" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="TodoItemTag">
     <Key>
       <PropertyRef Name="TodoItems_Id" />
@@ -101,6 +118,18 @@
       </Principal>
       <Dependent Role="TodoItem">
         <PropertyRef Name="ActivityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserGoals">
+    <End Role="User" Type="DataModel.Store.Users" Multiplicity="0..1" />
+    <End Role="Goal" Type="DataModel.Store.Goals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Goal">
+        <PropertyRef Name="User_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -149,6 +178,11 @@
             <End Role="TodoItem" EntitySet="TodoItems" />
             <End Role="Tag" EntitySet="Tags" />
           </AssociationSet>
+          <EntitySet Name="Users" EntityType="DataModel.User" />
+          <AssociationSet Name="UserGoals" Association="DataModel.UserGoals">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Goal" EntitySet="Goals" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Goal">
           <Key>
@@ -162,6 +196,7 @@
           <Property Name="MinHoursPerWeek" Type="Int16" Nullable="false" />
           <Property Name="MaxHoursPerWeek" Type="Int16" Nullable="false" />
           <Property Name="Color" Type="String" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="DataModel.UserGoals" FromRole="Goal" ToRole="User" />
         </EntityType>
         <EntityType Name="Activity">
           <Key>
@@ -228,6 +263,22 @@
           <End Type="DataModel.TodoItem" Role="TodoItem" Multiplicity="*" />
           <End Type="DataModel.Tag" Role="Tag" Multiplicity="*" />
         </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Goals" Relationship="DataModel.UserGoals" FromRole="User" ToRole="Goal" />
+          <Property Name="Username" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="DateJoined" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <Association Name="UserGoals">
+          <End Type="DataModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="DataModel.Goal" Role="Goal" Multiplicity="0..1" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -282,6 +333,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="DateJoined" ColumnName="DateJoined" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="TodoItemTag" TypeName="DataModel.TodoItemTag" StoreEntitySet="TodoItemTag">
       <EndProperty Name="TodoItem">
         <ScalarProperty Name="Id" ColumnName="TodoItems_Id" />
@@ -289,6 +352,15 @@
       <EndProperty Name="Tag">
         <ScalarProperty Name="Id" ColumnName="Tags_Id" />
       </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserGoals" TypeName="DataModel.UserGoals" StoreEntitySet="Goals">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="Goal">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="User_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
