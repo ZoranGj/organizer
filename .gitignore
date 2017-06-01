@@ -23,3 +23,8 @@
 /Organizer/Organizer.Model/obj/Release
 /Organizer/Organizer.Tests/bin/Release
 /Organizer/Organizer.Tests/obj/Release
+/Organizer/Organizer.Model/obj/x86/Release
+/Organizer/Organizer.Model/bin/x86/Release
+/Organizer/Organizer.WebClient/bin
+/Organizer/Organizer.WebClient/obj/Debug
+/Organizer/Organizer.ClientResources/obj/Debug
