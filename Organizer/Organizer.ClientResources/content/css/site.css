@@ -221,12 +221,33 @@ button.list-group-item {
     color: #fff;
 }
 
+.action-wrapper {
+    display: inline-block;
+}
+    .action-wrapper .dropdown-menu {
+        min-width: 130px;
+    }
+        .action-wrapper .dropdown-menu li a {
+            padding: 3px 12px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+            .action-wrapper .dropdown-menu li a span {
+                margin-right: 3px;
+            }
+
+.dropdown-menu {
+    margin-top: -3px !important;
+}
+
+.show-on-hover:hover > ul.dropdown-menu {
+    display: block;    
+}
+
 .activity-action {
     cursor: pointer;
-    padding: 1px 6px;
     position: relative;
-    margin-top: -30px;
-    display: inline-block;
+    margin-top: -31px;
     float: right;
     color: #fff;
     font-weight: normal;

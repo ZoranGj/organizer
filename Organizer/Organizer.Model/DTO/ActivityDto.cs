@@ -13,6 +13,11 @@ namespace Organizer.Model.DTO
         public string Name { get; set; }
         public int ActiveTodosNumber { get; set; }
         public int ResolvedTodosNumber { get; set; }
+        public DateTime? Start { get; set; }
+        public bool IsStarted { get; set; }
+        public DateTime? End { get; set; }
+        public bool StartEdit { get; set; }
+        public bool EndEdit { get; set; }
 
         public ActivityDto(Activity entity, int goalId)
         {
@@ -21,6 +26,9 @@ namespace Organizer.Model.DTO
             ActiveTodosNumber = entity.TodoItems.Count(t => !t.Resolved);
             ResolvedTodosNumber = entity.TodoItems.Count(t => t.Resolved);
             GoalId = goalId;
+            Start = entity.StartDate;
+            End = entity.CompletionDate;
+            IsStarted = entity.StartDate.HasValue;
         }
 
         public ActivityDto() { }

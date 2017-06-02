@@ -71,7 +71,7 @@
     $scope.addActivity = function (goal) {
         if (goal.Activities.filter(function (item) {
                 return item.Draft == true;
-            }).length > 0) {
+        }).length > 0) {
             focusActivity(goal);
             return;
         }
@@ -118,6 +118,28 @@
         if (valid === false) return;
         goalsCtrl.updateSetting(goal.Id, parseInt(goal.MinHoursPerWeek), parseInt(goal.MaxHoursPerWeek), goal.Color);
     }
+
+    $scope.updateActivity = function (activity, valid) {
+        if (valid === false) return;
+        var plannedCompletionDate = activity.PlannedCompletionDate || null;
+        var startDate = activity.StartDate || null;
+        goalsCtrl.updateActivity(activity.Id, activity.Name, startDate, activity.PlannedCompletionDate);
+    }
+
+    $scope.datePickerStart = function (activity) {
+        activity.StartEdit = true;
+    }
+
+    $scope.datePickerEnd = function (activity) {
+        activity.EndEdit = true;
+    }
+
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+    };
+
+    $scope.dateFormat = 'dd.MM.yyyy';
 
     $scope.updateGoalName = function (id, value) {
         if (!id || !value) return;

@@ -21,27 +21,27 @@ namespace Model.Setup {
                 new Tag { Name = "Algorithms" },
             };
 
-            foreach (var tag in predefinedTags)
-            {
-                if (!dbContext.Tags.Any(t => t.Name == tag.Name))
-                {
-                    dbContext.Tags.Add(tag);
-                }
-            }
+            //foreach (var tag in predefinedTags)
+            //{
+            //    if (!dbContext.Tags.Any(t => t.Name == tag.Name))
+            //    {
+            //        dbContext.Tags.Add(tag);
+            //    }
+            //}
 
-            if (!dbContext.Users.Any(u => u.IsAdmin))
-            {
-                dbContext.Users.Add(new User
-                {
-                    DateJoined = DateTime.Now,
-                    IsAdmin = true,
-                    Username = "Zoran Gj",
-                    Email = "zoran.gjuroski@gmail.com",
-                    Password = "pass",
-                });
-            }
+            //if (!dbContext.Users.Any(u => u.IsAdmin))
+            //{
+            //    dbContext.Users.Add(new User
+            //    {
+            //        DateJoined = DateTime.Now,
+            //        IsAdmin = true,
+            //        Username = "Zoran Gj",
+            //        Email = "zoran.gjuroski@gmail.com",
+            //        Password = "pass",
+            //    });
+            //}
 
-            dbContext.SaveChanges();
+            //dbContext.SaveChanges();
         }
 	}
 }

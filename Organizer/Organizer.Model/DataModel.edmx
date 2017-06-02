@@ -44,6 +44,8 @@
     <Property Name="MinHoursPerWeek" Type="smallint" Nullable="false" />
     <Property Name="MaxHoursPerWeek" Type="smallint" Nullable="false" />
     <Property Name="Color" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Start" Type="datetime" Nullable="true" />
+    <Property Name="End" Type="datetime" Nullable="true" />
     <Property Name="User_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Activities">
@@ -56,6 +58,9 @@
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="GoalId" Type="int" Nullable="false" />
     <Property Name="Completed" Type="bit" Nullable="false" />
+    <Property Name="PlannedCompletionDate" Type="datetime" Nullable="true" />
+    <Property Name="CompletionDate" Type="datetime" Nullable="true" />
+    <Property Name="StartDate" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="TodoItems">
     <Key>
@@ -197,6 +202,8 @@
           <Property Name="MaxHoursPerWeek" Type="Int16" Nullable="false" />
           <Property Name="Color" Type="String" Nullable="false" />
           <NavigationProperty Name="User" Relationship="DataModel.UserGoals" FromRole="Goal" ToRole="User" />
+          <Property Name="Start" Type="DateTime" Nullable="true" />
+          <Property Name="End" Type="DateTime" Nullable="true" />
         </EntityType>
         <EntityType Name="Activity">
           <Key>
@@ -210,6 +217,9 @@
           <Property Name="GoalId" Type="Int32" Nullable="false" />
           <Property Name="Completed" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TodoItems" Relationship="DataModel.ActivityTodoItem" FromRole="Activity" ToRole="TodoItem" />
+          <Property Name="PlannedCompletionDate" Type="DateTime" Nullable="true" />
+          <Property Name="CompletionDate" Type="DateTime" Nullable="true" />
+          <Property Name="StartDate" Type="DateTime" Nullable="true" />
         </EntityType>
         <Association Name="CategoryActivity">
           <End Type="DataModel.Goal" Role="Category" Multiplicity="1" />
@@ -295,6 +305,8 @@
           <ScalarProperty Name="MinHoursPerWeek" ColumnName="MinHoursPerWeek" />
           <ScalarProperty Name="MaxHoursPerWeek" ColumnName="MaxHoursPerWeek" />
           <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Start" ColumnName="Start" />
+          <ScalarProperty Name="End" ColumnName="End" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -307,6 +319,9 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="GoalId" ColumnName="GoalId" />
           <ScalarProperty Name="Completed" ColumnName="Completed" />
+          <ScalarProperty Name="PlannedCompletionDate" ColumnName="PlannedCompletionDate" />
+          <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

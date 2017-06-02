@@ -14,11 +14,15 @@ namespace Organizer.Client.API
 {
     public class TodosController : AppController
     {
+        private readonly GoalsProvider _goalsProvider;
+        private readonly ActivitiesProvider _activitiesProvider;
         private readonly TodoItemsProvider _todoItemsProvider;
         private readonly TagsProvider _tagsProvider;
 
         public TodosController(ChromiumWebBrowser originalBrowser, MainWindow mainForm, DataContext dbContext) : base(originalBrowser, mainForm)
         {
+            _goalsProvider = new GoalsProvider(dbContext);
+            _activitiesProvider = new ActivitiesProvider(dbContext);
             _todoItemsProvider = new TodoItemsProvider(dbContext);
             _tagsProvider = new TagsProvider(dbContext);
         }
@@ -93,6 +97,19 @@ namespace Organizer.Client.API
                 Duration = duration,
                 Resolved = resolved,
             });
+
+            var activity = _activitiesProvider.GetById(activityId);
+            if (activity != null && activity.StartDate == null)
+            {
+                var date = activity.TodoItems.Min(t => t.AddedOn);
+                activity.StartDate = date;
+                var goal = _goalsProvider.GetById(activity.GoalId);
+                if (goal != null && goal.Start == null)
+                {
+                    goal.Start = date;
+                }
+            }
+
             _todoItemsProvider.Save();
         }
 

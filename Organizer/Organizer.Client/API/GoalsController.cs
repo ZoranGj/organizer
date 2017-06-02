@@ -105,7 +105,7 @@ namespace Organizer.Client.API
                     Name = name,
                     Description = null,
                     GoalId = goalId,
-                    Priority = 2
+                    Priority = 2,
                 });
             }
             else
@@ -134,6 +134,18 @@ namespace Organizer.Client.API
                 Name = x.Name,
                 Id = x.Id
             }).ToList().Serialize();
+        }
+
+        public void UpdateActivity(int id, string name, DateTime? startDate = null, DateTime? plannedCompletionDate = null)
+        {
+            var activity = _acivitiesProvider.GetById(id);
+            if (activity != null)
+            {
+                activity.Name = name;
+                activity.StartDate = startDate;
+                activity.PlannedCompletionDate = plannedCompletionDate;
+                _goalsProvider.Save();
+            }
         }
 
         #endregion

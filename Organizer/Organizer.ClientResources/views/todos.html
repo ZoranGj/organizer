@@ -28,10 +28,10 @@
             <tr>
                 <th class="col-md-4">Task description</th>
                 <th class="col-md-2">DEADLINE</th>
-                <th class="col-md-1">Time</th>
                 <th class="col-md-1">Duration</th>
                 <th class="col-md-3">Tags</th>
                 <th class="col-md-1">Activity</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -47,7 +47,6 @@
                 <td>
                     <editable id="item.Id" value="item.Duration" on-edit="updateTodoDuration(item.Id, item.Duration)"></editable>
                 </td>
-                <td>{{item.Activity}}</td>
                 <td>
                     <div class="tags">
                         <div class="tag tag-todo" ng-repeat="tag in item.Tags">
@@ -55,6 +54,7 @@
                         </div>
                     </div>                
                 </td>
+                <td>{{item.Activity}}</td>
                 <td colspan="2">
                     <div class="modal fade-scale" id="dialogTestDialog{{$index}}" tabindex="-1" role="dialog" aria-labelledby="executionOptionLabel"
                          aria-hidden="true">
