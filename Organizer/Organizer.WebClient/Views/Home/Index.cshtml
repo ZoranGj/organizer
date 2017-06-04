@@ -1,31 +1,131 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@{ 
+    Layout = null;
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<!DOCTYPE html>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="../content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../content/css/datetimepicker.css" rel="stylesheet" />
+    <link href="../content/css/site.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.9.2/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="../content/css/angular-ui-notification.min.css" rel="stylesheet" />
+    <link href="../content/css/angularjs-color-picker.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="../scripts/libraries/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="https://momentjs.com/downloads/moment.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.0/ui-bootstrap-tpls.min.js"></script>
+
+    <script type="text/javascript" src="../scripts/libraries/calendar.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="../scripts/libraries/angular-ui-notification.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.1/tinycolor.min.js"></script>
+    <script type="text/javascript" src="../scripts/libraries/angularjs-color-picker.js"></script>
+
+</head>
+<body ng-app="ngApp">
+    <div ng-controller="MainController">
+        <div id="menu" class="navbar navbar-default navbar-fixed-top">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#goals" ng-class="{active: isActiveView('goals')}">
+                            <span class="menu-icon fa fa-calendar-check-o"></span>
+                            <span class="menu-text">Goals</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#todos" ng-class="{active: isActiveView('todos')}">
+                            <span class="menu-icon fa fa-tasks"></span>
+                            <span class="menu-text">Work</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#calendar" ng-class="{active: isActiveView('calendar')}">
+                            <span class="menu-icon fa fa-calendar"></span>
+                            <span class="menu-text">Calendar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#reports" ng-class="{active: isActiveView('reports')}">
+                            <span class="menu-icon fa fa-bar-chart"></span>
+                            <span class="menu-text">Productivity</span>
+                        </a>
+                    </li>
+                    <li class="dropdown dropdown-large" ng-show="upcomingNotifications.length > 0 || expiredNotifications.length > 0">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="menu-icon fa fa-bell"></span>
+                            <span class="menu-text">Status <span class="badge text-danger" ng-show="expiredNotifications.length > 0">{{expiredNotifications.length}}</span></span>
+                        </a>
+
+                        <notifications expired="expiredNotifications" upcoming="upcomingNotifications"></notifications>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="viewContainer">
+            <div class="col-sm-12" ng-view autoscroll="true">
+
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+
+    <div class="modal fade" id="notification" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title text-center" id="lineModalLabel">{{notification.title}}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{notification.message}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+    <script>
+        window.onerror = function (errorMessage, url, lineNumber)
+        {
+            try {
+                throw new Error("get current stack trace");
+            } catch (e) {
+                stackTrace = e.trace;
+                alert(errorMessage);
+            }
+        };
+    </script>
+
+    <script src="/scripts/application/app.js"></script>
+    <script src="../scripts/application/constants.js"></script>
+    <script src="../scripts/application/services/goalsService.js"></script>
+    <script src="../scripts/application/services/tasksService.js"></script>
+    <script src="../scripts/application/services/reportsService.js"></script>
+    <script src="../scripts/application/services/notificationsService.js"></script>
+    <script src="../scripts/application/controllers/mainController.js"></script>
+    <script src="../scripts/application/controllers/goalsController.js"></script>
+    <script src="../scripts/application/controllers/todoItemsController.js"></script>
+    <script src="../scripts/application/controllers/reportsController.js"></script>
+    <script src="../scripts/application/controllers/calendarController.js"></script>
+    <script src="../scripts/application/directives/tags.js"></script>
+    <script src="../scripts/application/directives/calendarEvent.js"></script>
+    <script src="../scripts/application/directives/todoItem.js"></script>
+    <script src="../scripts/application/directives/notifications.js"></script>
+    <script src="../scripts/application/directives/editable.js"></script>
+</body>
+</html>

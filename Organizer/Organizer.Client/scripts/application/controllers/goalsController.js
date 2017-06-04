@@ -1,7 +1,7 @@
 ﻿app.controller('GoalsController', function ($scope, $timeout, COLORS) {
     $scope.goal = {
         name: '',
-        color: 'rgb(92,184,92)',
+        color: COLORS.green,
     };
     $scope.activity = {};
     $scope.activities = [];

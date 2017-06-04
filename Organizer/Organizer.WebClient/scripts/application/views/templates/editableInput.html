@@ -1,0 +1,11 @@
+﻿<span ng-style="{'color': color}" class="editable-label editable-item" ng-show="!editInput" ng-click="edit()">{{model}}</span>
+
+<div class="editable-form editable-item" ng-show="editInput">
+    <input type="text" class="form-control input-sm" ng-model="model"/>
+    <button type="button" class="btn btn-default btn-sm" ng-click="saveValue()">
+        <span class="fa fa-save"></span>
+    </button>
+    <button type="button" class="btn btn-default btn-sm" ng-click="cancel()">
+        <span class="fa fa-times"></span>
+    </button>
+</div>

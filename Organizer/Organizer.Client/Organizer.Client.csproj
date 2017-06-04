@@ -142,24 +142,19 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="..\Organizer.ClientResources\content\css\bootstrap.min.css.map">
-      <Link>content\css\bootstrap.min.css.map</Link>
+    <None Include="content\css\bootstrap.min.css.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Organizer.ClientResources\content\fonts\glyphicons-halflings-regular.eot">
-      <Link>content\fonts\glyphicons-halflings-regular.eot</Link>
+    <None Include="content\fonts\glyphicons-halflings-regular.eot">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Organizer.ClientResources\content\fonts\glyphicons-halflings-regular.ttf">
-      <Link>content\fonts\glyphicons-halflings-regular.ttf</Link>
+    <None Include="content\fonts\glyphicons-halflings-regular.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Organizer.ClientResources\content\fonts\glyphicons-halflings-regular.woff">
-      <Link>content\fonts\glyphicons-halflings-regular.woff</Link>
+    <None Include="content\fonts\glyphicons-halflings-regular.woff">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\Organizer.ClientResources\content\fonts\glyphicons-halflings-regular.woff2">
-      <Link>content\fonts\glyphicons-halflings-regular.woff2</Link>
+    <None Include="content\fonts\glyphicons-halflings-regular.woff2">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Organizer.Client_TemporaryKey.pfx" />
@@ -182,150 +177,35 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Organizer.ClientResources\business.ico">
-      <Link>business.ico</Link>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\content\css\angular-ui-notification.min.css">
-      <Link>content\css\angular-ui-notification.min.css</Link>
+    <Content Include="business.ico" />
+    <Content Include="content\css\angular-ui-notification.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Organizer.ClientResources\content\css\angularjs-color-picker.min.css">
-      <Link>content\css\angularjs-color-picker.min.css</Link>
+    <Content Include="content\css\angularjs-color-picker.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Organizer.ClientResources\content\css\bootstrap.min.css">
-      <Link>content\css\bootstrap.min.css</Link>
+    <Content Include="content\css\bootstrap.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Organizer.ClientResources\content\css\datetimepicker.css">
-      <Link>content\css\datetimepicker.css</Link>
+    <Content Include="content\css\datetimepicker.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Organizer.ClientResources\content\css\site.css">
-      <Link>content\css\site.css</Link>
+    <Content Include="content\css\site.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Organizer.ClientResources\content\fonts\glyphicons-halflings-regular.svg">
-      <Link>content\fonts\glyphicons-halflings-regular.svg</Link>
+    <Content Include="content\fonts\glyphicons-halflings-regular.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Organizer.ClientResources\content\images\business.ico">
-      <Link>content\images\business.ico</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\application\app.js">
-      <Link>scripts\application\app.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\application\constants.js">
-      <Link>scripts\application\constants.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\application\directives\calendarEvent.js">
-      <Link>scripts\application\directives\calendarEvent.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\application\directives\editable.js">
-      <Link>scripts\application\directives\editable.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\application\directives\notifications.js">
-      <Link>scripts\application\directives\notifications.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\application\directives\tags.js">
-      <Link>scripts\application\directives\tags.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\application\directives\todoItem.js">
-      <Link>scripts\application\directives\todoItem.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\libraries\angular-ui-notification.js">
-      <Link>scripts\libraries\angular-ui-notification.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\libraries\angular.min.js">
-      <Link>scripts\libraries\angular.min.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\libraries\angularjs-color-picker.js">
-      <Link>scripts\libraries\angularjs-color-picker.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\libraries\angularjs-color-picker.min.js">
-      <Link>scripts\libraries\angularjs-color-picker.min.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\libraries\bootstrap.js">
-      <Link>scripts\libraries\bootstrap.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\libraries\bootstrap.min.js">
-      <Link>scripts\libraries\bootstrap.min.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\libraries\calendar.js">
-      <Link>scripts\libraries\calendar.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\libraries\datetimepicker.js">
-      <Link>scripts\libraries\datetimepicker.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\libraries\datetimepicker.templates.js">
-      <Link>scripts\libraries\datetimepicker.templates.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\libraries\jquery-1.12.4.min.js">
-      <Link>scripts\libraries\jquery-1.12.4.min.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\scripts\libraries\jquery-ui.js">
-      <Link>scripts\libraries\jquery-ui.js</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\views\calendar.html">
-      <Link>views\calendar.html</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\views\goals.html">
-      <Link>views\goals.html</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\views\index.html">
-      <Link>views\index.html</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\views\reports.html">
-      <Link>views\reports.html</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\views\reports_tags.html">
-      <Link>views\reports_tags.html</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\views\templates\editableInput.html">
-      <Link>views\templates\editableInput.html</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\views\templates\modal.html">
-      <Link>views\templates\modal.html</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\views\templates\todoItem.html">
-      <Link>views\templates\todoItem.html</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\views\templates\todoItemNotifications.html">
-      <Link>views\templates\todoItemNotifications.html</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Organizer.ClientResources\views\todos.html">
-      <Link>views\todos.html</Link>
+    <Content Include="content\images\business.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Organizer.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\app.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\constants.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="scripts\application\controllers\calendarController.js">
@@ -343,10 +223,88 @@
     <Content Include="scripts\application\controllers\todoItemsController.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="scripts\application\directives\calendarEvent.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\directives\editable.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\directives\notifications.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\directives\tags.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\directives\todoItem.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="scripts\application\services\notificationsService.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="scripts\application\services\reportsService.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\angular-ui-notification.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\angular.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\angularjs-color-picker.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\angularjs-color-picker.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\bootstrap.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\bootstrap.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\calendar.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\datetimepicker.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\datetimepicker.templates.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\jquery-1.12.4.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\jquery-ui.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="views\calendar.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="views\goals.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="views\index.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="views\reports.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="views\reports_tags.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="views\templates\editableInput.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="views\templates\modal.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="views\templates\todoItem.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="views\templates\todoItemNotifications.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="views\todos.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

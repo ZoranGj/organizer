@@ -1,0 +1,163 @@
+﻿<div ng-init="initializeGoals()" class="col-md-12">
+    <div id="goals">
+        <div data-id="{{goal.Id}}" ng-repeat="goal in goals" class="col-md-4 card goal">
+            <div class="list-group-item list-group-item-primary" ng-style="{'background-color': goal.Color}">
+                <editable id="goal.Id" value="goal.Name" on-edit="updateGoalName(goal.Id, goal.Name)" ng-click="alert()" color="editableColor"></editable>
+                
+                <span class="fa fa-times text-danger pull-right lead action" ng-click="deleteGoal(goal, $index)"></span>
+                <div class="modal fade-scale" id="goalDialog{{$index}}" tabindex="-1" role="dialog" aria-labelledby="executionOptionLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" style="width: 550px;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                <h3 class="modal-title">Update goal</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form name="goalForm">
+                                    <div class="form-group">
+                                        <label>MIN productivity (hours per week):</label>
+                                        <input type="text" class="table-input form-control" name="min" ng-model="goal.MinHoursPerWeek" value="goal.MinHoursPerWeek" required />
+                                        <span ng-show="goalForm.min.$touched && goalForm.min.$invalid" class="validate-msg">*The field is required</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>IDEAL productivity (hours per week):</label>
+                                        <input type="text" class="table-input form-control" name="max" ng-model="goal.MaxHoursPerWeek" value="goal.MinHoursPerWeek" required />
+                                        <span ng-show="goalForm.max.$touched && goalForm.max.$invalid" class="validate-msg">*The field is required</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Color:</label>
+                                        <color-picker class="color-picker" options="$parent.colorOptions" ng-model="goal.Color"></color-picker>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-success" data-dismiss="modal" ng-disabled="!goalForm.$valid" ng-click="updateGoal(goal, goalForm.$valid)">Save</button>
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+                <span class="fa fa-cog pull-right lead action" data-toggle="modal" data-target="#goalDialog{{$index}}"></span>
+                <span class="fa fa-arrows pull-right lead action"></span>
+            </div>
+            <div class="wrapper">
+                <ul class="list-group">
+                    <li ng-repeat="activity in goal.Activities" ng-mouseenter="showicons=true" ng-focus="showicons=true" ng-mouseleave="showicons=false">
+                        <input data-id="{{activity.Id}}" type="text" class="form-control list-group-item activity" style="border-radius: 0;"
+                               ng-model="activity.Name" ng-keydown="showicons=true" />
+
+                        <div class="dropdown pull-right action-wrapper" ng-show="showicons">
+                            <a id="dLabel" role="button" data-toggle="dropdown" class="activity-action btn btn-sm" ng-style="{'background-color': goal.Color}">
+                                Actions <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                <li>
+                                    <a ng-click="saveActivity()">
+                                        <span class="fa fa-floppy-o" ng-style="{'color': goal.Color}"></span> Save changes
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="modal" data-target="#activityDialog{{$index}}">
+                                        <span class="fa fa-pencil" ng-style="{'color': goal.Color}"></span> Activity details
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-click="todoItemDialog(activity)">
+                                        <span class="fa fa-pencil" ng-style="{'color': goal.Color}"></span> Add task
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-click="deleteActivity(goal, $index)">
+                                        <span class="fa fa-times" ng-style="{'color': goal.Color}"></span> Delete
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="modal fade-scale" id="activityDialog{{$index}}" tabindex="-1" role="dialog" aria-labelledby="executionOptionLabel" aria-hidden="true">
+                            <div class="modal-dialog" style="width: 550px;">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                        <h3 class="modal-title">Activity details</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form name="activityForm">
+                                            <div class="form-group">
+                                                <label>Name:</label>
+                                                <input type="text" class="table-input form-control" name="name" ng-model="activity.Name" value="activity.Name" required />
+                                                <span ng-show="activityForm.name.$touched && activityForm.name.$invalid" class="validate-msg">*The field is required</span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Acticity start:</label>
+                                                <div ng-if="!activity.IsStarted">
+                                                    <p class="input-group">
+                                                        <input type="text" name="start" class="form-control" ng-model="activity.StartDate" is-open="activity.StartEdit"
+                                                               datepicker-options="dateOptions" ng-required="true" close-text="Close" uib-datepicker-popup="{{dateFormat}}" />
+                                                        <span class="input-group-btn">
+                                                            <button type="button" class="btn btn-default" ng-click="datePickerStart(activity)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                        </span>
+                                                    </p>
+                                                    <span ng-show="activityForm.start.$touched && activityForm.start.$invalid" class="validate-msg">*The field is required</span>
+                                                </div>
+                                                <p ng-if="activity.IsStarted">
+                                                    {{activity.Start}}
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Ends on:</label>                                                
+                                                <p class="input-group">
+                                                    <input type="text" name="plannedCompletionDate" class="form-control" ng-model="activity.PlannedCompletionDate" is-open="activity.EndEdit"
+                                                            datepicker-options="dateOptions" close-text="Close" uib-datepicker-popup="{{dateFormat}}" />
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default" ng-click="datePickerEnd(activity)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-success" data-dismiss="modal" ng-disabled="!activityForm.$valid" ng-click="updateActivity(activity, activityForm.$valid)">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="pull-right" ng-show="showicons">
+                            <button type="button" class="btn btn-default activity-action" ng-click="deleteActivity(goal, $index)" ng-style="{'background-color': goal.Color}" style="right:5px;">
+                                <span class="fa fa-times"></span>
+                            </button>
+                            <button type="button" class="btn btn-default activity-action" ng-click="todoItemDialog(activity)" ng-style="{'background-color': goal.Color}" style="right:35px;">
+                                <span class="fa fa-pencil"></span>
+                            </button>
+                            <button type="button" class="btn btn-default activity-action" ng-click="saveActivity()" ng-style="{'background-color': goal.Color}" style="right:65px;">
+                                <span class="fa fa-floppy-o"></span>
+                            </button>
+                        </div>-->
+                    </li>
+                </ul>
+            </div>
+            <button type="button" class="list-group-item btn-default text-muted" ng-click="addActivity(goal)">
+                <span class="fa fa-plus" ng-style="{'color': goal.Color}"></span> 
+                <span  ng-style="{'color': goal.Color}">Add activity</span>
+            </button>
+        </div>
+        <div id="newGoal" ng-show="showNewGoal" class="col-md-4 card goal">
+            <div class="list-group-item list-group-item-primary bordered">
+                <div class="input-group">
+                    <input id="goalName" type="text" class="form-control" ng-model="goal.name" placeholder="{{constants.goalName}}" />
+                    <span class="input-group-addon btn btn-sm btn-info" ng-click="saveGoal()">Save</span>
+                    <span class="input-group-addon btn btn-sm" ng-click="cancelAddingGoal()"><span class="fa fa-times text-danger"></span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <button ng-click="addGoal()" type="button" class="btn btn-default btn-lg">
+            <span class="fa fa-plus lead text-info"></span> Add Goal
+        </button>
+    </div>
+</div>
+
+<todo-item-dialog activities="activityItems" item="todoItem" refreshAction="$parent.initialize()"/>

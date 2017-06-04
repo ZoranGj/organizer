@@ -1,0 +1,24 @@
+﻿<div class="reports" ng-init="initReports()">
+    <div class="filter">
+        <div class="col-md-3">
+            <div>
+                <select ng-model="goal" class="form-control table-input" ng-change="goalChanged()"
+                        ng-options="item.Id as item.Name for item in goals"></select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div>
+                <a class="btn btn-default btn-h" href="#reports_tags">
+                    Tags reports <span class="fa fa-caret-right green"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="chartWrapper" ng-show="displayDiagram">
+        <canvas id="myChart"></canvas>
+    </div>
+    <p class="no-data" ng-show="msgNoData">
+        There aren't recorded activities for the chosen Goal yet. Go and be productive!
+    </p>
+</div>

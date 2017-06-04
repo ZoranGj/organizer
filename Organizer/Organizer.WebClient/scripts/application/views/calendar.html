@@ -1,0 +1,22 @@
+﻿<div ng-init="initCalendarView()">
+    <div class="filter">
+        <div class="col-md-3">
+            <select ng-model="calendarGoal" class="form-control table-input" ng-change="calendarGoalChanged()"
+                    ng-options="item.Id as item.Name for item in calendarGoals">
+                <option value="">All goals</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <div class="btn-group">
+                <button class="btn btn-success btn-h" ng-click="changeView('agendaDay', 'myCalendar3')">AgendaDay</button>
+                <button class="btn btn-success btn-h" ng-click="changeView('agendaWeek', 'myCalendar3')">AgendaWeek</button>
+                <button class="btn btn-success btn-h" ng-click="changeView('month', 'myCalendar3')">Month</button>
+                <a href="#todos" class="btn btn-default btn-h">
+                    <span class="fa fa-tasks"></span>
+                    View todo list
+                </a>
+            </div>
+        </div>
+    </div>
+    <div ui-calendar="uiConfig.calendar" class="col-md-12 calendar" calendar="calendar" ng-model="eventSources"></div>
+</div>

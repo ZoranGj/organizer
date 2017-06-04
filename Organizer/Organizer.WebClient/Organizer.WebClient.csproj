@@ -44,6 +44,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -120,7 +128,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GoalsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Controllers\_BaseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -130,35 +142,125 @@
     <Content Include="..\Organizer.ClientResources\business.ico">
       <Link>business.ico</Link>
     </Content>
-    <Content Include="..\Organizer.ClientResources\content\css\angular-ui-notification.min.css">
-      <Link>content\css\angular-ui-notification.min.css</Link>
+    <Content Include="content\css\angular-ui-notification.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Organizer.ClientResources\content\css\angularjs-color-picker.min.css">
-      <Link>content\css\angularjs-color-picker.min.css</Link>
+    <Content Include="content\css\angularjs-color-picker.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Organizer.ClientResources\content\css\bootstrap.min.css">
-      <Link>content\css\bootstrap.min.css</Link>
+    <Content Include="content\css\bootstrap.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Organizer.ClientResources\content\css\datetimepicker.css">
-      <Link>content\css\datetimepicker.css</Link>
+    <Content Include="content\css\datetimepicker.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Organizer.ClientResources\content\css\site.css">
-      <Link>content\css\site.css</Link>
+    <Content Include="content\css\site.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Organizer.ClientResources\content\fonts\glyphicons-halflings-regular.svg">
-      <Link>content\fonts\glyphicons-halflings-regular.svg</Link>
+    <Content Include="content\fonts\glyphicons-halflings-regular.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Organizer.ClientResources\content\images\business.ico">
-      <Link>content\images\business.ico</Link>
+    <Content Include="content\images\business.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="scripts\application\app.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\constants.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\controllers\calendarController.js" />
+    <Content Include="scripts\application\controllers\goalsController.js" />
+    <Content Include="scripts\application\controllers\mainController.js" />
+    <Content Include="scripts\application\controllers\reportsController.js" />
+    <Content Include="scripts\application\controllers\todoItemsController.js" />
+    <Content Include="scripts\application\directives\calendarEvent.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\directives\editable.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\directives\notifications.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\directives\tags.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\directives\todoItem.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\services\goalsService.js" />
+    <Content Include="scripts\application\services\notificationsService.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\services\reportsService.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\services\tasksService.js" />
+    <Content Include="scripts\application\views\calendar.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\views\goals.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\views\index.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\views\reports.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\views\reports_tags.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\views\templates\editableInput.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\views\templates\modal.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\views\templates\todoItem.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\views\templates\todoItemNotifications.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\application\views\todos.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\angular-ui-notification.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\angular.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\angularjs-color-picker.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\angularjs-color-picker.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\bootstrap.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\bootstrap.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\calendar.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\datetimepicker.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\datetimepicker.templates.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\jquery-1.12.4.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\libraries\jquery-ui.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -168,37 +270,39 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Organizer.Model\Organizer.Model.csproj">
+      <Project>{e006a4da-dd9c-49d2-bcb5-bff9e8260e2d}</Project>
+      <Name>Organizer.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Organizer.ClientResources\content\css\bootstrap.min.css.map">
-      <Link>content\css\bootstrap.min.css.map</Link>
+    <Content Include="content\css\bootstrap.min.css.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Organizer.ClientResources\content\fonts\glyphicons-halflings-regular.eot">
-      <Link>content\fonts\glyphicons-halflings-regular.eot</Link>
+    <Content Include="content\fonts\glyphicons-halflings-regular.eot">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Organizer.ClientResources\content\fonts\glyphicons-halflings-regular.ttf">
-      <Link>content\fonts\glyphicons-halflings-regular.ttf</Link>
+    <Content Include="content\fonts\glyphicons-halflings-regular.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Organizer.ClientResources\content\fonts\glyphicons-halflings-regular.woff">
-      <Link>content\fonts\glyphicons-halflings-regular.woff</Link>
+    <Content Include="content\fonts\glyphicons-halflings-regular.woff">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Organizer.ClientResources\content\fonts\glyphicons-halflings-regular.woff2">
-      <Link>content\fonts\glyphicons-halflings-regular.woff2</Link>
+    <Content Include="content\fonts\glyphicons-halflings-regular.woff2">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Reports\" />
+    <Folder Include="Views\Tasks\" />
+    <Folder Include="Views\_Base\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
