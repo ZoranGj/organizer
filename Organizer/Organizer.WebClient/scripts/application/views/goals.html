@@ -2,7 +2,7 @@
     <div id="goals">
         <div data-id="{{goal.Id}}" ng-repeat="goal in goals" class="col-md-4 card goal">
             <div class="list-group-item list-group-item-primary" ng-style="{'background-color': goal.Color}">
-                <editable id="goal.Id" value="goal.Name" on-edit="updateGoalName(goal.Id, goal.Name)" ng-click="alert()" color="editableColor"></editable>
+                <editable id="goal.Id" value="goal.Name" on-edit="updateGoalName(goal.Id, goal.Name)" color="editableColor"></editable>
                 
                 <span class="fa fa-times text-danger pull-right lead action" ng-click="deleteGoal(goal, $index)"></span>
                 <div class="modal fade-scale" id="goalDialog{{$index}}" tabindex="-1" role="dialog" aria-labelledby="executionOptionLabel"

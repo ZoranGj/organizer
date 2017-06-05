@@ -1,0 +1,19 @@
+﻿<div>
+    <h2>Login:</h2>
+    <form name="form" novalidate>
+        <input type="text" ng-model="userLogin.username" />
+        <input type="password" class="text-control" ng-model="userLogin.password" />
+        <input type="button" class="btn btn-success" value="Sign In" data-ng-click="login()">
+    </form>
+</div>
+<br />
+<br />
+<div>
+    <h2>Register:</h2>
+    <form name="form" novalidate>
+        <input type="text" class="text-control" ng-model="userRegistration.username" />
+        <input type="email" class="text-control" ng-model="userRegistration.email" />
+        <input type="password" class="text-control" ng-model="userRegistration.password" />
+        <input type="submit" class="btn btn-success" value="Register" data-ng-click="register()">
+    </form>
+</div>

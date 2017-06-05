@@ -28,11 +28,19 @@ app.config(['$routeProvider',
             controller: 'ReportsController',
             activeView: 'reports'
         }).
+        when('/login', {
+            templateUrl: '/scripts/application/views/login.html',
+            controller: 'LoginController',
+            activeView: 'login'
+        }).
         otherwise({
             redirectTo: '/'
         });
   }]);
 
-app.config(['$locationProvider', function ($locationProvider) {
+app.config(['$locationProvider', '$httpProvider', function ($locationProvider, $httpProvider) {
     $locationProvider.hashPrefix('');
+
+    //configure authentication interceptor for adding user access token:
+    $httpProvider.interceptors.push('AuthInterceptor');
 }]);

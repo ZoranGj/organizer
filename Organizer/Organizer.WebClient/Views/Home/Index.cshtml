@@ -40,37 +40,43 @@
         <div id="menu" class="navbar navbar-default navbar-fixed-top">
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>
+                    <li ng-if="isAuthenticated">
                         <a href="#goals" ng-class="{active: isActiveView('goals')}">
                             <span class="menu-icon fa fa-calendar-check-o"></span>
                             <span class="menu-text">Goals</span>
                         </a>
                     </li>
-                    <li>
+                    <li ng-if="isAuthenticated">
                         <a href="#todos" ng-class="{active: isActiveView('todos')}">
                             <span class="menu-icon fa fa-tasks"></span>
                             <span class="menu-text">Work</span>
                         </a>
                     </li>
-                    <li>
+                    <li ng-if="isAuthenticated">
                         <a href="#calendar" ng-class="{active: isActiveView('calendar')}">
                             <span class="menu-icon fa fa-calendar"></span>
                             <span class="menu-text">Calendar</span>
                         </a>
                     </li>
-                    <li>
+                    <li ng-if="isAuthenticated">
                         <a href="#reports" ng-class="{active: isActiveView('reports')}">
                             <span class="menu-icon fa fa-bar-chart"></span>
                             <span class="menu-text">Productivity</span>
                         </a>
                     </li>
-                    <li class="dropdown dropdown-large" ng-show="upcomingNotifications.length > 0 || expiredNotifications.length > 0">
+                    <li ng-if="isAuthenticated" class="dropdown dropdown-large" ng-show="upcomingNotifications.length > 0 || expiredNotifications.length > 0">
                         <a class="dropdown-toggle" data-toggle="dropdown">
                             <span class="menu-icon fa fa-bell"></span>
                             <span class="menu-text">Status <span class="badge text-danger" ng-show="expiredNotifications.length > 0">{{expiredNotifications.length}}</span></span>
                         </a>
 
                         <notifications expired="expiredNotifications" upcoming="upcomingNotifications"></notifications>
+                    </li>
+                    <li ng-if="!isAuthenticated">
+                        <a href="#login" ng-class="{active: isActiveView('login')}">
+                            <span class="menu-icon fa fa-sign-in"></span>
+                            <span class="menu-text">Login</span>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -100,28 +106,31 @@
     </div>
 
     <script>
-        window.onerror = function (errorMessage, url, lineNumber)
-        {
-            try {
-                throw new Error("get current stack trace");
-            } catch (e) {
-                stackTrace = e.trace;
-                alert(errorMessage);
-            }
-        };
+        //window.onerror = function (errorMessage, url, lineNumber)
+        //{
+        //    try {
+        //        throw new Error("get current stack trace");
+        //    } catch (e) {
+        //        stackTrace = e.trace;
+        //        alert(errorMessage);
+        //    }
+        //};
     </script>
 
     <script src="/scripts/application/app.js"></script>
+    <script src="/scripts/application/auth.js"></script>
     <script src="../scripts/application/constants.js"></script>
     <script src="../scripts/application/services/goalsService.js"></script>
     <script src="../scripts/application/services/tasksService.js"></script>
     <script src="../scripts/application/services/reportsService.js"></script>
     <script src="../scripts/application/services/notificationsService.js"></script>
+    <script src="../scripts/application/services/authenticationService.js"></script>
     <script src="../scripts/application/controllers/mainController.js"></script>
     <script src="../scripts/application/controllers/goalsController.js"></script>
     <script src="../scripts/application/controllers/todoItemsController.js"></script>
     <script src="../scripts/application/controllers/reportsController.js"></script>
     <script src="../scripts/application/controllers/calendarController.js"></script>
+    <script src="../scripts/application/controllers/loginController.js"></script>
     <script src="../scripts/application/directives/tags.js"></script>
     <script src="../scripts/application/directives/calendarEvent.js"></script>
     <script src="../scripts/application/directives/todoItem.js"></script>

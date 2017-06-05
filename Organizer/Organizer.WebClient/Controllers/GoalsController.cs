@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Organizer.WebClient.Controllers
 {
+    [Authorize]
     public class GoalsController : BaseController
     {
         private GoalsProvider _goalsProvider;
