@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Organizer.WebClient.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class TasksController : BaseController
     {
         private readonly GoalsProvider _goalsProvider;

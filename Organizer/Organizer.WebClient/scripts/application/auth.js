@@ -10,13 +10,13 @@
             return config || $q.when(config);
         },
         response: function (response) {
-            if (response.status == "401") {
+            if (response.status == "401" || response.status == "404") {
                 $location.path('/login');
             }
             return response || $q.when(response);
         },
         responseError: function (rejection) {
-            if (rejection.status == "401") {
+            if (rejection.status == "401" || rejection.status == "404") {
                 $location.path('/login');
             }
             return $q.reject(rejection);

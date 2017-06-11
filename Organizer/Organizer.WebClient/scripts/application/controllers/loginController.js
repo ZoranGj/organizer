@@ -16,7 +16,7 @@
 
     function initializeLoginModel() {
         $scope.userLogin = {
-            username: '',
+            email: '',
             password: ''
         }
     }
@@ -27,6 +27,7 @@
         registerPromise.then(function (response) {
             initializeRegisterModel();
             sessionStorage.setItem('accessToken', response.data.accessToken);
+            $scope.$parent.isAuthenticated = true;
             $location.path('/');
         }, function (error) {
             alert('error on register');
@@ -41,6 +42,7 @@
             sessionStorage.setItem('userName', response.data.userName);
             sessionStorage.setItem('accessToken', response.data.accessToken);
             sessionStorage.setItem('refreshToken', response.data.refreshToken);
+            $scope.$parent.isAuthenticated = true;
             $location.path('/');
         }, function (error) {
             alert('error on login');

@@ -3,7 +3,6 @@
     var tasksService = {};
 
     tasksService.getAll = function (goalId) {
-        alert(goalId);
         return $http.get(urlBase + '/GetAll?goalid='+goalId);
     }
 

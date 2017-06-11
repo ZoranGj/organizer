@@ -12,7 +12,7 @@ using Organizer.Model.Extensions;
 
 namespace Organizer.WebClient.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class ReportsController : BaseController
     {
         private readonly GoalsController goals;

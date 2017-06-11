@@ -44,3 +44,12 @@ app.config(['$locationProvider', '$httpProvider', function ($locationProvider, $
     //configure authentication interceptor for adding user access token:
     $httpProvider.interceptors.push('AuthInterceptor');
 }]);
+
+app.run(['$window', '$rootScope', '$location', function ($window, $rootScope, $location) {
+    $rootScope.$on('$routeChangeStart', function (event) {
+        var accessToken = $window.sessionStorage.getItem('accessToken');
+        if (!accessToken) {
+            $location.path('/login');
+        }
+    });
+}]);

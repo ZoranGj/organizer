@@ -1,5 +1,6 @@
-﻿app.controller('MainController', function ($scope, $route, reports) {
+﻿app.controller('MainController', function ($scope, $route, $location, $window, reports, authenticationService) {
     $scope.todoItemNotifications = [];
+    $scope.isAuthenticated = false;
 
     $scope.initialize = function () {
         reports.loadTodoItemNotifications().then(function (response) {
@@ -14,6 +15,23 @@
                 });
             }
         }, function (error) {
+        });
+
+        var token = $window.sessionStorage.getItem('accessToken');
+        if (token) {
+            $scope.isAuthenticated = true;
+        }
+    }
+
+    $scope.logout = function () {
+        var logoutPromise = authenticationService.logout();
+
+        logoutPromise.then(function (response) {
+            $window.sessionStorage.removeItem('accessToken')
+            $scope.isAuthenticated = false;
+            $location.path('/');
+        }, function (error) {
+            alert('error on logout');
         });
     }
 

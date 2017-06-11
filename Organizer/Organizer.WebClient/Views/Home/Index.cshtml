@@ -72,10 +72,10 @@
 
                         <notifications expired="expiredNotifications" upcoming="upcomingNotifications"></notifications>
                     </li>
-                    <li ng-if="!isAuthenticated">
-                        <a href="#login" ng-class="{active: isActiveView('login')}">
-                            <span class="menu-icon fa fa-sign-in"></span>
-                            <span class="menu-text">Login</span>
+                    <li ng-if="isAuthenticated">
+                        <a ng-click="logout()">
+                            <span class="menu-icon fa fa-sign-out"></span>
+                            <span class="menu-text">Logout</span>
                         </a>
                     </li>
                 </ul>
@@ -104,18 +104,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        //window.onerror = function (errorMessage, url, lineNumber)
-        //{
-        //    try {
-        //        throw new Error("get current stack trace");
-        //    } catch (e) {
-        //        stackTrace = e.trace;
-        //        alert(errorMessage);
-        //    }
-        //};
-    </script>
 
     <script src="/scripts/application/app.js"></script>
     <script src="/scripts/application/auth.js"></script>
