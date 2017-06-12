@@ -25,9 +25,9 @@ namespace Organizer.WebClient.Controllers
         public ReportsController()
         {
             var dbContext = new DataContext();
-            _todoItemsProvider = new TodoItemsProvider(dbContext);
+            _todoItemsProvider = new TodoItemsProvider(dbContext, UserId);
             _tagsProvider = new TagsProvider(dbContext);
-            _goalsProvider = new GoalsProvider(dbContext);
+            _goalsProvider = new GoalsProvider(dbContext, UserId);
         }
 
         [HttpGet]

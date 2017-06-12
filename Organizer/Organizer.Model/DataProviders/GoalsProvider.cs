@@ -7,9 +7,15 @@ namespace Model.DataProviders {
 	public class GoalsProvider : DataProvider<Goal> {
         public GoalsProvider(DataContext db) : base(db) { }
 
+        public GoalsProvider(DataContext db, int userId) : base(db) {
+            UserId = userId;
+        }
+
         public new List<Goal> GetAll()
         {
-            return _dbSet.OrderBy(x => x.Priority).ToList();
+            return _dbSet.Where(x => x.User.Id == UserId)
+                         .OrderBy(x => x.Priority)
+                         .ToList();
         }
 
         public void UpdatePriority(int id, int newPriority)

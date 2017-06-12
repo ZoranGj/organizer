@@ -21,9 +21,9 @@ namespace Organizer.WebClient.Controllers
         public TasksController()
         {
             var dbContext = new DataContext();
-            _goalsProvider = new GoalsProvider(dbContext);
-            _activitiesProvider = new ActivitiesProvider(dbContext);
-            _todoItemsProvider = new TodoItemsProvider(dbContext);
+            _goalsProvider = new GoalsProvider(dbContext, UserId);
+            _activitiesProvider = new ActivitiesProvider(dbContext, UserId);
+            _todoItemsProvider = new TodoItemsProvider(dbContext, UserId);
             _tagsProvider = new TagsProvider(dbContext);
         }
 

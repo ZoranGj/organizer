@@ -115,6 +115,7 @@
     <Compile Include="DataProviders\GoalsProvider.cs" />
     <Compile Include="DataProviders\TagsProvider.cs" />
     <Compile Include="DataProviders\TodoItemsProvider.cs" />
+    <Compile Include="DataProviders\UsersProvider.cs" />
     <Compile Include="DataProviders\_DataProvider.cs" />
     <Compile Include="DTO\ActivityDto.cs" />
     <Compile Include="DTO\GoalDto.cs" />

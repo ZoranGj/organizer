@@ -10,6 +10,7 @@ namespace Model.DataProviders {
 	public class DataProvider<T> where T : class {
 		private DataContext _dbContext;
 		protected DbSet<T> _dbSet;
+        protected int UserId;
 
 		public DataProvider(DataContext dbContext) {
 			_dbContext = dbContext;

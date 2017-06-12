@@ -22,7 +22,6 @@ namespace Organizer.Model
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<Goal> Goals { get; set; }

@@ -1,5 +1,6 @@
 ﻿using Model.DataProviders;
 using Organizer.Model;
+using Organizer.Model.DataProviders;
 using Organizer.Model.DTO;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,16 @@ namespace Organizer.WebClient.Controllers
         private GoalsProvider _goalsProvider;
         private ActivitiesProvider _acivitiesProvider;
         private TodoItemsProvider _todoItemsProvider;
+        private UsersProvider _usersProvider;
         private DataContext _dbContext;
 
         public GoalsController()
         {
             _dbContext = new DataContext();
-            _goalsProvider = new GoalsProvider(_dbContext);
-            _acivitiesProvider = new ActivitiesProvider(_dbContext);
-            _todoItemsProvider = new TodoItemsProvider(_dbContext);
+            _goalsProvider = new GoalsProvider(_dbContext, UserId);
+            _acivitiesProvider = new ActivitiesProvider(_dbContext, UserId);
+            _todoItemsProvider = new TodoItemsProvider(_dbContext, UserId);
+            _usersProvider = new UsersProvider(_dbContext);
         }
 
         #region Goals
@@ -46,13 +49,16 @@ namespace Organizer.WebClient.Controllers
         [HttpPost]
         public void Add(string name, int priority)
         {
+            var user = _usersProvider.GetById(UserId);
+
             _goalsProvider.Insert(new Goal
             {
                 Name = name,
                 Priority = priority,
                 Color = "rgb(92,184,92)",
                 MinHoursPerWeek = 2,
-                MaxHoursPerWeek = 8
+                MaxHoursPerWeek = 8,
+                User = user
             });
             _goalsProvider.Save();
         }
