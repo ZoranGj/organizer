@@ -28,3 +28,8 @@
 /Organizer/Organizer.WebClient/bin
 /Organizer/Organizer.WebClient/obj/Debug
 /Organizer/Organizer.ClientResources/obj/Debug
+/Organizer/Organizer.Client/bin/x86/Debug
+/Organizer/Organizer.Client/obj/x86/Debug
+/Organizer/Organizer.ClientResources/bin/Debug
+/Organizer/Organizer.Model/obj/x86/Debug
+/Organizer/Organizer.WebClient/obj/Release

@@ -13,8 +13,7 @@ namespace Model.DataProviders {
 
         public new List<Goal> GetAll()
         {
-            return _dbSet.Where(x => x.User.Id == UserId)
-                         .OrderBy(x => x.Priority)
+            return _dbSet.OrderBy(x => x.Priority)
                          .ToList();
         }
 

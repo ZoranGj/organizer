@@ -12,7 +12,7 @@ namespace Model.DataProviders {
 
         public IEnumerable<Activity> GetAll(int goalId)
         {
-            return _dbSet.Where(x => x.GoalId == goalId && x.Goal.User.Id == UserId);
+            return _dbSet.Where(x => x.GoalId == goalId);
         }
 
         public new void Delete(object Id)

@@ -13,8 +13,7 @@ namespace Model.DataProviders {
         public IEnumerable<TodoItem> GetAll(int goalId)
         {
             return _dbSet.Include("Activity")
-                         .Where(x => x.Activity.GoalId == goalId 
-                                && x.Activity.Goal.User.Id == goalId);
+                         .Where(x => x.Activity.GoalId == goalId);
         }
 
         public void Resolve(int id, bool resolved)
